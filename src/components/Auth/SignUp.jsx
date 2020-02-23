@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { Link, withRouter } from "react-router-dom";
 
-import { withFirebase } from "../../Firebase";
+// import { withFirebase } from "../../Firebase";
 import * as ROUTES from "../../Routes/routes";
 
 import styled from "styled-components";
@@ -105,38 +105,38 @@ const SignUpFormBase = props => {
   const [passwordTwo, setPasswordTwo] = useState("");
   const [error, setError] = useState(null);
 
-  const onSubmit = event => {
-    //send email & pw values form to firebase for authentication
-    props.firebase
-      .doCreateUserWithEmailAndPassword(email, passwordOne)
-      .then(user => {
-        const newUser = {
-          firebase_user_id: user.user.uid,
-          userName: username,
-          email: email
-        };
-        //send FB authenticated user UID, username and email to wheretocode Database
-        axios
-          .post(
-            "https://wheretocode-master.herokuapp.com/auth/register",
+  // const onSubmit = event => {
+  //   //send email & pw values form to firebase for authentication
+  //   props.firebase
+  //     .doCreateUserWithEmailAndPassword(email, passwordOne)
+  //     .then(user => {
+  //       const newUser = {
+  //         firebase_user_id: user.user.uid,
+  //         userName: username,
+  //         email: email
+  //       };
+  //       //send FB authenticated user UID, username and email to wheretocode Database
+  //       axios
+  //         .post(
+  //           "https://wheretocode-master.herokuapp.com/auth/register",
 
-            newUser
-          )
-          .then(res => {
-            setUsername("");
-            setEmail("");
-            setPasswordOne("");
-            props.history.push(ROUTES.HOME);
-          })
-          .catch(error => {
-            console.log(error);
-          });
-      })
-      .catch(error => {
-        setError(error);
-      });
-    event.preventDefault();
-  };
+  //           newUser
+  //         )
+  //         .then(res => {
+  //           setUsername("");
+  //           setEmail("");
+  //           setPasswordOne("");
+  //           props.history.push(ROUTES.HOME);
+  //         })
+  //         .catch(error => {
+  //           console.log(error);
+  //         });
+  //     })
+  //     .catch(error => {
+  //       setError(error);
+  //     });
+  //   event.preventDefault();
+  // };
 
   const isInvalid =
     passwordOne !== passwordTwo ||
@@ -148,54 +148,53 @@ const SignUpFormBase = props => {
     <FormContainer>
       <StyledHeader>
         <i
-          class="fas fa-wifi fa-2x"
+          class='fas fa-wifi fa-2x'
           style={{ color: "gold", marginRight: "14px" }}
         ></i>
         <h1>HiveStack</h1>
         <StyledSvg
-          xmlns="http://www.w3.org/2000/svg"
-          viewBox="0 0 200 100"
-          preserveAspectRatio="none"
+          xmlns='http://www.w3.org/2000/svg'
+          viewBox='0 0 200 100'
+          preserveAspectRatio='none'
         >
-          <circle fill="white" cx="0" cy="100" r="100" />
-          <circle fill="white" cx="200" cy="100" r="100" />
+          <circle fill='white' cx='0' cy='100' r='100' />
+          <circle fill='white' cx='200' cy='100' r='100' />
         </StyledSvg>
       </StyledHeader>
-      <StyledForm onSubmit={onSubmit}>
+      <StyledForm>
         <StyledInput
-          name="username"
+          name='username'
           value={username}
           onChange={e => setUsername(e.target.value)}
-          type="text"
-          placeholder="Username"
+          type='text'
+          placeholder='Username'
         />
         <StyledInput
-          name="email"
+          name='email'
           value={email}
           onChange={e => setEmail(e.target.value)}
-          type="text"
-          placeholder="Email"
+          type='text'
+          placeholder='Email'
         />
         <StyledInput
-          name="passwordOne"
+          name='passwordOne'
           value={passwordOne}
           onChange={e => setPasswordOne(e.target.value)}
-          type="password"
-          placeholder="Password"
+          type='password'
+          placeholder='Password'
         />
         <StyledInput
-          name="passwordTwo"
+          name='passwordTwo'
           value={passwordTwo}
           onChange={e => setPasswordTwo(e.target.value)}
-          type="password"
-          placeholder="Confirm Password"
+          type='password'
+          placeholder='Confirm Password'
         />
       </StyledForm>
       <ExtendedSignUpButton
         disabled={isInvalid}
-        onClick={onSubmit}
         // primary
-        label="Sign Up"
+        label='Sign Up'
       >
         Sign Up
       </ExtendedSignUpButton>
@@ -204,10 +203,10 @@ const SignUpFormBase = props => {
 };
 
 const SignUpLink = () => (
-  <h6 alignSelf="center" margin="small">
+  <h6 alignSelf='center' margin='small'>
     Don't have an account? <Link to={ROUTES.SIGN_UP}>Sign Up</Link>
   </h6>
 );
-const SignUpForm = withRouter(withFirebase(SignUpFormBase));
+const SignUpForm = withRouter(SignUpFormBase);
 // export default SignUpPage;
 export { SignUpForm, SignUpLink };

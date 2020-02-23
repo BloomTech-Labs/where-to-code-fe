@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { withRouter } from "react-router-dom";
-import { withFirebase } from "../../Firebase";
+// import { withFirebase } from "../../Firebase";
 import styled from "styled-components";
 import * as ROUTES from "../../Routes/routes";
 
@@ -14,7 +14,7 @@ class SignOutButton1 extends Component {
   render() {
     return (
       <>
-        <Signout type="button" onClick={this.submit}>
+        <Signout type='button' onClick={this.submit}>
           Sign Out
         </Signout>
       </>
@@ -22,7 +22,7 @@ class SignOutButton1 extends Component {
   }
 }
 
-const SignOutButton = withRouter(withFirebase(SignOutButton1));
+const SignOutButton = withRouter(SignOutButton1);
 
 export default SignOutButton;
 

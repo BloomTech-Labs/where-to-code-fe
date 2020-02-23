@@ -21,4 +21,19 @@ body {
   cursor: pointer;
 }
 
+.topnav {
+  display: flex;
+  position: absolute;
+  right: 30px;
+}
+
+@media only screen and (max-width: 600px) {
+  .topnav {
+    display: flex;
+    margin: 0 auto;
+    position: relative;
+    right: 0;
+  }
+}
+
 @import "./components/Loaders/TriangleLoader.css";
