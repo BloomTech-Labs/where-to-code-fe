@@ -10,8 +10,8 @@ import { Box, Button, Heading } from "grommet";
 
 import { Link } from "react-router-dom";
 
-import { SignUpForm } from "../Auth/SignUp.jsx";
-import { SignInForm } from "../Auth/SignIn.jsx";
+import  SignUpForm from "../Auth/SignUp.jsx";
+import  SignInForm  from "../Auth/SignIn.jsx";
 
 import styled from "styled-components";
 
