@@ -6,7 +6,7 @@ import { withRouter } from "react-router-dom";
 
 import { AuthUserContext } from "../Session";
 
-import { Box, Button, Heading } from "grommet";
+// import { Box, Button, Heading } from "grommet";
 
 import { Link } from "react-router-dom";
 
@@ -148,20 +148,20 @@ const Navigation = props => {
   };
   return (
     <Navbar>
-      <Box direction="row" gap="small">
-        <Heading level="3" margin="none">
+      {/* <Box direction='row' gap='small'>
+        <Heading level='3' margin='none'>
           <i
-            class="fas fa-wifi"
+            class='fas fa-wifi'
             style={{ color: "gold", margin: "0 20px" }}
           ></i>
           <Button
             onClick={landingRedirect}
-            label="HiveStack"
-            color="white"
-            plain="true"
+            label='HiveStack'
+            color='white'
+            plain='true'
           />
         </Heading>
-      </Box>
+      </Box> */}
       <AuthUserContext.Consumer>
         {authUser => (authUser ? <NavigationAuth /> : <NavigationNonAuth />)}
       </AuthUserContext.Consumer>
@@ -180,15 +180,21 @@ const FadingBackground = styled(BaseModalBackground)`
   transition: opacity ease 1000ms;
 `;
 
-const NavigationNonAuth = () => (
-  <Box direction="row" justify="right" gap="small">
-    <ModalProvider backgroundComponent={FadingBackground}>
-      <LoginButton />
-    </ModalProvider>
-    <ModalProvider backgroundComponent={FadingBackground}>
-      <SignUpButton />
-    </ModalProvider>
-  </Box>
-);
+const NavigationNonAuth = () => {
+  // <Box direction='row' justify='right' gap='small'>
+  return (
+    <div className='topnav'>
+      <ModalProvider backgroundComponent={FadingBackground}>
+        <LoginButton />
+      </ModalProvider>
+      <ModalProvider backgroundComponent={FadingBackground}>
+        <SignUpButton />
+      </ModalProvider>{" "}
+    </div>
+  );
+  // </Box>
+
+  // return null;
+};
 
 export default withRouter(Navigation);

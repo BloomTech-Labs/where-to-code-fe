@@ -2,7 +2,7 @@
 import React from "react";
 import axios from "axios";
 import styled from "styled-components";
-import { withFirebase } from "../../Firebase";
+// import { withFirebase } from "../../Firebase";
 import axiosWithAuth from "../../Helpers/axiosWithAuth";
 import StarRatings from "react-star-ratings";
 
@@ -197,11 +197,11 @@ class DetailsPanel1 extends React.Component {
                         Overall Rating:
                         <StarRatings
                           rating={this.state.review.rating}
-                          starRatedColor="gold"
+                          starRatedColor='gold'
                           numberOfStars={3}
-                          name="rating"
-                          starDimension="15px"
-                          starSpacing="0px"
+                          name='rating'
+                          starDimension='15px'
+                          starSpacing='0px'
                         />
                       </p>
                     </li>
@@ -210,11 +210,11 @@ class DetailsPanel1 extends React.Component {
                         Internet Rating:
                         <StarRatings
                           rating={this.state.review.internet_rating}
-                          starRatedColor="gold"
+                          starRatedColor='gold'
                           numberOfStars={3}
-                          name="rating"
-                          starDimension="15px"
-                          starSpacing="0px"
+                          name='rating'
+                          starDimension='15px'
+                          starSpacing='0px'
                         />
                       </p>
                     </li>
@@ -231,11 +231,11 @@ class DetailsPanel1 extends React.Component {
             </StyledFeatureReview>
           </ContentLeft>
           <ContentRight>
-            <h2 className="name">Name:</h2>
+            <h2 className='name'>Name:</h2>
             <p style={{ fontSize: "20px" }}>{this.props.details[0]}</p>
             <h2>Phone:</h2>
             <p style={{ fontSize: "20px" }}>{this.props.details[1]}</p>
-            <h2 className="hours">Hours:</h2>
+            <h2 className='hours'>Hours:</h2>
             <ul>
               <p>
                 {this.props.hours.map((data, index) => {
@@ -255,5 +255,5 @@ class DetailsPanel1 extends React.Component {
   }
 }
 // EXPORT
-const NonAuthDetailsPanel = withFirebase(DetailsPanel1);
+const NonAuthDetailsPanel = DetailsPanel1;
 export default NonAuthDetailsPanel;

@@ -1,11 +1,10 @@
-import React from 'react';
-import { DataTable, Text } from 'grommet';
-
+import React from "react";
+// import { DataTable, Text } from 'grommet';
 
 const NetworkKey = () => {
-    return(
-        <div>
-               <DataTable
+  return (
+    <div>
+      {/* <DataTable
                     columns={
                         [
                             { property: 'Name', header: <Text>Name</Text> },
@@ -27,9 +26,9 @@ const NetworkKey = () => {
 
                         ]
                     }
-                    />
-        </div>
-    )
-}
+                    /> */}
+    </div>
+  );
+};
 
 export default NetworkKey;

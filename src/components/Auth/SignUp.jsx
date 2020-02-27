@@ -5,9 +5,7 @@ import axiosWithAuth from "../../Helpers/axiosWithAuth";
 // import { withFirebase } from "../../Firebase";
 import * as ROUTES from "../../Routes/routes";
 
-import styled from "styled-components";
-
-import axios from "axios";
+import styled from 'styled-components'
 
 const FormContainer = styled.div`
 display: flex;
@@ -21,23 +19,23 @@ border-radius: 25px;
 background:white;
 border: 3px solid gold;
 
-`;
+`
 
 const StyledHeader = styled.div`
-  width: 100%;
-  height: 100px;
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
-  align-items: baseline;
-  background: black;
-  color: white;
-  position: relative;
-  margin-top: -70px;
-  border-radius: 30px;
-  border: 3px solid gold;
-  border-bottom: none;
-`;
+	width: 100%;
+	height: 100px;
+	display: flex;
+	flex-direction: row;
+	justify-content: center;
+	align-items: baseline;
+	background: black;
+	color: white;
+	position: relative;
+	margin-top: -70px;
+	border-radius: 30px;
+	border: 3px solid gold;
+	border-bottom: none;
+`
 
 const StyledForm = styled.form`
 display:flex;
@@ -48,55 +46,55 @@ text-align: center;
 margin-top: 30px;
 background: white;
 width: 70%;
-`;
+`
 
 const StyledSvg = styled.svg`
-  position: absolute;
-  bottom: 0;
-  width: 100%;
-  height: 50px;
-`;
+	position: absolute;
+	bottom: 0;
+	width: 100%;
+	height: 50px;
+`
 
 const StyledInput = styled.input`
-  opacity: 0.5;
-  // border-radius: 25px;
-  border: none;
-  border-bottom: 0.7px solid grey;
-  color: grey;
-  padding-left: 10px;
-  margin-left: 10px;
-  margin-top: 15px;
-  margin-bottom: 15px;
-  font-size: 18px;
-  font-family: "Poppins", serif;
-  text-align: left;
-  height: 30px;
-  background: none;
-  // box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
-  ::placeholder: gold;
-  width: 70%;
-`;
+	opacity: 0.5;
+	// border-radius: 25px;
+	border: none;
+	border-bottom: 0.7px solid grey;
+	color: grey;
+	padding-left: 10px;
+	margin-left: 10px;
+	margin-top: 15px;
+	margin-bottom: 15px;
+	font-size: 18px;
+	font-family: 'Poppins', serif;
+	text-align: left;
+	height: 30px;
+	background: none;
+	// box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+	::placeholder: gold;
+	width: 70%;
+`
 
 //@@GOLD SIGNUP BUTTON
 const SignUpButton = styled.button`
-  width: 55%;
-  border-radius: 10px;
-  background: black;
-  border: 3px solid gold;
-  color: white;
-  height: 10%;
-  text-align: center;
-  margin-top: 8%;
-  font-family: "Zilla Slab", serif;
-  font-size: 1.5rem;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-`;
+	width: 55%;
+	border-radius: 10px;
+	background: black;
+	border: 3px solid gold;
+	color: white;
+	height: 10%;
+	text-align: center;
+	margin-top: 8%;
+	font-family: 'Zilla Slab', serif;
+	font-size: 1.5rem;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+`
 
 const ExtendedSignUpButton = styled(SignUpButton)`
-  color: white;
-`;
+	color: white;
+`
 
 
 function SignUpForm(props) {

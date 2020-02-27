@@ -1,17 +1,17 @@
-// // IMPORTS
-// import React, { Component } from "react";
-// import styled from "styled-components";
-// import axios from "axios";
-// import { distanceTo } from "geolocation-utils";
-// import axiosWithAuth from "../../Helpers/axiosWithAuth";
+// IMPORTS
+import React, { Component } from "react";
+import styled from "styled-components";
+import axios from "axios";
+//import { distanceTo } from "geolocation-utils";
+import axiosWithAuth from "../../Helpers/axiosWithAuth";
 
 // // COMPONENTS
 // import NetworkModal from "../NetworkSpeed/networkModal";
 // import NetworkSpeed from "../NetworkSpeed/NetworkSpeed";
 
-// import TextArea from "../Review/TextArea";
-// import Select from "../Review/Select";
-// import Button from "../Review/Button";
+import TextArea from "../Review/TextArea";
+import Select from "../Review/Select";
+import Button from "../Review/Button";
 // import { withFirebase } from "../../Firebase";
 
 // /* global google */
@@ -64,25 +64,25 @@
 //   letter-spacing: 3px;
 // `;
 
-// class ReviewPanel1 extends Component {
-//   constructor(props) {
-//     super(props);
-//     // STATE
-//     this.state = {
-//       newUser: {
-//         user_id: null,
-//         rating: " ",
-//         internet_rating: " ",
-//         comments: "",
-//         location_id: null
-//       },
-//       rating: ["1", "2", "3"],
-//       internet_rating: ["1", "2", "3"],
-//       uid: this.props.firebase.auth.currentUser.uid,
-//       submitted: false,
-//       network: false,
-//       distanceFromLocation: 100
-//     };
+class ReviewPanel1 extends Component {
+  constructor(props) {
+    super(props);
+    // STATE
+    this.state = {
+      newUser: {
+        user_id: null,
+        rating: " ",
+        internet_rating: " ",
+        comments: "",
+        location_id: null
+      },
+      rating: ["1", "2", "3"],
+      internet_rating: ["1", "2", "3"],
+      //uid: this.props.firebase.auth.currentUser.uid,
+      submitted: false,
+      network: false,
+      distanceFromLocation: 100
+    };
 
 //     this.handleTextArea = this.handleTextArea.bind(this);
 //     this.handleFormSubmit = this.handleFormSubmit.bind(this);
@@ -98,29 +98,29 @@
 //     //Default to Sydney, Australia to match map default
 //     let userCoords = [-33.856, 151.215];
 
-//     //Check if user allowed location sharing
-//     if (navigator.geolocation) {
-//       navigator.geolocation.getCurrentPosition(position => {
-//         userCoords = [position.coords.latitude, position.coords.longitude];
+    //Check if user allowed location sharing
+    // if (navigator.geolocation) {
+    //   navigator.geolocation.getCurrentPosition(position => {
+    //     userCoords = [position.coords.latitude, position.coords.longitude];
 
-//         geocoder.__proto__.geocode(
-//           { address: this.props.address },
-//           (res, err) => {
-//             const locationCoords = [
-//               res[0].geometry.location.lat(),
-//               res[0].geometry.location.lng()
-//             ];
+    //     geocoder.__proto__.geocode(
+    //       { address: this.props.address },
+    //       (res, err) => {
+    //         const locationCoords = [
+    //           res[0].geometry.location.lat(),
+    //           res[0].geometry.location.lng()
+    //         ];
 
-//             this.setState(prevState => {
-//               return {
-//                 ...prevState,
-//                 distanceFromLocation: distanceTo(userCoords, locationCoords)
-//               };
-//             });
-//           }
-//         );
-//       });
-//     }
+    //         this.setState(prevState => {
+    //           return {
+    //             ...prevState,
+    //             distanceFromLocation: distanceTo(userCoords, locationCoords)
+    //           };
+    //         });
+    //       }
+    //     );
+    //   });
+    // }
 
 //     return axiosWithAuth()
 //       .get(`https://wheretocode-master.herokuapp.com/users/${this.state.uid}`)
@@ -246,53 +246,53 @@
 //           <StyleModal>
 //             <Header> Leave a Review </Header>
 
-//             <div style={{ display: "flex" }}>
-//               <StyledForm form onSubmit={this.handleFormSubmit}>
-//                 {/* Rating Required*/}
-//                 <Select
-//                   title={"Location Rating"}
-//                   name={"rating"}
-//                   options={this.state.rating}
-//                   value={this.state.newUser.rating}
-//                   placeholder={"Select Rating"}
-//                   handleChange={this.handleInput}
-//                 />
-//                 {/*Internet Rating */}
-//                 <Select
-//                   title={"Internet Rating"}
-//                   name={"internet_rating"}
-//                   options={this.state.internet_rating}
-//                   value={this.state.newUser.internet_rating}
-//                   placeholder={"Select Internet Rating"}
-//                   handleChange={this.handleInput}
-//                 />
-//                 {/*Comment */}
-//                 <TextArea
-//                   title={"Comments"}
-//                   rows={10}
-//                   cols={50}
-//                   value={this.state.newUser.comments}
-//                   name={"comment"}
-//                   handleChange={this.handleTextArea}
-//                   placeholder={"Leave a comment"}
-//                 />
-//                 {/*Submit */}
-//                 <div className="buttonContainer">
-//                   <Button
-//                     action={this.handleFormSubmit}
-//                     type={"primary"}
-//                     title={"Submit"}
-//                     style={buttonStyle}
-//                   />
-//                   {/* Clear form */}
-//                   <Button
-//                     action={this.handleClearForm}
-//                     type={"secondary"}
-//                     title={"Clear"}
-//                     style={buttonStyle}
-//                   />
-//                 </div>
-//               </StyledForm>
+            <div style={{ display: "flex" }}>
+              <StyledForm form onSubmit={this.handleFormSubmit}>
+                {/* Rating Required*/}
+                <Select
+                  title={"Location Rating"}
+                  name={"rating"}
+                  options={this.state.rating}
+                  value={this.state.newUser.rating}
+                  placeholder={"Select Rating"}
+                  handleChange={this.handleInput}
+                />
+                {/*Internet Rating */}
+                <Select
+                  title={"Internet Rating"}
+                  name={"internet_rating"}
+                  options={this.state.internet_rating}
+                  value={this.state.newUser.internet_rating}
+                  placeholder={"Select Internet Rating"}
+                  handleChange={this.handleInput}
+                />
+                {/*Comment */}
+                <TextArea
+                  title={"Comments"}
+                  rows={10}
+                  cols={50}
+                  value={this.state.newUser.comments}
+                  name={"comment"}
+                  handleChange={this.handleTextArea}
+                  placeholder={"Leave a comment"}
+                />
+                {/*Submit */}
+                <div className='buttonContainer'>
+                  <Button
+                    action={this.handleFormSubmit}
+                    type={"primary"}
+                    title={"Submit"}
+                    style={buttonStyle}
+                  />
+                  {/* Clear form */}
+                  <Button
+                    action={this.handleClearForm}
+                    type={"secondary"}
+                    title={"Clear"}
+                    style={buttonStyle}
+                  />
+                </div>
+              </StyledForm>
 
 //               {this.state.network ? <NetworkSpeed /> : null}
 //             </div>
@@ -305,22 +305,21 @@
 //               />
 //             ) : null}
 
-//             <NetworkTextStyle>
-//               {this.state.distanceFromLocation > 30.48
-//                               // Convert Meters to Miles
-//                 ? `Must be ${(
-//                                 (this.state.distanceFromLocation - 30.48)
-//                                 * 0.000621
-//                               ) .toFixed(2)
-//                             } miles closer to test network`
-//                 : null}
-//             </NetworkTextStyle>
-//           </StyleModal>
-//         )}
-//       </>
-//     );
-//   }
-// }
+            <NetworkTextStyle>
+              {this.state.distanceFromLocation > 30.48
+                ? // Convert Meters to Miles
+                  `Must be ${(
+                    (this.state.distanceFromLocation - 30.48) *
+                    0.000621
+                  ).toFixed(2)} miles closer to test network`
+                : null}
+            </NetworkTextStyle>
+          </StyleModal>
+        )}
+      </>
+    );
+  }
+}
 
-// const ReviewPanel = withFirebase(ReviewPanel1);
-// export { ReviewPanel };
+const ReviewPanel = ReviewPanel1;
+export { ReviewPanel };
