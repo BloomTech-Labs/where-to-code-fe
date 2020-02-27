@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 
-import { withFirebase } from '../../Firebase';
+// import { withFirebase } from '../../Firebase';
 import * as ROUTES from '../../Routes/routes';
 const PasswordForgetPage = () => (
     <div>
@@ -73,6 +73,6 @@ const PasswordForgetLink = () => (
 
 export default PasswordForgetPage;
 
-const PasswordForgetForm = withFirebase(PasswordForgetFormBase);
+const PasswordForgetForm = PasswordForgetFormBase;
 
 export { PasswordForgetForm, PasswordForgetLink };

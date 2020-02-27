@@ -1,14 +1,15 @@
-import React, { Component } from "react";
+import React, { Component, useState } from "react";
+import axiosWithAuth, {axioswithAuth} from "../../Helpers/axiosWithAuth";
 import { withRouter } from "react-router-dom";
-import { compose } from "recompose";
+// import { compose } from "recompose";
 
 import { SignUpLink } from "./SignUp.jsx";
 import { PasswordForgetLink } from "./PasswordForget.jsx";
-import { withFirebase } from "../../Firebase";
+// import { withFirebase } from "../../Firebase";
 import * as ROUTES from "../../Routes/routes";
 
-import { Box, Heading } from "grommet";
-import axios from "axios";
+// import { Box, Heading } from "grommet";
+// import axios from "axios";
 
 import styled from "styled-components";
 
@@ -96,119 +97,197 @@ const LoginButton = styled.button`
   margin-top: 100px;
 `;
 
-const SignInPage = () => (
-  <Box align="center" background="#555555" height="100vh" pad="large">
-    <Box>
-      <Heading level="2" responsive="true" size="medium" alignSelf="center">
-        Sign In
-      </Heading>
-      <SignInForm />
-      <PasswordForgetLink />
-      <SignUpLink />
-    </Box>
-  </Box>
-);
 
-const INITIAL_STATE = {
-  email: "",
-  password: "",
-  error: null
-};
+function SignInForm(props) {
 
-class SignInFormBase extends Component {
-  constructor(props) {
-    super(props);
 
-    this.state = { ...INITIAL_STATE };
-  }
+const [credentials, setCredentials] = useState({username: "", password: ""});
 
-  onSubmit = event => {
-    event.preventDefault();
-    const { email, password } = this.state;
+// console.log(credentials)
 
-    // V1
-    this.props.firebase
-      .doSignInWithEmailAndPassword(email, password)
-
-      .then(signInResult => {
-        // Ping Token Route
-        axios
-          .get(`https://wheretocode-master.herokuapp.com/tokenRoute`)
-          .then(token => {
-            window.localStorage.setItem("JWT", token.data);
-          });
-        // Reset State
-        this.setState({ ...INITIAL_STATE });
-        // Go to home route
-        this.props.history.push(ROUTES.HOME);
-      })
-      .catch(error => {
-        console.log(error);
-      });
-  };
-
-  onChange = event => {
-    this.setState({ [event.target.name]: event.target.value });
-  };
-
-  render() {
-    const { email, password, error } = this.state;
-
-    const isInvalid = password === "" || email === "";
-
-    return (
-      <FormContainer>
-        <StyledHeader>
-          <i
-            class="fas fa-wifi fa-2x"
-            style={{ color: "gold", marginRight: "14px" }}
-          ></i>
-          <h1>HiveStack</h1>
-          <StyledSvg
-            xmlns="http://www.w3.org/2000/svg"
-            viewBox="0 0 200 100"
-            preserveAspectRatio="none"
-          >
-            <circle fill="white" cx="0" cy="100" r="100" />
-            <circle fill="white" cx="200" cy="100" r="100" />
-          </StyledSvg>
-        </StyledHeader>
-        <StyledForm onSubmit={this.onSubmit}>
-          <StyledInput
-            name="email"
-            value={email}
-            onChange={this.onChange}
-            type="text"
-            placeholder="Email Address"
-          />
-          <StyledInput
-            name="password"
-            value={password}
-            onChange={this.onChange}
-            type="password"
-            placeholder="Password"
-          />
-
-          {error && <p>{error.message}</p>}
-        </StyledForm>
-        <LoginButton
-          disabled={isInvalid}
-          onClick={this.onSubmit}
-          primary
-          label="Sign In"
-        >
-          Login
-        </LoginButton>
-      </FormContainer>
-    );
-  }
+const handleChanges = (e) => {
+  setCredentials({...credentials, [e.target.name]: e.target.value})
 }
 
-const SignInForm = compose(
-  withRouter,
-  withFirebase
-)(SignInFormBase);
+      const signin = (e) => {
+        e.preventDefault()
+          axiosWithAuth().post("/login", credentials)
+            .then(res => {
+              localStorage.setItem("token", res.data.token)
+              props.history.push("/userdashboard")
+            })
+            .catch(err => console.log(err))
+      };
 
-export default SignInPage;
 
-export { SignInForm };
+
+
+
+  return(
+    <FormContainer>
+            <StyledHeader>
+               <i class="fas fa-wifi fa-2x"
+                   style={{ color: "gold", marginRight: "14px" }}></i>
+                <h1>HiveStack</h1>
+              <StyledSvg
+                xmlns="http://www.w3.org/2000/svg"
+                viewBox="0 0 200 100"
+                preserveAspectRatio="none">
+                <circle fill="white" cx="0" cy="100" r="100" />
+                <circle fill="white" cx="200" cy="100" r="100" />
+              </StyledSvg>
+            </StyledHeader>
+            <StyledForm onSubmit={signin}>
+              <StyledInput
+                name="email"
+                value={credentials.email}
+                onChange={handleChanges}
+                type="text"
+                placeholder="Email Address"
+              />
+              <StyledInput
+                name="password"
+                value={credentials.password}
+                onChange={handleChanges}
+                type="password"
+                placeholder="Password"
+              />
+    
+            </StyledForm>
+            <LoginButton
+              onClick={signin}
+              primary
+              label="Sign In"
+            >
+              Login
+            </LoginButton>
+            <br></br>
+            <PasswordForgetLink />
+
+          </FormContainer>
+  )
+}
+
+
+
+
+
+
+
+
+// const SignInPage = () => (
+//   <Box align="center" background="#555555" height="100vh" pad="large">
+//     <Box>
+//       <Heading level="2" responsive="true" size="medium" alignSelf="center">
+//         Sign In
+//       </Heading>
+//       <SignInForm />
+//       <PasswordForgetLink />
+//       <SignUpLink />
+//     </Box>
+//   </Box>
+// );
+
+// const INITIAL_STATE = {
+//   email: "",
+//   password: "",
+//   error: null
+// };
+
+// class SignInFormBase extends Component {
+//   constructor(props) {
+//     super(props);
+
+//     this.state = { ...INITIAL_STATE };
+//   }
+
+//   onSubmit = event => {
+//     event.preventDefault();
+//     const { email, password } = this.state;
+
+//     // V1
+//     this.props.firebase
+//       .doSignInWithEmailAndPassword(email, password)
+
+//       .then(signInResult => {
+//         // Ping Token Route
+//         axios
+//           .get(`https://wheretocode-master.herokuapp.com/tokenRoute`)
+//           .then(token => {
+//             window.localStorage.setItem("JWT", token.data);
+//           });
+//         // Reset State
+//         this.setState({ ...INITIAL_STATE });
+//         // Go to home route
+//         this.props.history.push(ROUTES.HOME);
+//       })
+//       .catch(error => {
+//         console.log(error);
+//       });
+//   };
+
+//   onChange = event => {
+//     this.setState({ [event.target.name]: event.target.value });
+//   };
+
+//   render() {
+//     const { email, password, error } = this.state;
+
+//     const isInvalid = password === "" || email === "";
+
+//     return (
+//       <FormContainer>
+//         <StyledHeader>
+//           <i
+//             class="fas fa-wifi fa-2x"
+//             style={{ color: "gold", marginRight: "14px" }}
+//           ></i>
+//           <h1>HiveStack</h1>
+//           <StyledSvg
+//             xmlns="http://www.w3.org/2000/svg"
+//             viewBox="0 0 200 100"
+//             preserveAspectRatio="none"
+//           >
+//             <circle fill="white" cx="0" cy="100" r="100" />
+//             <circle fill="white" cx="200" cy="100" r="100" />
+//           </StyledSvg>
+//         </StyledHeader>
+//         <StyledForm onSubmit={this.onSubmit}>
+//           <StyledInput
+//             name="email"
+//             value={email}
+//             onChange={this.onChange}
+//             type="text"
+//             placeholder="Email Address"
+//           />
+//           <StyledInput
+//             name="password"
+//             value={password}
+//             onChange={this.onChange}
+//             type="password"
+//             placeholder="Password"
+//           />
+
+//           {error && <p>{error.message}</p>}
+//         </StyledForm>
+//         <LoginButton
+//           disabled={isInvalid}
+//           onClick={this.onSubmit}
+//           primary
+//           label="Sign In"
+//         >
+//           Login
+//         </LoginButton>
+//       </FormContainer>
+//     );
+//   }
+// }
+
+// const SignInForm = compose(
+//   withRouter,
+//   withFirebase
+// )(SignInFormBase);
+
+// export default SignInPage;
+
+export default withRouter(SignInForm);

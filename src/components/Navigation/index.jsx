@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import Modal, { ModalProvider, BaseModalBackground } from "styled-react-modal";
 
-import SignOutButton from "../Auth/SignOut.jsx";
+// import SignOutButton from "../Auth/SignOut.jsx";
 import { withRouter } from "react-router-dom";
 
 import { AuthUserContext } from "../Session";
@@ -10,8 +10,8 @@ import { Box, Button, Heading } from "grommet";
 
 import { Link } from "react-router-dom";
 
-import { SignUpForm } from "../Auth/SignUp.jsx";
-import { SignInForm } from "../Auth/SignIn.jsx";
+import  SignUpForm from "../Auth/SignUp.jsx";
+import  SignInForm  from "../Auth/SignIn.jsx";
 
 import styled from "styled-components";
 
@@ -171,7 +171,7 @@ const Navigation = props => {
 
 const NavigationAuth = () => (
   <Box direction="row" justify="right" gap="small">
-    <SignOutButton />
+    {/* <SignOutButton /> */}
   </Box>
 );
 
