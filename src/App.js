@@ -1,6 +1,8 @@
 //@ imports
 import React, { useState } from "react";
 import { BrowserRouter as Router, Route } from "react-router-dom";
+import { connect } from "react-redux";
+import { userName } from "./components/Redux/actions";
 
 //@ components
 
@@ -30,7 +32,7 @@ import * as ROUTES from "./Routes/routes";
 // 	}
 // }
 
-const App = () => {
+const App = ({ state, userName }) => {
   const [place, setPlace] = useState("");
 
   return (
@@ -56,4 +58,6 @@ const App = () => {
   );
 };
 
-export default App;
+const mapStateToProps = state => ({ state: state });
+
+export default connect(mapStateToProps, { userName })(App);
