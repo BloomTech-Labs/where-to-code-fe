@@ -3,8 +3,8 @@ import axiosWithAuth, {axioswithAuth} from "../../Helpers/axiosWithAuth";
 import { withRouter } from "react-router-dom";
 // import { compose } from "recompose";
 
-// import { SignUpLink } from "./SignUp.jsx";
-// import { PasswordForgetLink } from "./PasswordForget.jsx";
+import { SignUpLink } from "./SignUp.jsx";
+import { PasswordForgetLink } from "./PasswordForget.jsx";
 // import { withFirebase } from "../../Firebase";
 import * as ROUTES from "../../Routes/routes";
 
@@ -161,6 +161,9 @@ const handleChanges = (e) => {
             >
               Login
             </LoginButton>
+            <br></br>
+            <PasswordForgetLink />
+
           </FormContainer>
   )
 }

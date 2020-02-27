@@ -5,7 +5,7 @@ import { BrowserRouter as Router, Route } from 'react-router-dom'
 //@ components
 
 import PasswordForgetPage from './components/Auth/PasswordForget.jsx'
-import { withAuthentication } from './components/Session'
+// import { withAuthentication } from './components/Session'
 import Footer from './components/Footer/Footer.jsx'
 
 import { Grommet } from 'grommet'

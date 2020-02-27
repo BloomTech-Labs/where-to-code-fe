@@ -110,7 +110,7 @@ function SignUpForm(props) {
     setCredentials({...credentials, [e.target.name]: e.target.value})
   }
   
-        const signin = (e) => {
+        const signup = (e) => {
           e.perventdefault()
             axiosWithAuth().post("/login", credentials)
               .then(res => {
@@ -138,7 +138,7 @@ function SignUpForm(props) {
                   <circle fill="white" cx="200" cy="100" r="100" />
                 </StyledSvg>
               </StyledHeader>
-              <StyledForm onSubmit={signin}>
+              <StyledForm onSubmit={signup}>
                 <StyledInput
                   name="email"
                   value={credentials.email}
@@ -156,9 +156,9 @@ function SignUpForm(props) {
       
               </StyledForm>
               <SignUpButton
-                onClick={signin}
+                onClick={signup}
                 primary
-                label="Sign In"
+                label="Sign Up"
               >
                 Login
               </SignUpButton>
