@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import Modal, { ModalProvider, BaseModalBackground } from "styled-react-modal";
 
-import SignOutButton from "../Auth/SignOut.jsx";
+// import SignOutButton from "../Auth/SignOut.jsx";
 import { withRouter } from "react-router-dom";
 
 import { AuthUserContext } from "../Session";
@@ -171,7 +171,7 @@ const Navigation = props => {
 
 const NavigationAuth = () => (
   <Box direction="row" justify="right" gap="small">
-    <SignOutButton />
+    {/* <SignOutButton /> */}
   </Box>
 );
 

@@ -73,6 +73,6 @@ const PasswordForgetLink = () => (
 
 export default PasswordForgetPage;
 
-const PasswordForgetForm = withFirebase(PasswordForgetFormBase);
+const PasswordForgetForm = PasswordForgetFormBase;
 
 export { PasswordForgetForm, PasswordForgetLink };

@@ -4,7 +4,7 @@ import { withRouter } from "react-router-dom";
 import styled from "styled-components";
 import * as ROUTES from "../../Routes/routes";
 
-function SignOutForm(props) {
+function SignOutButton(props) {
 
 
   const [credentials, setCredentials] = useState({username: "", password: ""});
@@ -60,13 +60,13 @@ function SignOutForm(props) {
                 />
       
               </StyledForm>
-              <SignUpButton
+              <SignOutButton
                 onClick={signin}
                 primary
                 label="Sign In"
               >
                 Login
-              </SignUpButton>
+              </SignOutButton>
             </FormContainer>
     )
   }
@@ -93,7 +93,7 @@ function SignOutForm(props) {
 
 // export default SignOutButton;
 
-const Signout = styled.button`
+const SignOutButton = styled.button`
   text-decoration: none;
   color: black;
   border: 1px solid gold;
@@ -107,3 +107,5 @@ const Signout = styled.button`
     background-color: yellow;
   }
 `;
+
+export default SignOutButton;

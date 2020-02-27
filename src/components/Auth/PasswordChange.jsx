@@ -66,4 +66,4 @@ class PasswordChangeForm extends Component {
     }
 }
 
-export default withFirebase(PasswordChangeForm);
+export default PasswordChangeForm;
