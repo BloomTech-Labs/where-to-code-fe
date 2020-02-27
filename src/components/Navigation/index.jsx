@@ -150,7 +150,11 @@ const Navigation = props => {
     <Navbar>
       {/* <Box direction='row' gap='small'>
         <Heading level='3' margin='none'>
-           <Button
+          <i
+            class='fas fa-wifi'
+            style={{ color: "gold", margin: "0 20px" }}
+          ></i>
+          <Button
             onClick={landingRedirect}
             label='HiveStack'
             color='white'
@@ -158,10 +162,6 @@ const Navigation = props => {
           />
         </Heading>
       </Box> */}
-      <i class='fas fa-wifi' style={{ color: "gold", margin: "0 20px" }}>
-        HiveStack
-      </i>
-
       <AuthUserContext.Consumer>
         {authUser => (authUser ? <NavigationAuth /> : <NavigationNonAuth />)}
       </AuthUserContext.Consumer>

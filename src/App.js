@@ -51,7 +51,7 @@ const App = () => {
 
       <Route path={ROUTES.ACCOUNT} component={AccountPage} />
       <Route path={ROUTES.NETWORK} component={NetworkPage} />
-      {/* <Footer /> */}
+      <Footer />
     </Router>
   );
 };

@@ -7,10 +7,10 @@ import styled from "styled-components";
 
 import { withRouter, Link } from "react-router-dom";
 
-import mockup from "../assets/mockup.png";
-import hours from "../assets/hours.jpg";
-import explore from "../assets/explore.jpg";
-import reviews from "../assets/reviews.jpg";
+import mockup from '../assets/mockup.png';
+import hours from '../assets/hours.jpg';
+import explore from '../assets/explore.jpg';
+import reviews from '../assets/reviews.jpg';
 
 import * as ROUTES from "../Routes/routes";
 
@@ -52,18 +52,18 @@ const Landing = props => {
     <LandingPageContainer>
       <Navigation />
       <LandingScreen>
-        <SearchComponent>
-          <h2>
-            Find a place to <span>{currentActivity}</span> near you
-          </h2>
+      <SearchComponent>
+        <h2>
+          Find a place to <span>{currentActivity}</span> near you
+        </h2>
 
-          <InputAndButtonContainer>
-            <Input id='exploreAutoComplete' placeholder='Explore' size='40' />
-            <GoButton to={ROUTES.HOME}>Go</GoButton>
-          </InputAndButtonContainer>
-        </SearchComponent>
+        <InputAndButtonContainer>
+          <Input id="exploreAutoComplete" placeholder="Explore" size="40" />
+          <GoButton to={ROUTES.HOME}>Go</GoButton>
+        </InputAndButtonContainer>
+      </SearchComponent>
       </LandingScreen>
-      {/* <FeaturesInfo>
+      <FeaturesInfo>
         <InfoBox>
           <h3>Work Easier</h3>
           <p>Finding a place to work away form the home or office doesn't need to be a hassle. Find locations that meet your needs no matter where you are!</p>
@@ -96,7 +96,7 @@ const Landing = props => {
             <div><i class="fas fa-laptop fa-2x"></i><p>Sit down and get some work done</p></div>
           </Bullets>
         </LargeMarketing>
-      </MockupContainer> */}
+      </MockupContainer>
     </LandingPageContainer>
   );
 };
@@ -114,11 +114,11 @@ const SearchComponent = styled.div`
     font-size: 48px;
     font-weight: normal;
 
-    span {
+    span{
       font-weight: bold;
     }
 
-    @media (max-width: 500px) {
+    @media(max-width:500px){
       font-size: 28px;
       width: 80%;
       text-align: center;
@@ -130,21 +130,22 @@ const SearchComponent = styled.div`
   }
 `;
 
-const LandingPageContainer = styled.div``;
+const LandingPageContainer = styled.div`
+`;
 
 const LandingScreen = styled.div`
-  background: url("/heroimage.svg");
-  background-size: cover;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  width: 100%;
-  height: 100vh;
+background: url("/heroimage.svg");
+background-size: cover;
+display: flex;
+justify-content: center;
+align-items: center;
+width: 100%;
+height: 100vh;
 
-  @media (max-width: 500px) {
-    height: 98vh;
-  }
-`;
+@media(max-width: 500px){
+  height: 98vh;
+}
+`
 
 const GoButton = styled(Link)`
   display: flex
@@ -173,7 +174,7 @@ const Input = styled.input`
     vertical-align: center;
     font-size: 1rem;
   }
-  @media (max-width: 500) {
+  @media(max-width: 500){
     width: 50px;
   }
 `;
@@ -186,10 +187,10 @@ const FeaturesInfo = styled.div`
   margin: 125px 2% 20px 2%;
   display: flex;
   justify-content: space-between;
-  @media (max-width: 500px) {
+  @media(max-width: 500px){
     flex-direction: column;
   }
-`;
+`
 
 const InfoBox = styled.div`
   width: 23%;
@@ -210,37 +211,37 @@ const InfoBox = styled.div`
     width: 95%;
     margin-bottom: 20px;
   }
-`;
+`
 
 const FeatureBox = styled(InfoBox)`
-  border: 1px solid #ececec;
+  border: 1px solid #ECECEC;
   h3 {
     font-size: 20px;
   }
   p {
     font-size: 14px;
   }
-`;
+`
 const FeaturePic = styled.img`
   width: 100%;
   height: 185px;
-`;
+`
 
 const MockupContainer = styled.div`
   display: flex;
   justify-content: space-around;
-  @media (max-width: 500px) {
+  @media(max-width: 500px){
     flex-direction: column;
   }
-`;
+`
 
 const Mockup = styled.img`
   width: 45%;
   margin: 50px 0;
-  @media (max-width: 500px) {
+  @media(max-width: 500px){
     width: 90%;
   }
-`;
+`
 const ExploreButton = styled(GoButton)`
   font-size: 1.1rem;
   border-radius: 10px;
@@ -248,12 +249,12 @@ const ExploreButton = styled(GoButton)`
   font-weight: bold;
   width: 125px;
   padding: 10px;
-`;
+`
 
 const LargeMarketing = styled(InfoBox)`
   width: 40%;
   margin-top: 80px;
-`;
+`
 
 const Bullets = styled.div`
   padding-left: 10px;
@@ -266,10 +267,10 @@ const Bullets = styled.div`
     i {
       padding-right: 20px;
     }
-    p {
+    p{
       margin-top: 0;
       color: black;
       font-size: 16px;
     }
   }
-`;
+`
