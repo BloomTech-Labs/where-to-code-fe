@@ -110,7 +110,7 @@ const handleChanges = (e) => {
 }
 
       const signin = (e) => {
-        e.perventdefault()
+        e.preventDefault()
           axiosWithAuth().post("/login", credentials)
             .then(res => {
               localStorage.setItem("token", res.data.token)
