@@ -170,9 +170,9 @@ const Navigation = props => {
 };
 
 const NavigationAuth = () => (
-  <Box direction="row" justify="right" gap="small">
+  <div direction="row" justify="right" gap="small">
     {/* <SignOutButton /> */}
-  </Box>
+  </div>
 );
 
 const FadingBackground = styled(BaseModalBackground)`
