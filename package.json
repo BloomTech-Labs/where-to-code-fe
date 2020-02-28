@@ -2,6 +2,9 @@
 	"name": "client",
 	"version": "0.1.0",
 	"private": true,
+	"engines": {
+	  	"node": "10.15.3"
+	},
 	"dependencies": {
 		"apexcharts": "^3.10.1",
 		"axios": "^0.19.2",
