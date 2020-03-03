@@ -3,7 +3,7 @@
 	"version": "0.1.0",
 	"private": true,
 	"engines": {
-		  "node": "10.15.3"
+		"node": "10.15.3"
 	},
 	"dependencies": {
 		"apexcharts": "^3.10.1",
@@ -31,8 +31,8 @@
 	},
 	"scripts": {
 		"start": "react-scripts start",
-		"build": "react-scripts build",
 		"test": "react-scripts test",
+		"build": "react-scripts build",
 		"eject": "react-scripts eject"
 	},
 	"eslintConfig": {
@@ -55,3 +55,5 @@
 		"@testing-library/react": "^9.3.2"
 	}
 }
+
+
