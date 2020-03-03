@@ -1,6 +1,11 @@
+<<<<<<< HEAD
 .env
 /config
 node_modules
 .DS_Store
 .gitignore
 package-lock.json
+=======
+node_modules
+.env
+>>>>>>> 2a0463c67f53ba9034bebbc8e0612b30f9a68f7d
