@@ -111,7 +111,7 @@ const handleChanges = (e) => {
 
       const signin = (e) => {
         e.preventDefault()
-          axiosWithAuth().post("/login", credentials)
+          axiosWithAuth().post("/auth/login", credentials)
             .then(res => {
               localStorage.setItem("token", res.data.token)
               props.history.push("/userdashboard")
