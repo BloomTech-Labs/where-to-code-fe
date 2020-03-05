@@ -32,8 +32,8 @@
 	},
 	"scripts": {
 		"start": "react-scripts start",
-		"build": "react-scripts build",
 		"test": "react-scripts test",
+		"build": "react-scripts build",
 		"eject": "react-scripts eject"
 	},
 	"eslintConfig": {
@@ -56,3 +56,5 @@
 		"@testing-library/react": "^9.3.2"
 	}
 }
+
+
