@@ -53,7 +53,6 @@ const App = ({ state, userName }) => {
 
       <Route path={ROUTES.ACCOUNT} component={AccountPage} />
       <Route path={ROUTES.NETWORK} component={NetworkPage} />
-      <Footer />
     </Router>
   );
 };
