@@ -1,13 +1,7 @@
-<<<<<<< HEAD
-import React, { Component } from 'react'
-import { withRouter } from 'react-router-dom'
-import { compose } from 'recompose'
-=======
 import React, { Component, useState } from "react";
 import axiosWithAuth, {axioswithAuth} from "../../Helpers/axiosWithAuth";
 import { withRouter } from "react-router-dom";
 // import { compose } from "recompose";
->>>>>>> 2a0463c67f53ba9034bebbc8e0612b30f9a68f7d
 
 import { SignUpLink } from './SignUp.jsx'
 import { PasswordForgetLink } from './PasswordForget.jsx'
@@ -15,15 +9,9 @@ import { PasswordForgetLink } from './PasswordForget.jsx'
 import * as ROUTES from '../../Routes/routes'
 
 // import { Box, Heading } from "grommet";
-<<<<<<< HEAD
-import axios from 'axios'
-// import { axiosWithAuth } from '../../Helpers/axiosWithAuth'
-import styled from 'styled-components'
-=======
 // import axios from "axios";
 
 import styled from "styled-components";
->>>>>>> 2a0463c67f53ba9034bebbc8e0612b30f9a68f7d
 
 const StyledHeader = styled.div`
 	width: 100%;
@@ -96,117 +84,6 @@ const StyledInput = styled.input`
 
 //@@GOLD LOGIN BUTTON
 const LoginButton = styled.button`
-<<<<<<< HEAD
-	width: 55%;
-	border-radius: 10px;
-	background: gold;
-	border: 1px solid gold;
-	color: black;
-	height: 10%;
-	text-align: center;
-	margin-top: 8%;
-	font-family: 'Zilla Slab', serif;
-	font-size: 2rem;
-	margin-top: 100px;
-`
-
-// const SignInPage = () => {
-// <Box align='center' background='#555555' height='100vh' pad='large'>
-//   <Box>
-//     <Heading level='2' responsive='true' size='medium' alignSelf='center'>
-//       Sign In
-//     </Heading>
-//     <SignInForm />
-//     <PasswordForgetLink />
-//     <SignUpLink />
-//   </Box>
-// </Box>
-// }
-
-const INITIAL_STATE = {
-	email: '',
-	password: '',
-	error: null
-}
-
-class SignInFormBase extends Component {
-	constructor(props) {
-		super(props)
-		this.state = { ...INITIAL_STATE }
-	}
-
-	onSubmit = event => {
-		event.preventDefault()
-
-		axios
-			.post(`https://hive-stack-stage-backend.herokuapp.com/auth/login`)
-			.then(token => {
-				window.localStorage.setItem('JWT', token.data)
-				this.props.history.push(ROUTES.HOME)
-			})
-			.catch(err => ('error logging in', err))
-	}
-
-	onChange = event => {
-		this.setState({ [event.target.name]: event.target.value })
-	}
-
-	render() {
-		const { email, password, error } = this.state
-
-		const isInvalid = password === '' || email === ''
-
-		return (
-			<FormContainer>
-				<StyledHeader>
-					<i
-						class='fas fa-wifi fa-2x'
-						style={{ color: 'gold', marginRight: '14px' }}></i>
-					<h1>HiveStack</h1>
-					<StyledSvg
-						xmlns='http://www.w3.org/2000/svg'
-						viewBox='0 0 200 100'
-						preserveAspectRatio='none'>
-						<circle fill='white' cx='0' cy='100' r='100' />
-						<circle fill='white' cx='200' cy='100' r='100' />
-					</StyledSvg>
-				</StyledHeader>
-				<StyledForm onSubmit={this.onSubmit}>
-					<StyledInput
-						name='email'
-						value={email}
-						onChange={this.onChange}
-						type='text'
-						placeholder='Email Address'
-					/>
-					<StyledInput
-						name='password'
-						value={password}
-						onChange={this.onChange}
-						type='password'
-						placeholder='Password'
-					/>
-
-					{error && <p>{error.message}</p>}
-				</StyledForm>
-				<LoginButton
-					disabled={isInvalid}
-					onClick={this.onSubmit}
-					primary
-					label='Sign In'>
-					Login
-				</LoginButton>
-			</FormContainer>
-		)
-	}
-}
-
-const SignInForm = compose(withRouter)(SignInFormBase)
-
-// export default SignInPage
-
-export { SignInForm }
-=======
   width: 55%;
   border-radius: 10px;
   background: gold;
@@ -414,4 +291,3 @@ const handleChanges = (e) => {
 // export default SignInPage;
 
 export default withRouter(SignInForm);
->>>>>>> 2a0463c67f53ba9034bebbc8e0612b30f9a68f7d
