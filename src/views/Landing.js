@@ -121,10 +121,6 @@ const LandingScreen = styled.div`
   align-items: center;
   width: 100%;
   height: 100vh;
-
-  @media (max-width: 500px) {
-    height: 98vh;
-  }
 `;
 
 const GoButton = styled(Link)`
