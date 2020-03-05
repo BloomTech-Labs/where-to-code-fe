@@ -1,6 +1,6 @@
-import React, { Component, useState } from "react";
-import axiosWithAuth, {axioswithAuth} from "../../Helpers/axiosWithAuth";
-import { withRouter } from "react-router-dom";
+import React, { Component, useState } from 'react'
+import axiosWithAuth, { axioswithAuth } from '../../Helpers/axiosWithAuth'
+import { withRouter } from 'react-router-dom'
 // import { compose } from "recompose";
 
 import { SignUpLink } from './SignUp.jsx'
@@ -11,7 +11,7 @@ import * as ROUTES from '../../Routes/routes'
 // import { Box, Heading } from "grommet";
 // import axios from "axios";
 
-import styled from "styled-components";
+import styled from 'styled-components'
 
 const StyledHeader = styled.div`
 	width: 100%;
@@ -84,96 +84,78 @@ const StyledInput = styled.input`
 
 //@@GOLD LOGIN BUTTON
 const LoginButton = styled.button`
-  width: 55%;
-  border-radius: 10px;
-  background: gold;
-  border: 1px solid gold;
-  color: black;
-  height: 10%;
-  text-align: center;
-  margin-top: 8%;
-  font-family: "Zilla Slab", serif;
-  font-size: 2rem;
-  margin-top: 100px;
-`;
-
+	width: 55%;
+	border-radius: 10px;
+	background: gold;
+	border: 1px solid gold;
+	color: black;
+	height: 10%;
+	text-align: center;
+	margin-top: 8%;
+	font-family: 'Zilla Slab', serif;
+	font-size: 2rem;
+	margin-top: 100px;
+`
 
 function SignInForm(props) {
+	const [credentials, setCredentials] = useState({ username: '', password: '' })
 
+	// console.log(credentials)
 
-const [credentials, setCredentials] = useState({username: "", password: ""});
+	const handleChanges = e => {
+		setCredentials({ ...credentials, [e.target.name]: e.target.value })
+	}
 
-// console.log(credentials)
+	const signin = e => {
+		e.preventDefault()
+		axiosWithAuth()
+			.post('/auth/login', credentials)
+			.then(res => {
+				localStorage.setItem('token', res.data.token)
+				props.history.push('/userdashboard')
+			})
+			.catch(err => console.log(err))
+	}
 
-const handleChanges = (e) => {
-  setCredentials({...credentials, [e.target.name]: e.target.value})
+	return (
+		<FormContainer>
+			<StyledHeader>
+				<i
+					class='fas fa-wifi fa-2x'
+					style={{ color: 'gold', marginRight: '14px' }}></i>
+				<h1>HiveStack</h1>
+				<StyledSvg
+					xmlns='http://www.w3.org/2000/svg'
+					viewBox='0 0 200 100'
+					preserveAspectRatio='none'>
+					<circle fill='white' cx='0' cy='100' r='100' />
+					<circle fill='white' cx='200' cy='100' r='100' />
+				</StyledSvg>
+			</StyledHeader>
+			<StyledForm onSubmit={signin}>
+				<StyledInput
+					name='email'
+					value={credentials.email}
+					onChange={handleChanges}
+					type='text'
+					placeholder='Email Address'
+				/>
+				<StyledInput
+					name='password'
+					value={credentials.password}
+					onChange={handleChanges}
+					type='password'
+					placeholder='Password'
+				/>
+			</StyledForm>
+			<LoginButton onClick={signin} primary label='Sign In'>
+				Login
+			</LoginButton>
+			<br></br>
+			<PasswordForgetLink />
+		</FormContainer>
+	)
 }
-
-      const signin = (e) => {
-        e.preventDefault()
-          axiosWithAuth().post("/auth/login", credentials)
-            .then(res => {
-              localStorage.setItem("token", res.data.token)
-              props.history.push("/userdashboard")
-            })
-            .catch(err => console.log(err))
-      };
-
-
-
-
-
-  return(
-    <FormContainer>
-            <StyledHeader>
-               <i class="fas fa-wifi fa-2x"
-                   style={{ color: "gold", marginRight: "14px" }}></i>
-                <h1>HiveStack</h1>
-              <StyledSvg
-                xmlns="http://www.w3.org/2000/svg"
-                viewBox="0 0 200 100"
-                preserveAspectRatio="none">
-                <circle fill="white" cx="0" cy="100" r="100" />
-                <circle fill="white" cx="200" cy="100" r="100" />
-              </StyledSvg>
-            </StyledHeader>
-            <StyledForm onSubmit={signin}>
-              <StyledInput
-                name="email"
-                value={credentials.email}
-                onChange={handleChanges}
-                type="text"
-                placeholder="Email Address"
-              />
-              <StyledInput
-                name="password"
-                value={credentials.password}
-                onChange={handleChanges}
-                type="password"
-                placeholder="Password"
-              />
-    
-            </StyledForm>
-            <LoginButton
-              onClick={signin}
-              primary
-              label="Sign In"
-            >
-              Login
-            </LoginButton>
-            <br></br>
-            <PasswordForgetLink />
-
-          </FormContainer>
-  )
-}
-
-
-
-
-
-
-
 
 // const SignInPage = () => (
 //   <Box align="center" background="#555555" height="100vh" pad="large">
@@ -290,4 +272,4 @@ const handleChanges = (e) => {
 
 // export default SignInPage;
 
-export default withRouter(SignInForm);
+export default withRouter(SignInForm)
