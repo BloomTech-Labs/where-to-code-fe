@@ -1,5 +1,5 @@
 import React, { Component, useState } from "react";
-import axiosWithAuth, {axioswithAuth} from "../../Helpers/axiosWithAuth";
+import axiosWithAuth, { axioswithAuth } from "../../Helpers/axiosWithAuth";
 import { withRouter } from "react-router-dom";
 // import { compose } from "recompose";
 
@@ -97,83 +97,73 @@ const LoginButton = styled.button`
   margin-top: 100px;
 `;
 
-
 function SignInForm(props) {
+  const [credentials, setCredentials] = useState({
+    username: "",
+    password: ""
+  });
 
+  // console.log(credentials)
 
-const [credentials, setCredentials] = useState({username: "", password: ""});
+  const handleChanges = e => {
+    setCredentials({ ...credentials, [e.target.name]: e.target.value });
+  };
 
-// console.log(credentials)
+  const signin = e => {
+    e.preventDefault();
+    axiosWithAuth()
+      .post(
+        "https://hive-stack-stage-backend.herokuapp.com/auth/login",
+        credentials
+      )
+      .then(res => {
+        localStorage.setItem("token", res.data.token);
+        props.history.push("/userdashboard");
+      })
+      .catch(err => console.log(err));
+  };
 
-const handleChanges = (e) => {
-  setCredentials({...credentials, [e.target.name]: e.target.value})
-}
-
-      const signin = (e) => {
-        e.preventDefault()
-          axiosWithAuth().post("/login", credentials)
-            .then(res => {
-              localStorage.setItem("token", res.data.token)
-              props.history.push("/userdashboard")
-            })
-            .catch(err => console.log(err))
-      };
-
-
-
-
-
-  return(
+  return (
     <FormContainer>
-            <StyledHeader>
-               <i class="fas fa-wifi fa-2x"
-                   style={{ color: "gold", marginRight: "14px" }}></i>
-                <h1>HiveStack</h1>
-              <StyledSvg
-                xmlns="http://www.w3.org/2000/svg"
-                viewBox="0 0 200 100"
-                preserveAspectRatio="none">
-                <circle fill="white" cx="0" cy="100" r="100" />
-                <circle fill="white" cx="200" cy="100" r="100" />
-              </StyledSvg>
-            </StyledHeader>
-            <StyledForm onSubmit={signin}>
-              <StyledInput
-                name="email"
-                value={credentials.email}
-                onChange={handleChanges}
-                type="text"
-                placeholder="Email Address"
-              />
-              <StyledInput
-                name="password"
-                value={credentials.password}
-                onChange={handleChanges}
-                type="password"
-                placeholder="Password"
-              />
-    
-            </StyledForm>
-            <LoginButton
-              onClick={signin}
-              primary
-              label="Sign In"
-            >
-              Login
-            </LoginButton>
-            <br></br>
-            <PasswordForgetLink />
-
-          </FormContainer>
-  )
+      <StyledHeader>
+        <i
+          class="fas fa-wifi fa-2x"
+          style={{ color: "gold", marginRight: "14px" }}
+        ></i>
+        <h1>HiveStack</h1>
+        <StyledSvg
+          xmlns="http://www.w3.org/2000/svg"
+          viewBox="0 0 200 100"
+          preserveAspectRatio="none"
+        >
+          <circle fill="white" cx="0" cy="100" r="100" />
+          <circle fill="white" cx="200" cy="100" r="100" />
+        </StyledSvg>
+      </StyledHeader>
+      <StyledForm onSubmit={signin}>
+        <StyledInput
+          name="email"
+          value={credentials.email}
+          onChange={handleChanges}
+          type="text"
+          placeholder="Email Address"
+        />
+        <StyledInput
+          name="password"
+          value={credentials.password}
+          onChange={handleChanges}
+          type="password"
+          placeholder="Password"
+        />
+      </StyledForm>
+      <LoginButton onClick={signin} primary label="Sign In">
+        Login
+      </LoginButton>
+      <br></br>
+      <PasswordForgetLink />
+    </FormContainer>
+  );
 }
-
-
-
-
-
-
-
 
 // const SignInPage = () => (
 //   <Box align="center" background="#555555" height="100vh" pad="large">
