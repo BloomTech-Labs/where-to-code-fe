@@ -60,17 +60,18 @@ const StyledInput = styled.input`
   border: none;
   border-bottom: 0.7px solid grey;
   color: grey;
-  padding: 5px 0 0 10px;
-  margin: 10px 0;
+  padding-left: 10px;
+  margin-left: 10px;
+  margin-top: 15px;
+  margin-bottom: 15px;
   font-size: 18px;
   font-family: "Poppins", serif;
   text-align: left;
-  height: 20px;
+  height: 30px;
   background: none;
   // box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
   ::placeholder: gold;
   width: 70%;
-  outline: none;
 `;
 
 //@@GOLD SIGNUP BUTTON
@@ -82,7 +83,7 @@ const SignUpButton = styled.button`
   color: white;
   height: 10%;
   text-align: center;
-  margin-top: 3%;
+  margin-top: 8%;
   font-family: "Zilla Slab", serif;
   font-size: 1.5rem;
   display: flex;

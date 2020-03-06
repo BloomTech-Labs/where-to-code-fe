@@ -23,6 +23,16 @@ const StyledModal = Modal.styled`
   opacity: ${props => props.opacity};
   transition: opacity ease 1000ms;
   border-radius: 30px;
+
+  @media (max-width: 600px) {
+    width: 28rem;
+  }
+  @media (max-width: 500px) {
+    width: 25rem;
+  }
+  @media (max-width: 400px) {
+    width: 22rem;
+  }
 `;
 
 const RegisterLink = styled(Link)`
@@ -173,7 +183,7 @@ const FadingBackground = styled(BaseModalBackground)`
 
 const NavigationNonAuth = ({ login, register }) => {
   return (
-    <div className='topnav'>
+    <div className="topnav">
       <ModalProvider backgroundComponent={FadingBackground}>
         <LoginButton login={login} />
       </ModalProvider>
