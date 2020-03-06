@@ -2,7 +2,7 @@
 import React from "react";
 import styled from "styled-components";
 import axios from "axios";
-// import { withFirebase } from "../../Firebase";
+import { withFirebase } from "../../Firebase";
 
 // STYLED COMPONENTS
 const StyleModal = styled.div`
@@ -86,70 +86,71 @@ display: flex;
   `;
 
 class AllReviewsPanel1 extends React.Component {
-  state = {
-    reviews: []
-    // uid: this.props.firebase.auth.currentUser.uid,
-    // u_id: null,
-    // loc_id: null
-  };
+    state = {
+        reviews: [],
+        // uid: this.props.firebase.auth.currentUser.uid,
+        // u_id: null,
+        // loc_id: null
+    };
 
-  componentDidMount() {
-    let locationReq = this.props.locationId;
-    console.log("location id", locationReq);
-    return axios
-      .get(`https://wheretocode-master.herokuapp.com/locations/${locationReq}`)
-      .then(res => {
-        let locationId = res.data[0].id;
+    componentDidMount() {
+
+        let locationReq = this.props.locationId;
+        console.log('location id', locationReq);
         return axios.get(
-          `https://wheretocode-master.herokuapp.com/reviews/${locationId}/location`
-        );
-      })
-      .then(res => {
-        if (res) {
-          this.setState({
-            reviews: [...this.state.reviews, res.data]
-          });
-          let map = this.state.reviews[0].map((review, i) => {
-            return review.comments;
-          });
-        } else {
-          console.log("no response for get by userLocation", res);
-        }
-      })
-      .catch(error => {
-        console.log(error);
-      });
-  }
+            `https://wheretocode-master.herokuapp.com/locations/${locationReq}`
+        )
+            .then(res => {
+                let locationId = res.data[0].id;
+                return axios.get(
+                    `https://wheretocode-master.herokuapp.com/reviews/${locationId}/location`
+                );
+            })
+            .then(res => {
+                if (res) {
+                    this.setState({
+                        reviews: [...this.state.reviews, res.data]
+                    });
+                    let map = this.state.reviews[0].map((review, i) => {
+                        return review.comments;
+                    });
+                } else {
+                    console.log("no response for get by userLocation", res);
+                }
+            })
+            .catch(error => {
+                console.log(error);
+            });
+    }
 
-  render() {
-    return (
-      <>
-        <StyleModal></StyleModal>
-        {this.state.reviews.length === 0 ? (
-          <StyleModal>
-            <Header>No Reviews Exist Yet</Header>
-          </StyleModal>
-        ) : (
-          <StyleModal>
-            <Header> Reviews </Header>
-            <Content>
-              <ol className='ratingInfo'>
-                {this.state.reviews[0].map((review, i) => (
-                  <li key={review.ratingId}>
-                    <a href='#'>
-                      Username:{review.userName} -- Overall Rating:{" "}
-                      {review.rating} -- Internet Rating:{" "}
-                      {review.internet_rating} -- Comments:{review.comments}{" "}
-                    </a>
-                  </li>
-                ))}
-              </ol>
-            </Content>
-          </StyleModal>
-        )}
-      </>
-    );
-  }
+    render() {
+        return (
+            <>
+                <StyleModal></StyleModal>
+                {this.state.reviews.length === 0 ? (
+                    <StyleModal>
+                        <Header>No Reviews Exist Yet</Header>
+                    </StyleModal>
+                ) : (
+                        <StyleModal>
+                            <Header> Reviews </Header>
+                            <Content>
+                                <ol className="ratingInfo">
+                                    {this.state.reviews[0].map((review, i) => (
+                                        <li key={review.ratingId}>
+                                            <a href="#">
+                                                Username:{review.userName} -- Overall Rating: {review.rating} -- Internet Rating: {review.internet_rating}  --
+                      Comments:{review.comments}{" "}
+                                            </a>
+                                        </li>
+                                    ))}
+                                </ol>
+                            </Content>
+                        </StyleModal>
+                    )}
+            </>
+        );
+    }
 }
-const NonAuthAllReviewsPanel = AllReviewsPanel1;
+const NonAuthAllReviewsPanel = withFirebase(AllReviewsPanel1);
 export { NonAuthAllReviewsPanel };

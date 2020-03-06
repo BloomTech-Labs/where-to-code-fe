@@ -2,7 +2,7 @@
 import React, { Component } from "react";
 import styled from "styled-components";
 import axios from "axios";
-//import { distanceTo } from "geolocation-utils";
+import { distanceTo } from "geolocation-utils";
 import axiosWithAuth from "../../Helpers/axiosWithAuth";
 
 // COMPONENTS
@@ -12,7 +12,7 @@ import NetworkSpeed from "../NetworkSpeed/NetworkSpeed";
 import TextArea from "../Review/TextArea";
 import Select from "../Review/Select";
 import Button from "../Review/Button";
-// import { withFirebase } from "../../Firebase";
+import { withFirebase } from "../../Firebase";
 
 /* global google */
 
@@ -78,7 +78,7 @@ class ReviewPanel1 extends Component {
       },
       rating: ["1", "2", "3"],
       internet_rating: ["1", "2", "3"],
-      //uid: this.props.firebase.auth.currentUser.uid,
+      uid: this.props.firebase.auth.currentUser.uid,
       submitted: false,
       network: false,
       distanceFromLocation: 100
@@ -99,28 +99,28 @@ class ReviewPanel1 extends Component {
     let userCoords = [-33.856, 151.215];
 
     //Check if user allowed location sharing
-    // if (navigator.geolocation) {
-    //   navigator.geolocation.getCurrentPosition(position => {
-    //     userCoords = [position.coords.latitude, position.coords.longitude];
+    if (navigator.geolocation) {
+      navigator.geolocation.getCurrentPosition(position => {
+        userCoords = [position.coords.latitude, position.coords.longitude];
 
-    //     geocoder.__proto__.geocode(
-    //       { address: this.props.address },
-    //       (res, err) => {
-    //         const locationCoords = [
-    //           res[0].geometry.location.lat(),
-    //           res[0].geometry.location.lng()
-    //         ];
+        geocoder.__proto__.geocode(
+          { address: this.props.address },
+          (res, err) => {
+            const locationCoords = [
+              res[0].geometry.location.lat(),
+              res[0].geometry.location.lng()
+            ];
 
-    //         this.setState(prevState => {
-    //           return {
-    //             ...prevState,
-    //             distanceFromLocation: distanceTo(userCoords, locationCoords)
-    //           };
-    //         });
-    //       }
-    //     );
-    //   });
-    // }
+            this.setState(prevState => {
+              return {
+                ...prevState,
+                distanceFromLocation: distanceTo(userCoords, locationCoords)
+              };
+            });
+          }
+        );
+      });
+    }
 
     return axiosWithAuth()
       .get(`https://wheretocode-master.herokuapp.com/users/${this.state.uid}`)
@@ -277,7 +277,7 @@ class ReviewPanel1 extends Component {
                   placeholder={"Leave a comment"}
                 />
                 {/*Submit */}
-                <div className='buttonContainer'>
+                <div className="buttonContainer">
                   <Button
                     action={this.handleFormSubmit}
                     type={"primary"}
@@ -307,11 +307,12 @@ class ReviewPanel1 extends Component {
 
             <NetworkTextStyle>
               {this.state.distanceFromLocation > 30.48
-                ? // Convert Meters to Miles
-                  `Must be ${(
-                    (this.state.distanceFromLocation - 30.48) *
-                    0.000621
-                  ).toFixed(2)} miles closer to test network`
+                              // Convert Meters to Miles
+                ? `Must be ${(
+                                (this.state.distanceFromLocation - 30.48)
+                                * 0.000621
+                              ) .toFixed(2)
+                            } miles closer to test network`
                 : null}
             </NetworkTextStyle>
           </StyleModal>
@@ -321,6 +322,5 @@ class ReviewPanel1 extends Component {
   }
 }
 
-const ReviewPanel = ReviewPanel1;
+const ReviewPanel = withFirebase(ReviewPanel1);
 export { ReviewPanel };
-
