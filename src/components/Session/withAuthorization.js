@@ -3,7 +3,7 @@ import { withRouter } from "react-router-dom";
 import { compose } from "recompose";
 
 import AuthUserContext from "./context";
-// import { withFirebase } from "../../Firebase";
+import { withFirebase } from "../../Firebase";
 import * as ROUTES from "../../Routes/routes";
 
 const withAuthorization = condition => Component => {
@@ -32,8 +32,8 @@ const withAuthorization = condition => Component => {
   }
 
   return compose(
-    withRouter
-    // withFirebase
+    withRouter,
+    withFirebase
   )(WithAuthorization);
 };
 

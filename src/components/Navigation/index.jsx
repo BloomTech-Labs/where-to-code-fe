@@ -1,17 +1,17 @@
 import React, { useState } from "react";
 import Modal, { ModalProvider, BaseModalBackground } from "styled-react-modal";
 
-// import SignOutButton from "../Auth/SignOut.jsx";
+import SignOutButton from "../Auth/SignOut.jsx";
 import { withRouter } from "react-router-dom";
 
 import { AuthUserContext } from "../Session";
 
-// import { Box, Button, Heading } from "grommet";
+import { Box, Button, Heading } from "grommet";
 
 import { Link } from "react-router-dom";
 
-import  SignUpForm from "../Auth/SignUp.jsx";
-import  SignInForm  from "../Auth/SignIn.jsx";
+import { SignUpForm } from "../Auth/SignUp.jsx";
+import { SignInForm } from "../Auth/SignIn.jsx";
 
 import styled from "styled-components";
 
@@ -148,20 +148,20 @@ const Navigation = props => {
   };
   return (
     <Navbar>
-      {/* <Box direction='row' gap='small'>
-        <Heading level='3' margin='none'>
+      <Box direction="row" gap="small">
+        <Heading level="3" margin="none">
           <i
-            class='fas fa-wifi'
+            class="fas fa-wifi"
             style={{ color: "gold", margin: "0 20px" }}
           ></i>
           <Button
             onClick={landingRedirect}
-            label='HiveStack'
-            color='white'
-            plain='true'
+            label="HiveStack"
+            color="white"
+            plain="true"
           />
         </Heading>
-      </Box> */}
+      </Box>
       <AuthUserContext.Consumer>
         {authUser => (authUser ? <NavigationAuth /> : <NavigationNonAuth />)}
       </AuthUserContext.Consumer>
@@ -170,9 +170,9 @@ const Navigation = props => {
 };
 
 const NavigationAuth = () => (
-  <div direction="row" justify="right" gap="small">
-    {/* <SignOutButton /> */}
-  </div>
+  <Box direction="row" justify="right" gap="small">
+    <SignOutButton />
+  </Box>
 );
 
 const FadingBackground = styled(BaseModalBackground)`
@@ -180,21 +180,15 @@ const FadingBackground = styled(BaseModalBackground)`
   transition: opacity ease 1000ms;
 `;
 
-const NavigationNonAuth = () => {
-  // <Box direction='row' justify='right' gap='small'>
-  return (
-    <div className='topnav'>
-      <ModalProvider backgroundComponent={FadingBackground}>
-        <LoginButton />
-      </ModalProvider>
-      <ModalProvider backgroundComponent={FadingBackground}>
-        <SignUpButton />
-      </ModalProvider>{" "}
-    </div>
-  );
-  // </Box>
-
-  // return null;
-};
+const NavigationNonAuth = () => (
+  <Box direction="row" justify="right" gap="small">
+    <ModalProvider backgroundComponent={FadingBackground}>
+      <LoginButton />
+    </ModalProvider>
+    <ModalProvider backgroundComponent={FadingBackground}>
+      <SignUpButton />
+    </ModalProvider>
+  </Box>
+);
 
 export default withRouter(Navigation);
