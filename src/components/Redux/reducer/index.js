@@ -1,15 +1,14 @@
-import { UPDATE_INFO } from '../actions'
+import { UPDATE_INFO } from "../actions";
+import initialState from "../store";
 
-const initialState = {
-	username: ''
-}
-
-export const userInfo = (state = initialState, action) => {
-	switch (action.type) {
-		case UPDATE_INFO:
-			return {
-				...state,
-				username: action.payload
-			}
-	}
-}
+export const reducer = (state = initialState, action) => {
+  switch (action.type) {
+    case UPDATE_INFO:
+      return {
+        ...state,
+        username: action.payload
+      };
+    default:
+      return state;
+  }
+};

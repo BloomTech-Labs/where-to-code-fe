@@ -1,8 +1,10 @@
-export const UPDATE_INFO = 'UPDATE_INFO'
+import React from "react";
 
-export const userName = name => {
-	return {
-		type: UPDATE_INFO,
-		payload: name
-	}
-}
+export const UPDATE_INFO = "UPDATE_INFO";
+
+export const userName = name => dispatch => {
+  dispatch({
+    type: UPDATE_INFO,
+    payload: name
+  });
+};

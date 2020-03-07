@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-/* global google */
+// /* global google */
 
 import Navigation from "../components/Navigation/index";
 
@@ -7,18 +7,18 @@ import styled from "styled-components";
 
 import { withRouter, Link } from "react-router-dom";
 
-import mockup from "../assets/mockup.png";
-import hours from "../assets/hours.jpg";
-import explore from "../assets/explore.jpg";
-import reviews from "../assets/reviews.jpg";
+// // import mockup from "../assets/mockup.png";
+// // import hours from "../assets/hours.jpg";
+// // import explore from "../assets/explore.jpg";
+// // import reviews from "../assets/reviews.jpg";
 
 import * as ROUTES from "../Routes/routes";
 
-const Landing = props => {
-  const [currentActivity, setCurrentActivity] = useState("code");
-  const [number, setNumber] = useState(1);
+const Landing = ({ state, setPlace }) => {
+  const activity = state.activity;
 
-  const activity = ["code", "study", "stream"];
+  const [currentActivity, setCurrentActivity] = useState(activity[0]);
+  const [number, setNumber] = useState(0);
 
   function updateText() {
     setCurrentActivity(activity[number]);
@@ -27,22 +27,22 @@ const Landing = props => {
       : setNumber(number + 1);
   }
 
-  useEffect(() => {
-    const autocomplete = new google.maps.places.Autocomplete(
-      document.getElementById("exploreAutoComplete")
-    );
-    autocomplete.setFields([
-      "address_components",
-      "formatted_address",
-      "geometry",
-      "icon",
-      "name",
-      "place_id"
-    ]);
-    autocomplete.addListener("place_changed", () => {
-      props.setPlace(autocomplete.getPlace());
-    });
-  }, []);
+  // useEffect(() => {
+  //   const autocomplete = new google.maps.places.Autocomplete(
+  //     document.getElementById("exploreAutoComplete")
+  //   );
+  //   autocomplete.setFields([
+  //     "address_components",
+  //     "formatted_address",
+  //     "geometry",
+  //     "icon",
+  //     "name",
+  //     "place_id"
+  //   ]);
+  //   autocomplete.addListener("place_changed", () => {
+  //     props.setPlace(autocomplete.getPlace());
+  //   });
+  // }, []);
 
   useEffect(() => {
     setTimeout(updateText, 2000);
@@ -58,7 +58,7 @@ const Landing = props => {
           </h2>
 
           <InputAndButtonContainer>
-            <Input id="exploreAutoComplete" placeholder="Explore" size="40" />
+            <Input id='exploreAutoComplete' placeholder='Explore' size='40' />
             <GoButton to={ROUTES.HOME}>Go</GoButton>
           </InputAndButtonContainer>
         </SearchComponent>
@@ -67,7 +67,7 @@ const Landing = props => {
   );
 };
 
-export default withRouter(Landing);
+export default Landing;
 
 const SearchComponent = styled.div`
   display: flex;
