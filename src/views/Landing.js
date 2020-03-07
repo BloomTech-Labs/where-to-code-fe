@@ -1,45 +1,24 @@
-import React, { useState, useEffect } from "react";
-// /* global google */
-
+import React from "react";
 import Navigation from "../components/Navigation/index";
-
 import styled from "styled-components";
-
 import { withRouter, Link } from "react-router-dom";
 
-// // import mockup from "../assets/mockup.png";
-// // import hours from "../assets/hours.jpg";
-// // import explore from "../assets/explore.jpg";
-// // import reviews from "../assets/reviews.jpg";
+// import mockup from "../assets/mockup.png";
+// import hours from "../assets/hours.jpg";
+// import explore from "../assets/explore.jpg";
+// import reviews from "../assets/reviews.jpg";
 
 import * as ROUTES from "../Routes/routes";
 
-const Landing = ({ state, setActivity, setPlace }) => {
+const Landing = ({ state, setActivity, login }) => {
   const activity = state.activity;
   const number = state.activityNumber;
 
   const activityTimer = setTimeout(setActivity, 2000);
 
-  // useEffect(() => {
-  //   const autocomplete = new google.maps.places.Autocomplete(
-  //     document.getElementById("exploreAutoComplete")
-  //   );
-  //   autocomplete.setFields([
-  //     "address_components",
-  //     "formatted_address",
-  //     "geometry",
-  //     "icon",
-  //     "name",
-  //     "place_id"
-  //   ]);
-  //   autocomplete.addListener("place_changed", () => {
-  //     props.setPlace(autocomplete.getPlace());
-  //   });
-  // }, []);
-
   return (
     <LandingPageContainer>
-      <Navigation />
+      <Navigation state={state} login={login} />
       <LandingScreen>
         <SearchComponent>
           <h2>
