@@ -14,18 +14,11 @@ import { withRouter, Link } from "react-router-dom";
 
 import * as ROUTES from "../Routes/routes";
 
-const Landing = ({ state, setPlace }) => {
+const Landing = ({ state, setActivity, setPlace }) => {
   const activity = state.activity;
+  const number = state.activityNumber;
 
-  const [currentActivity, setCurrentActivity] = useState(activity[0]);
-  const [number, setNumber] = useState(0);
-
-  function updateText() {
-    setCurrentActivity(activity[number]);
-    return number === activity.length - 1
-      ? setNumber(0)
-      : setNumber(number + 1);
-  }
+  const activityTimer = setTimeout(setActivity, 2000);
 
   // useEffect(() => {
   //   const autocomplete = new google.maps.places.Autocomplete(
@@ -44,17 +37,13 @@ const Landing = ({ state, setPlace }) => {
   //   });
   // }, []);
 
-  useEffect(() => {
-    setTimeout(updateText, 2000);
-  }, [number]);
-
   return (
     <LandingPageContainer>
       <Navigation />
       <LandingScreen>
         <SearchComponent>
           <h2>
-            Find a place to <span>{currentActivity}</span> near you
+            Find a place to <span>{activity[number]}</span> near you
           </h2>
 
           <InputAndButtonContainer>

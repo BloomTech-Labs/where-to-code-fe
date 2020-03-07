@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { BrowserRouter as Router, Route } from "react-router-dom";
 import { connect } from "react-redux";
-import { userName } from "./components/Redux/actions";
+import { userName, setActivity } from "./components/Redux/actions";
 
 //@ components
 
@@ -20,14 +20,18 @@ import Landing from "./views/Landing";
 //@ utils
 import * as ROUTES from "./Routes/routes";
 
-function App({ state, userName }) {
+function App({ state, setActivity, userName }) {
   const [place, setPlace] = useState("");
 
   return (
     <Router>
       <Route exact path={ROUTES.LANDING}>
         <div className='App'>
-          <Landing state={state} setPlace={setPlace} />
+          <Landing
+            state={state}
+            setActivity={setActivity}
+            setPlace={setPlace}
+          />
         </div>
       </Route>
       {/* //{" "} */}
@@ -43,4 +47,4 @@ function App({ state, userName }) {
 
 const mapStateToProps = state => ({ state: state });
 
-export default connect(mapStateToProps, { userName })(App);
+export default connect(mapStateToProps, { userName, setActivity })(App);
