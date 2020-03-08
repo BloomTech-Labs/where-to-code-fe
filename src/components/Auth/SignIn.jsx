@@ -1,15 +1,10 @@
 import React, { Component, useState } from "react";
 import axiosWithAuth, { axioswithAuth } from "../../Helpers/axiosWithAuth";
 import { withRouter } from "react-router-dom";
-// import { compose } from "recompose";
 
 import { SignUpLink } from "./SignUp.jsx";
 import { PasswordForgetLink } from "./PasswordForget.jsx";
-// import { withFirebase } from "../../Firebase";
 import * as ROUTES from "../../Routes/routes";
-
-// import { Box, Heading } from "grommet";
-// import axios from "axios";
 
 import styled from "styled-components";
 
@@ -96,8 +91,6 @@ function SignInForm(props) {
     username: "",
     password: ""
   });
-
-  // console.log(credentials)
 
   const handleChanges = e => {
     setCredentials({ ...credentials, [e.target.name]: e.target.value });

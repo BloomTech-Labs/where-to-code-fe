@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import { Link, withRouter } from "react-router-dom";
 import axiosWithAuth from "../../Helpers/axiosWithAuth";
 
-// import { withFirebase } from "../../Firebase";
 import * as ROUTES from "../../Routes/routes";
 
 import styled from "styled-components";
@@ -93,8 +92,6 @@ function SignUpForm(props) {
     username: "",
     password: ""
   });
-
-  // console.log(credentials)
 
   const handleChanges = e => {
     setCredentials({ ...credentials, [e.target.name]: e.target.value });
