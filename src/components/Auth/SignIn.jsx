@@ -24,8 +24,8 @@ const StyledHeader = styled.div`
   color: white;
   position: relative;
   border-radius: 25px 25px 0 0;
-  padding: 34px 0 8px 0;
-  margin-bottom: 40px;
+  padding: 34px 0 0 0;
+  margin-bottom: 55px;
   border-bottom: none;
 `;
 
