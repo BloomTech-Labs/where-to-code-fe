@@ -1,9 +1,17 @@
 import React, { Component, useState } from "react";
 import axiosWithAuth, { axioswithAuth } from "../../Helpers/axiosWithAuth";
 import { withRouter } from "react-router-dom";
+<<<<<<< HEAD
 import { SignUpLink } from "./SignUp.jsx";
 import { PasswordForgetLink } from "./PasswordForget.jsx";
 import * as ROUTES from "../../Routes/routes";
+=======
+
+import { SignUpLink } from "./SignUp.jsx";
+import { PasswordForgetLink } from "./PasswordForget.jsx";
+import * as ROUTES from "../../Routes/routes";
+
+>>>>>>> Got rid of commented out code in the SignIn and SignUp components
 import styled from "styled-components";
 
 const StyledHeader = styled.div`
@@ -97,6 +105,7 @@ const StyledError = styled.div`
   font-size: 1rem;
 `;
 
+<<<<<<< HEAD
 const SignInForm = ({ login, ...props }) => {
   const [creds, setCreds] = useState({
     email: "",
@@ -110,6 +119,10 @@ const SignInForm = ({ login, ...props }) => {
       [e.target.name]: e.target.value,
       err: null
     });
+=======
+  const handleChanges = e => {
+    setCredentials({ ...credentials, [e.target.name]: e.target.value });
+>>>>>>> Got rid of commented out code in the SignIn and SignUp components
   };
 
   const { history } = props;
