@@ -40,7 +40,13 @@ export const login = (e, creds, history) => dispatch => {
           dispatch({ type: LOGIN_SUCCESS, payload: res.data });
           localStorage.setItem("token", res.data.token);
           history.push("/dashboard");
-        } else dispatch({ type: LOGIN_FAIL, payload: res.data });
-      });
+        }
+      })
+      .catch(err =>
+        dispatch({
+          type: LOGIN_FAIL,
+          payload: "Could not login. Please try again."
+        })
+      );
   }
 };

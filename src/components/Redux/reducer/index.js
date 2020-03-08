@@ -38,6 +38,8 @@ export const reducer = (state = initialState, action) => {
       };
     case LOGIN_NOT_COMPLETE:
       return { ...state, loginErr: action.payload };
+    case LOGIN_FAIL:
+      return { ...state, loginErr: action.payload };
     default:
       return state;
   }
