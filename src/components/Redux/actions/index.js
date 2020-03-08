@@ -36,7 +36,7 @@ export const login = (e, creds, history) => dispatch => {
         password: creds.password
       })
       .then(res => {
-        if (res.data !== undefined) {
+        if (res.data.id) {
           dispatch({ type: LOGIN_SUCCESS, payload: res.data });
           localStorage.setItem("token", res.data.token);
           history.push("/dashboard");

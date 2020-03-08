@@ -7,8 +7,7 @@ const initialState = {
   password: "",
   activity: ["code", "study", "stream"],
   activityNumber: 0,
-  loginErr: "",
-  isLoggedIn: false
+  loginErr: ""
 };
 
 export default initialState;

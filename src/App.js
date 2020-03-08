@@ -1,5 +1,5 @@
-import React, { useState } from "react";
-import { BrowserRouter as Router, Route } from "react-router-dom";
+import React, { useState, Component } from "react";
+import { BrowserRouter as Router, Route, Redirect } from "react-router-dom";
 import { connect } from "react-redux";
 import { userName, setActivity, login } from "./components/Redux/actions";
 import Dashboard from "./components/Dashboard";
@@ -21,14 +21,31 @@ import Landing from "./views/Landing";
 import * as ROUTES from "./Routes/routes";
 
 function App({ state, userName, setActivity, login }) {
+  const PrivateRoute = ({ component: Component, ...rest }) => (
+    <Route
+      {...rest}
+      render={props =>
+        localStorage.getItem("token") ? (
+          <Component {...props} />
+        ) : (
+          <Redirect to='/' />
+        )
+      }
+    />
+  );
+
   return (
     <Router>
       <Route exact path={ROUTES.LANDING}>
         <div className='App'>
-          <Landing state={state} setActivity={setActivity} login={login} />
+          {localStorage.getItem("token") ? (
+            <Redirect to='/dashboard' />
+          ) : (
+            <Landing state={state} setActivity={setActivity} login={login} />
+          )}
         </div>
       </Route>
-      <Route path='/dashboard' component={Dashboard} />
+      <PrivateRoute path='/dashboard' component={Dashboard} />
       {/* <Route path={ROUTES.PASSWORD_FORGET} component={PasswordForgetPage} /> */}
       {/* <Route */}
       {/* // exact // path={ROUTES.HOME}

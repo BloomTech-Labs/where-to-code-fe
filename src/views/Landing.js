@@ -10,7 +10,9 @@ import { withRouter, Link } from "react-router-dom";
 
 import * as ROUTES from "../Routes/routes";
 
-const Landing = ({ state, setActivity, login }) => {
+const Landing = ({ state, setActivity, login, ...props }) => {
+  const { history } = props;
+
   const activity = state.activity;
   const number = state.activityNumber;
 
@@ -35,7 +37,7 @@ const Landing = ({ state, setActivity, login }) => {
   );
 };
 
-export default Landing;
+export default withRouter(Landing);
 
 const SearchComponent = styled.div`
   display: flex;

@@ -34,8 +34,7 @@ export const reducer = (state = initialState, action) => {
         userID: action.payload.id,
         username: action.payload.username,
         firstname: action.payload.firstName,
-        lastname: action.payload.lastName,
-        isLoggedIn: true
+        lastname: action.payload.lastName
       };
     case LOGIN_NOT_COMPLETE:
       return { ...state, loginErr: action.payload };

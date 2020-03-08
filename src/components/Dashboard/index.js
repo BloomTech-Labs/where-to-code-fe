@@ -1,6 +1,6 @@
 import React from "react";
 
-const Dashboard = () => {
+const Dashboard = state => {
   return (
     <>
       <h1>Welcome to funkytown</h1>
