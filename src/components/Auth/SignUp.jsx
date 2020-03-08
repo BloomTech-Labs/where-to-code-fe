@@ -7,17 +7,19 @@ import * as ROUTES from "../../Routes/routes";
 import styled from "styled-components";
 
 const FormContainer = styled.div`
-display: flex;
-flex-direction: column;
-justify-content: center;
-align-items: center;
-text-align: center;
-width: 100%
-height: 100%;
-border-radius: 25px;
-background:white;
-border: 3px solid gold;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  width: 100%;
+  height: 100%;
+  border-radius: 25px;
+  background: white;
 
+  p {
+    margin-bottom: 33px;
+  }
 `;
 
 const StyledHeader = styled.div`
@@ -30,9 +32,9 @@ const StyledHeader = styled.div`
   background: black;
   color: white;
   position: relative;
-  margin-top: -70px;
-  border-radius: 30px;
-  border: 3px solid gold;
+  border-radius: 25px 25px 0 0;
+  padding: 34px 0 0 0;
+  margin-bottom: 55px;
   border-bottom: none;
 `;
 
@@ -42,25 +44,17 @@ flex-direction: column;
 justify-content: center;
 align-items: center
 text-align: center;
-margin-top: 30px;
+margin-bottom: 0px;
 background: white;
 width: 70%;
 `;
 
-const StyledSvg = styled.svg`
-  position: absolute;
-  bottom: 0;
-  width: 100%;
-  height: 50px;
-`;
-
 const StyledInput = styled.input`
   opacity: 0.5;
-  // border-radius: 25px;
   border: none;
   border-bottom: 0.7px solid grey;
   color: grey;
-  padding-left: 10px;
+  padding-left: 14px;
   margin-left: 10px;
   margin-top: 15px;
   margin-bottom: 15px;
@@ -69,7 +63,6 @@ const StyledInput = styled.input`
   text-align: left;
   height: 30px;
   background: none;
-  // box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
   ::placeholder: gold;
   width: 70%;
 `;
@@ -78,17 +71,16 @@ const StyledInput = styled.input`
 const SignUpButton = styled.button`
   width: 55%;
   border-radius: 10px;
-  background: black;
-  border: 3px solid gold;
-  color: white;
+  background: gold;
+
+  color: black;
   height: 10%;
   text-align: center;
   margin-top: 8%;
   font-family: "Zilla Slab", serif;
-  font-size: 1.5rem;
-  display: flex;
-  justify-content: center;
-  align-items: center;
+  font-size: 2rem;
+  margin-top: 40px;
+  margin-bottom: 85px;
 `;
 
 const StyledError = styled.div`
@@ -130,14 +122,8 @@ const SignUpForm = ({ register, ...props }) => {
           style={{ color: "gold", marginRight: "14px" }}
         ></i>
         <h1>HiveStack</h1>
-        <StyledSvg
-          xmlns='http://www.w3.org/2000/svg'
-          viewBox='0 0 200 100'
-          preserveAspectRatio='none'
-        >
-          <circle fill='white' cx='0' cy='100' r='100' />
-          <circle fill='white' cx='200' cy='100' r='100' />
-        </StyledSvg>
+        <circle fill="white" cx="0" cy="100" r="100" />
+        <circle fill="white" cx="200" cy="100" r="100" />
       </StyledHeader>
       <StyledForm>
         <StyledInput
