@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import Navigation from "../components/Navigation/index";
 import styled from "styled-components";
 import { withRouter, Link } from "react-router-dom";
@@ -11,13 +11,12 @@ import { withRouter, Link } from "react-router-dom";
 import * as ROUTES from "../Routes/routes";
 
 const Landing = ({ state, setActivity, login, ...props }) => {
-  const { history } = props;
-
   const activity = state.activity;
   const number = state.activityNumber;
 
-  const activityTimer = setTimeout(setActivity, 2000);
-
+  useEffect(() => {
+    let activityTimer = setTimeout(setActivity, 2000);
+  }, [number]);
   return (
     <LandingPageContainer>
       <Navigation state={state} login={login} />

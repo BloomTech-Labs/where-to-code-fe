@@ -58,4 +58,8 @@ function App({ state, userName, setActivity, login }) {
 
 const mapStateToProps = state => ({ state: state });
 
-export default connect(mapStateToProps, { userName, setActivity, login })(App);
+export default connect(mapStateToProps, {
+  userName,
+  setActivity,
+  login
+})(App);

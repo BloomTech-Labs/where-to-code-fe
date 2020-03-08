@@ -40,8 +40,7 @@ export const login = (e, creds, history) => dispatch => {
     })
     .catch(err =>
       dispatch({
-        type: LOGIN_FAIL,
-        payload: "Could not login. Please try again."
+        type: LOGIN_FAIL
       })
     );
 };

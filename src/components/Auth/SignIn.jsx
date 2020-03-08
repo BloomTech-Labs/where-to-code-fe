@@ -151,16 +151,23 @@ const SignInForm = ({ state, login, ...props }) => {
           type='password'
           placeholder='Password'
         />
-        {state.landingErr && (
-          <StyledError name='err'>{state.landingErr}</StyledError>
-        )}
+
         {creds.err && <StyledError name='err'>{creds.err}</StyledError>}
       </StyledForm>
       <LoginButton
         onClick={e => {
-          creds.email === "" || creds.password === ""
+          login(e, creds, history)
+            ? setCreds({ ...creds, err: null })
+            : creds.email === "" || creds.password === ""
             ? setCreds({ ...creds, err: "Please complete all fields." })
-            : login(e, creds, history);
+            : setTimeout(
+                () =>
+                  setCreds({
+                    ...creds,
+                    err: "Login failed. Please try again."
+                  }),
+                2000
+              );
         }}
         primary
         label='Sign In'
