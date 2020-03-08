@@ -3,10 +3,13 @@ import axiosWithAuth from "../../../Helpers/axiosWithAuth";
 export const UPDATE_ACTIVITY = "UPDATE_ACTIVITY";
 export const UPDATE_INFO = "UPDATE_INFO";
 
-export const LOGIN_NOT_COMPLETE = "LOGIN_NOT_COMPLETE";
 export const LOGIN_SUBMIT = "LOGIN_SUBMIT";
 export const LOGIN_SUCCESS = "LOGIN_SUCCESS";
 export const LOGIN_FAIL = "LOGIN_FAIL";
+
+export const REGISTER_SUBMIT = "REGISTER_SUBMIT";
+export const REGISTER_SUCCESS = "REGISTER_SUCCESS";
+export const REGISTER_FAIL = "REGISTER_FAIL";
 
 export const userName = name => dispatch => {
   dispatch({
@@ -22,31 +25,23 @@ export const setActivity = () => dispatch => {
 export const login = (e, creds, history) => dispatch => {
   e.preventDefault();
 
-  if (!creds.email.length > 0 || !creds.password.length > 0) {
-    dispatch({
-      type: LOGIN_NOT_COMPLETE,
-      payload: "Please complete all login fields."
-    });
-    return;
-  } else {
-    dispatch({ type: LOGIN_SUBMIT });
-    axiosWithAuth()
-      .post("/auth/login", {
-        email: creds.email,
-        password: creds.password
+  dispatch({ type: LOGIN_SUBMIT });
+  axiosWithAuth()
+    .post("/auth/login", {
+      email: creds.email,
+      password: creds.password
+    })
+    .then(res => {
+      if (res.data.id) {
+        dispatch({ type: LOGIN_SUCCESS, payload: res.data });
+        localStorage.setItem("token", res.data.token);
+        history.push("/dashboard");
+      }
+    })
+    .catch(err =>
+      dispatch({
+        type: LOGIN_FAIL,
+        payload: "Could not login. Please try again."
       })
-      .then(res => {
-        if (res.data.id) {
-          dispatch({ type: LOGIN_SUCCESS, payload: res.data });
-          localStorage.setItem("token", res.data.token);
-          history.push("/dashboard");
-        }
-      })
-      .catch(err =>
-        dispatch({
-          type: LOGIN_FAIL,
-          payload: "Could not login. Please try again."
-        })
-      );
-  }
+    );
 };

@@ -7,7 +7,7 @@ const initialState = {
   password: "",
   activity: ["code", "study", "stream"],
   activityNumber: 0,
-  loginErr: ""
+  landingErr: null
 };
 
 export default initialState;

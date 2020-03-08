@@ -58,7 +58,7 @@ const LoginLink = styled(Link)`
   border-radius: 5px;
 `;
 
-const SignUpButton = ({ state, login }) => {
+const SignUpButton = ({ state }) => {
   const [isOpen, setIsOpen] = useState(false);
   const [opacity, setOpacity] = useState(0);
 
@@ -93,7 +93,7 @@ const SignUpButton = ({ state, login }) => {
         opacity={opacity}
         backgroundProps={{ opacity }}
       >
-        <SignUpForm toggleModal={toggleModal} login={login} />
+        <SignUpForm toggleModal={toggleModal} />
 
         {/* <button onClick={toggleModal}>Close me</button> */}
       </StyledModal>

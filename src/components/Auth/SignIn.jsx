@@ -87,13 +87,26 @@ const LoginButton = styled.button`
   margin-top: 8%;
   font-family: "Zilla Slab", serif;
   font-size: 2rem;
-  margin-top: 100px;
+`;
+
+const StyledError = styled.div`
+  width: 85%;
+  padding: 12px;
+  background-color: #ffe7e7;
+  border: 2px solid #ff9090;
+  border-radius: 5px;
+  color: #ff9090;
+  font-weight: bold;
+  text-align: center;
+  font-family: "Zilla Slab", serif;
+  font-size: 1rem;
 `;
 
 const SignInForm = ({ state, login, ...props }) => {
   const [creds, setCreds] = useState({
     email: "",
-    password: ""
+    password: "",
+    err: null
   });
 
   const { history } = props;
@@ -101,7 +114,8 @@ const SignInForm = ({ state, login, ...props }) => {
   const handleChange = e => {
     setCreds({
       ...creds,
-      [e.target.name]: e.target.value
+      [e.target.name]: e.target.value,
+      err: null
     });
   };
 
@@ -137,9 +151,17 @@ const SignInForm = ({ state, login, ...props }) => {
           type='password'
           placeholder='Password'
         />
+        {state.landingErr && (
+          <StyledError name='err'>{state.landingErr}</StyledError>
+        )}
+        {creds.err && <StyledError name='err'>{creds.err}</StyledError>}
       </StyledForm>
       <LoginButton
-        onClick={e => login(e, creds, history)}
+        onClick={e => {
+          creds.email === "" || creds.password === ""
+            ? setCreds({ ...creds, err: "Please complete all fields." })
+            : login(e, creds, history);
+        }}
         primary
         label='Sign In'
       >

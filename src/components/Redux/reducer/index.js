@@ -1,10 +1,12 @@
 import {
   UPDATE_INFO,
   UPDATE_ACTIVITY,
-  LOGIN_NOT_COMPLETE,
   LOGIN_SUBMIT,
   LOGIN_SUCCESS,
-  LOGIN_FAIL
+  LOGIN_FAIL,
+  REGISTER_SUBMIT,
+  REGISTER_SUCCESS,
+  REGISTER_FAIL
 } from "../actions";
 import initialState from "../store";
 
@@ -36,10 +38,9 @@ export const reducer = (state = initialState, action) => {
         firstname: action.payload.firstName,
         lastname: action.payload.lastName
       };
-    case LOGIN_NOT_COMPLETE:
-      return { ...state, loginErr: action.payload };
+
     case LOGIN_FAIL:
-      return { ...state, loginErr: action.payload };
+      return { ...state, landingErr: action.payload };
     default:
       return state;
   }
