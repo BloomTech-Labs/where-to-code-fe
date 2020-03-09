@@ -102,14 +102,12 @@ const StyledError = styled.div`
   font-size: 1rem;
 `;
 
-const SignInForm = ({ state, login, ...props }) => {
+const SignInForm = ({ login, ...props }) => {
   const [creds, setCreds] = useState({
     email: "",
     password: "",
     err: null
   });
-
-  const { history } = props;
 
   const handleChange = e => {
     setCreds({
@@ -118,6 +116,8 @@ const SignInForm = ({ state, login, ...props }) => {
       err: null
     });
   };
+
+  const { history } = props;
 
   return (
     <FormContainer>

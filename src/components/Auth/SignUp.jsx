@@ -104,7 +104,7 @@ const StyledError = styled.div`
   margin-top: 2%;
 `;
 
-function SignUpForm(props) {
+const SignUpForm = ({ register, ...props }) => {
   const [creds, setCreds] = useState({
     username: "",
     firstname: "",
@@ -115,28 +115,17 @@ function SignUpForm(props) {
     err: null
   });
 
-  // console.log(creds)
-
   const handleChanges = e => {
-    setCreds({ ...creds, [e.target.name]: e.target.value });
+    setCreds({ ...creds, [e.target.name]: e.target.value, err: null });
   };
 
-  const signup = e => {
-    e.perventdefault();
-    axiosWithAuth()
-      .post("/login", creds)
-      .then(res => {
-        localStorage.setItem("token", res.data.token);
-        props.history.push("/userdashboard");
-      })
-      .catch(err => console.log(err));
-  };
+  const { history } = props;
 
   return (
     <FormContainer>
       <StyledHeader>
         <i
-          class='fas fa-wifi fa-2x'
+          className='fas fa-wifi fa-2x'
           style={{ color: "gold", marginRight: "14px" }}
         ></i>
         <h1>HiveStack</h1>
@@ -149,12 +138,12 @@ function SignUpForm(props) {
           <circle fill='white' cx='200' cy='100' r='100' />
         </StyledSvg>
       </StyledHeader>
-      <StyledForm onSubmit={signup}>
+      <StyledForm>
         <StyledInput
           name='username'
           value={creds.username}
           onChange={handleChanges}
-          type='password'
+          type='text'
           placeholder='Preferred Username...'
         />
         <StyledInput
@@ -194,11 +183,37 @@ function SignUpForm(props) {
         />
         {creds.err && <StyledError name='err'>{creds.err}</StyledError>}
       </StyledForm>
-      <SignUpButton onClick={signup} primary label='Sign Up'>
+      <SignUpButton
+        onClick={e => {
+          register(e, creds, history)
+            ? setCreds({ ...creds, err: null })
+            : creds.username === "" ||
+              creds.firstname === "" ||
+              creds.lastname === "" ||
+              creds.email === "" ||
+              creds.password === ""
+            ? setCreds({ ...creds, err: "Please complete all fields." })
+            : creds.password !== creds.passwordConfirm
+            ? setCreds({
+                ...creds,
+                err: "Password and confirm fields must match."
+              })
+            : setTimeout(
+                () =>
+                  setCreds({
+                    ...creds,
+                    err: "Registration failed. Please try again."
+                  }),
+                2000
+              );
+        }}
+        primary
+        label='Sign Up'
+      >
         Sign Up
       </SignUpButton>
     </FormContainer>
   );
-}
+};
 
 export default SignUpForm;

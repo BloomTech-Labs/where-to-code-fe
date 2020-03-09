@@ -58,7 +58,7 @@ const LoginLink = styled(Link)`
   border-radius: 5px;
 `;
 
-const SignUpButton = ({ state }) => {
+const SignUpButton = ({ register }) => {
   const [isOpen, setIsOpen] = useState(false);
   const [opacity, setOpacity] = useState(0);
 
@@ -93,7 +93,7 @@ const SignUpButton = ({ state }) => {
         opacity={opacity}
         backgroundProps={{ opacity }}
       >
-        <SignUpForm toggleModal={toggleModal} />
+        <SignUpForm toggleModal={toggleModal} register={register} />
 
         {/* <button onClick={toggleModal}>Close me</button> */}
       </StyledModal>
@@ -101,7 +101,7 @@ const SignUpButton = ({ state }) => {
   );
 };
 
-const LoginButton = ({ state, login }) => {
+const LoginButton = ({ login }) => {
   const [isOpen, setIsOpen] = useState(false);
   const [opacity, setOpacity] = useState(0);
 
@@ -121,6 +121,7 @@ const LoginButton = ({ state, login }) => {
       setTimeout(resolve, 200);
     });
   }
+
   return (
     <div>
       <LoginLink to='' onClick={toggleModal}>
@@ -135,7 +136,7 @@ const LoginButton = ({ state, login }) => {
         opacity={opacity}
         backgroundProps={{ opacity }}
       >
-        <SignInForm toggleModal={toggleModal} state={state} login={login} />
+        <SignInForm toggleModal={toggleModal} login={login} />
 
         {/* <button onClick={toggleModal}>Close me</button> */}
       </StyledModal>
@@ -143,7 +144,7 @@ const LoginButton = ({ state, login }) => {
   );
 };
 
-const Navigation = ({ state, login }) => {
+const Navigation = ({ login, register }) => {
   return (
     <Navbar>
       <AuthUserContext.Consumer>
@@ -151,7 +152,7 @@ const Navigation = ({ state, login }) => {
           authUser ? (
             <NavigationAuth />
           ) : (
-            <NavigationNonAuth state={state} login={login} />
+            <NavigationNonAuth login={login} register={register} />
           )
         }
       </AuthUserContext.Consumer>
@@ -170,14 +171,14 @@ const FadingBackground = styled(BaseModalBackground)`
   transition: opacity ease 1000ms;
 `;
 
-const NavigationNonAuth = ({ state, login }) => {
+const NavigationNonAuth = ({ login, register }) => {
   return (
     <div className='topnav'>
       <ModalProvider backgroundComponent={FadingBackground}>
-        <LoginButton state={state} login={login} />
+        <LoginButton login={login} />
       </ModalProvider>
       <ModalProvider backgroundComponent={FadingBackground}>
-        <SignUpButton />
+        <SignUpButton register={register} />
       </ModalProvider>{" "}
     </div>
   );

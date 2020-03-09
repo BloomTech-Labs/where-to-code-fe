@@ -3,8 +3,6 @@ const initialState = {
   username: "",
   firstname: "",
   lastname: "",
-  email: "",
-  password: "",
   activity: ["code", "study", "stream"],
   activityNumber: 0
 };

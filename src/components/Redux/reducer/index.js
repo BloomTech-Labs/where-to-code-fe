@@ -7,7 +7,7 @@ import {
   REGISTER_SUBMIT,
   REGISTER_SUCCESS,
   REGISTER_FAIL,
-  CLEAR_ERRORS
+  SIGN_OUT
 } from "../actions";
 import initialState from "../store";
 
@@ -40,6 +40,26 @@ export const reducer = (state = initialState, action) => {
       };
     case LOGIN_FAIL:
       return state;
+    case REGISTER_SUBMIT:
+      return state;
+    case REGISTER_SUCCESS:
+      return {
+        ...state,
+        userID: action.payload.id,
+        username: action.payload.username,
+        firstname: action.payload.firstName,
+        lastname: action.payload.lastName
+      };
+    case REGISTER_FAIL:
+      return state;
+    case SIGN_OUT:
+      return {
+        ...state,
+        userID: "",
+        username: "",
+        firstname: "",
+        lastname: ""
+      };
     default:
       return state;
   }

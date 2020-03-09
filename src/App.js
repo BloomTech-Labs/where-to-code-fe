@@ -1,7 +1,13 @@
-import React, { useState, Component } from "react";
+import React from "react";
 import { BrowserRouter as Router, Route, Redirect } from "react-router-dom";
 import { connect } from "react-redux";
-import { userName, setActivity, login } from "./components/Redux/actions";
+import {
+  userName,
+  setActivity,
+  login,
+  register,
+  signout
+} from "./components/Redux/actions";
 import Dashboard from "./components/Dashboard";
 //@ components
 
@@ -20,13 +26,13 @@ import Landing from "./views/Landing";
 //@ utils
 import * as ROUTES from "./Routes/routes";
 
-function App({ state, userName, setActivity, login }) {
+function App({ state, setActivity, login, register, signout }) {
   const PrivateRoute = ({ component: Component, ...rest }) => (
     <Route
       {...rest}
       render={props =>
         localStorage.getItem("token") ? (
-          <Component {...props} />
+          <Component {...props} {...rest} />
         ) : (
           <Redirect to='/' />
         )
@@ -41,11 +47,16 @@ function App({ state, userName, setActivity, login }) {
           {localStorage.getItem("token") ? (
             <Redirect to='/dashboard' />
           ) : (
-            <Landing state={state} setActivity={setActivity} login={login} />
+            <Landing
+              state={state}
+              setActivity={setActivity}
+              login={login}
+              register={register}
+            />
           )}
         </div>
       </Route>
-      <PrivateRoute path='/dashboard' component={Dashboard} />
+      <PrivateRoute path='/dashboard' component={Dashboard} signout={signout} />
       {/* <Route path={ROUTES.PASSWORD_FORGET} component={PasswordForgetPage} /> */}
       {/* <Route */}
       {/* // exact // path={ROUTES.HOME}
@@ -61,5 +72,7 @@ const mapStateToProps = state => ({ state: state });
 export default connect(mapStateToProps, {
   userName,
   setActivity,
-  login
+  login,
+  register,
+  signout
 })(App);

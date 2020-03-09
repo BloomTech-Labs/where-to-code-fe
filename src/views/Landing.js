@@ -10,16 +10,22 @@ import { withRouter, Link } from "react-router-dom";
 
 import * as ROUTES from "../Routes/routes";
 
-const Landing = ({ state, setActivity, login, ...props }) => {
+const Landing = ({ state, setActivity, login, register, ...props }) => {
   const activity = state.activity;
   const number = state.activityNumber;
 
+  const { history } = props;
+
   useEffect(() => {
     let activityTimer = setTimeout(setActivity, 2000);
-  }, [number]);
+    return function cleanup() {
+      clearTimeout(activityTimer);
+    };
+  }, [number, setActivity]);
+
   return (
     <LandingPageContainer>
-      <Navigation state={state} login={login} />
+      <Navigation login={login} register={register} />
       <LandingScreen>
         <SearchComponent>
           <h2>
