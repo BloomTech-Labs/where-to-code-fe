@@ -56,7 +56,12 @@ function App({ state, setActivity, login, register, signout }) {
           )}
         </div>
       </Route>
-      <PrivateRoute path='/dashboard' component={Dashboard} signout={signout} />
+      <PrivateRoute
+        path='/dashboard'
+        component={Dashboard}
+        signout={signout}
+        state={state}
+      />
       {/* <Route path={ROUTES.PASSWORD_FORGET} component={PasswordForgetPage} /> */}
       {/* <Route */}
       {/* // exact // path={ROUTES.HOME}
