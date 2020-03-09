@@ -156,18 +156,20 @@ const SignInForm = ({ login, ...props }) => {
       </StyledForm>
       <LoginButton
         onClick={e => {
-          login(e, creds, history)
-            ? setCreds({ ...creds, err: null })
-            : creds.email === "" || creds.password === ""
-            ? setCreds({ ...creds, err: "Please complete all fields." })
-            : setTimeout(
-                () =>
-                  setCreds({
-                    ...creds,
-                    err: "Login failed. Please try again."
-                  }),
-                2000
-              );
+          if (creds.email === "" || creds.password === "") {
+            setCreds({ ...creds, err: "Please complete all fields." });
+            return;
+          } else if (!login(e, creds, history)) {
+            setTimeout(
+              () =>
+                setCreds({
+                  ...creds,
+                  err: "Login failed. Please try again."
+                }),
+              2000
+            );
+            return;
+          } else setCreds({ ...creds, err: null });
         }}
         primary
         label='Sign In'
