@@ -185,27 +185,32 @@ const SignUpForm = ({ register, ...props }) => {
       </StyledForm>
       <SignUpButton
         onClick={e => {
-          register(e, creds, history)
-            ? setCreds({ ...creds, err: null })
-            : creds.username === "" ||
-              creds.firstname === "" ||
-              creds.lastname === "" ||
-              creds.email === "" ||
-              creds.password === ""
-            ? setCreds({ ...creds, err: "Please complete all fields." })
-            : creds.password !== creds.passwordConfirm
-            ? setCreds({
-                ...creds,
-                err: "Password and confirm fields must match."
-              })
-            : setTimeout(
-                () =>
-                  setCreds({
-                    ...creds,
-                    err: "Registration failed. Please try again."
-                  }),
-                2000
-              );
+          if (
+            creds.username === "" ||
+            creds.firstname === "" ||
+            creds.lastname === "" ||
+            creds.email === "" ||
+            creds.password === ""
+          ) {
+            setCreds({ ...creds, err: "Please complete all fields." });
+            return;
+          } else if (creds.password !== creds.passwordConfirm) {
+            setCreds({
+              ...creds,
+              err: "Password and confirm fields must match."
+            });
+            return;
+          } else if (!register(e, creds, history)) {
+            setTimeout(
+              () =>
+                setCreds({
+                  ...creds,
+                  err: "Registration failed. Please try again."
+                }),
+              2000
+            );
+            return;
+          } else setCreds({ ...creds, err: null });
         }}
         primary
         label='Sign Up'
