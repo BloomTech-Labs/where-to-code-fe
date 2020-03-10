@@ -12,7 +12,6 @@ import SignInForm from '../Auth/SignIn.jsx'
 
 import styled from 'styled-components'
 
-//styled modal is css for pop up
 const StyledModal = Modal.styled`
   width: 30rem;
   height: 30rem;
