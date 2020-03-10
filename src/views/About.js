@@ -12,11 +12,9 @@ import hours from '../assets/hours.jpg';
 import explore from '../assets/explore.jpg';
 import reviews from '../assets/reviews.jpg';
 
-
 import * as ROUTES from "../Routes/routes";
 
 const About = props => {
-
 
   return (
       <AboutPageContainer>
