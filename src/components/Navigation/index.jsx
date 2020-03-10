@@ -119,8 +119,6 @@ const SignUpButton = ({ register }) => {
         backgroundProps={{ opacity }}
       >
         <SignUpForm toggleModal={toggleModal} register={register} />
-
-        {/* <button onClick={toggleModal}>Close me</button> */}
       </StyledModal>
     </div>
   );
@@ -162,8 +160,6 @@ const LoginButton = ({ login }) => {
         backgroundProps={{ opacity }}
       >
         <SignInForm toggleModal={toggleModal} login={login} />
-
-        {/* <button onClick={toggleModal}>Close me</button> */}
       </StyledModal>
     </div>
   );
