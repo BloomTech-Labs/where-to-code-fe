@@ -1,64 +1,39 @@
-import React, { useState, useEffect } from "react";
-/* global google */
-
+import React, { useEffect } from "react";
 import Navigation from "../components/Navigation/index";
-
 import styled from "styled-components";
-
 import { withRouter, Link } from "react-router-dom";
 
-import mockup from "../assets/mockup.png";
-import hours from "../assets/hours.jpg";
-import explore from "../assets/explore.jpg";
-import reviews from "../assets/reviews.jpg";
+// import mockup from "../assets/mockup.png";
+// import hours from "../assets/hours.jpg";
+// import explore from "../assets/explore.jpg";
+// import reviews from "../assets/reviews.jpg";
 
 import * as ROUTES from "../Routes/routes";
 
-const Landing = props => {
-  const [currentActivity, setCurrentActivity] = useState("code");
-  const [number, setNumber] = useState(1);
+const Landing = ({ state, setActivity, login, register, ...props }) => {
+  const activity = state.activity;
+  const number = state.activityNumber;
 
-  const activity = ["code", "study", "stream"];
-
-  function updateText() {
-    setCurrentActivity(activity[number]);
-    return number === activity.length - 1
-      ? setNumber(0)
-      : setNumber(number + 1);
-  }
+  const { history } = props;
 
   useEffect(() => {
-    const autocomplete = new google.maps.places.Autocomplete(
-      document.getElementById("exploreAutoComplete")
-    );
-    autocomplete.setFields([
-      "address_components",
-      "formatted_address",
-      "geometry",
-      "icon",
-      "name",
-      "place_id"
-    ]);
-    autocomplete.addListener("place_changed", () => {
-      props.setPlace(autocomplete.getPlace());
-    });
-  }, []);
-
-  useEffect(() => {
-    setTimeout(updateText, 2000);
-  }, [number]);
+    let activityTimer = setTimeout(setActivity, 2000);
+    return function cleanup() {
+      clearTimeout(activityTimer);
+    };
+  }, [number, setActivity]);
 
   return (
     <LandingPageContainer>
-      <Navigation />
+      <Navigation login={login} register={register} />
       <LandingScreen>
         <SearchComponent>
           <h2>
-            Find a place to <span>{currentActivity}</span> near you
+            Find a place to <span>{activity[number]}</span> near you
           </h2>
 
           <InputAndButtonContainer>
-            <Input id="exploreAutoComplete" placeholder="Explore" size="40" />
+            <Input id='exploreAutoComplete' placeholder='Explore' size='40' />
             <GoButton to={ROUTES.HOME}>Go</GoButton>
           </InputAndButtonContainer>
         </SearchComponent>
