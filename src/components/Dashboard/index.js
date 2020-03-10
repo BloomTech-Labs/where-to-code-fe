@@ -1,5 +1,4 @@
 import React, { useState } from 'react'
-import styled from 'styled-components'
 import SignOut from '../../components/Auth/SignOut'
 import './Dashboard.scss'
 
