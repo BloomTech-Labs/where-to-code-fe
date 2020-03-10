@@ -5,6 +5,8 @@ import { withRouter } from "react-router-dom";
 
 import { AuthUserContext } from "../Session";
 
+import { Box, Button, Heading } from "grommet";
+
 import { Link } from "react-router-dom";
 
 import SignUpForm from "../Auth/SignUp.jsx";
@@ -54,8 +56,21 @@ const Navbar = styled.div`
   position: absolute;
   display: flex;
   justify-content: space-between;
+  flex-direction: row;
+  align-items: center;
   width: 100%;
   padding-top: 20px;
+  @media (max-width: 600px) {
+    flex-direction: column;
+  }
+`;
+
+const NavButtons = styled.div`
+  display: flex;
+
+  @media (max-width: 600px) {
+    margin-top: 30px;
+  }
 `;
 
 const LoginLink = styled(Link)`
@@ -157,6 +172,20 @@ const LoginButton = ({ login }) => {
 const Navigation = ({ login, register }) => {
   return (
     <Navbar>
+      <Box direction="row" gap="small">
+        <Heading responsive="false" level="2" margin="none">
+          <i
+            class="fas fa-wifi"
+            style={{ color: "gold", margin: "0 10px 0" }}
+          ></i>
+          <Button
+            onClick={landingRedirect}
+            label="HiveStack"
+            color="white"
+            plain="true"
+          />
+        </Heading>
+      </Box>
       <AuthUserContext.Consumer>
         {authUser =>
           authUser ? (
@@ -171,9 +200,7 @@ const Navigation = ({ login, register }) => {
 };
 
 const NavigationAuth = () => (
-  <div direction='row' justify='right' gap='small'>
-    {/* <SignOutButton /> */}
-  </div>
+  <div direction="row" justify="right" gap="small"></div>
 );
 
 const FadingBackground = styled(BaseModalBackground)`
@@ -183,14 +210,14 @@ const FadingBackground = styled(BaseModalBackground)`
 
 const NavigationNonAuth = ({ login, register }) => {
   return (
-    <div className="topnav">
+    <NavButtons>
       <ModalProvider backgroundComponent={FadingBackground}>
         <LoginButton login={login} />
       </ModalProvider>
       <ModalProvider backgroundComponent={FadingBackground}>
         <SignUpButton register={register} />
       </ModalProvider>{" "}
-    </div>
+    </NavButtons>
   );
 };
 
