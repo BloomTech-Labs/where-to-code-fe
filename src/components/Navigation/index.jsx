@@ -1,17 +1,14 @@
 import React, { useState } from "react";
 import Modal, { ModalProvider, BaseModalBackground } from "styled-react-modal";
 
-// import SignOutButton from "../Auth/SignOut.jsx";
 import { withRouter } from "react-router-dom";
 
 import { AuthUserContext } from "../Session";
 
-// import { Box, Button, Heading } from "grommet";
-
 import { Link } from "react-router-dom";
 
-import  SignUpForm from "../Auth/SignUp.jsx";
-import  SignInForm  from "../Auth/SignIn.jsx";
+import SignUpForm from "../Auth/SignUp.jsx";
+import SignInForm from "../Auth/SignIn.jsx";
 
 import styled from "styled-components";
 
@@ -61,7 +58,7 @@ const LoginLink = styled(Link)`
   border-radius: 5px;
 `;
 
-function SignUpButton() {
+const SignUpButton = ({ register }) => {
   const [isOpen, setIsOpen] = useState(false);
   const [opacity, setOpacity] = useState(0);
 
@@ -84,7 +81,9 @@ function SignUpButton() {
 
   return (
     <div>
-      <RegisterLink onClick={toggleModal}>Sign Up</RegisterLink>
+      <RegisterLink to='' onClick={toggleModal}>
+        Sign Up
+      </RegisterLink>
       <StyledModal
         isOpen={isOpen}
         afterOpen={afterOpen}
@@ -94,15 +93,15 @@ function SignUpButton() {
         opacity={opacity}
         backgroundProps={{ opacity }}
       >
-        <SignUpForm toggleModal={toggleModal} />
+        <SignUpForm toggleModal={toggleModal} register={register} />
 
         {/* <button onClick={toggleModal}>Close me</button> */}
       </StyledModal>
     </div>
   );
-}
+};
 
-function LoginButton() {
+const LoginButton = ({ login }) => {
   const [isOpen, setIsOpen] = useState(false);
   const [opacity, setOpacity] = useState(0);
 
@@ -122,9 +121,12 @@ function LoginButton() {
       setTimeout(resolve, 200);
     });
   }
+
   return (
     <div>
-      <LoginLink onClick={toggleModal}>Login</LoginLink>
+      <LoginLink to='' onClick={toggleModal}>
+        Login
+      </LoginLink>
       <StyledModal
         isOpen={isOpen}
         afterOpen={afterOpen}
@@ -134,43 +136,32 @@ function LoginButton() {
         opacity={opacity}
         backgroundProps={{ opacity }}
       >
-        <SignInForm toggleModal={toggleModal} />
+        <SignInForm toggleModal={toggleModal} login={login} />
 
         {/* <button onClick={toggleModal}>Close me</button> */}
       </StyledModal>
     </div>
   );
-}
+};
 
-const Navigation = props => {
-  const landingRedirect = () => {
-    props.history.push("/");
-  };
+const Navigation = ({ login, register }) => {
   return (
     <Navbar>
-      {/* <Box direction='row' gap='small'>
-        <Heading level='3' margin='none'>
-          <i
-            class='fas fa-wifi'
-            style={{ color: "gold", margin: "0 20px" }}
-          ></i>
-          <Button
-            onClick={landingRedirect}
-            label='HiveStack'
-            color='white'
-            plain='true'
-          />
-        </Heading>
-      </Box> */}
       <AuthUserContext.Consumer>
-        {authUser => (authUser ? <NavigationAuth /> : <NavigationNonAuth />)}
+        {authUser =>
+          authUser ? (
+            <NavigationAuth />
+          ) : (
+            <NavigationNonAuth login={login} register={register} />
+          )
+        }
       </AuthUserContext.Consumer>
     </Navbar>
   );
 };
 
 const NavigationAuth = () => (
-  <div direction="row" justify="right" gap="small">
+  <div direction='row' justify='right' gap='small'>
     {/* <SignOutButton /> */}
   </div>
 );
@@ -180,21 +171,17 @@ const FadingBackground = styled(BaseModalBackground)`
   transition: opacity ease 1000ms;
 `;
 
-const NavigationNonAuth = () => {
-  // <Box direction='row' justify='right' gap='small'>
+const NavigationNonAuth = ({ login, register }) => {
   return (
     <div className='topnav'>
       <ModalProvider backgroundComponent={FadingBackground}>
-        <LoginButton />
+        <LoginButton login={login} />
       </ModalProvider>
       <ModalProvider backgroundComponent={FadingBackground}>
-        <SignUpButton />
+        <SignUpButton register={register} />
       </ModalProvider>{" "}
     </div>
   );
-  // </Box>
-
-  // return null;
 };
 
 export default withRouter(Navigation);
