@@ -5,7 +5,7 @@ import Navigation from "../components/Navigation/index";
 
 import styled from "styled-components";
 
-import { withRouter, Link } from "react-router-dom";
+import { withRouter} from "react-router-dom";
 
 import mockup from '../assets/mockup.png';
 import hours from '../assets/hours.jpg';
