@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import Modal, { ModalProvider, BaseModalBackground } from 'styled-react-modal'
 
 import { withRouter } from 'react-router-dom'
-
+import { Box, Heading, Button } from 'grommet';
 import { AuthUserContext } from '../Session'
 
 import { Link } from 'react-router-dom'
@@ -12,7 +12,6 @@ import SignInForm from '../Auth/SignIn.jsx'
 
 import styled from 'styled-components'
 
-//styled modal is css for pop up
 const StyledModal = Modal.styled`
   width: 30rem;
   height: 30rem;
@@ -47,6 +46,13 @@ const Navbar = styled.div`
 	width: 100%;
 	padding-top: 20px;
 `
+
+const NavButtons = styled.div`
+  display: flex;
+  @media (max-width: 600px) {
+    margin-top: 30px;
+  }
+`;
 
 const LoginLink = styled(Link)`
 	text-decoration: none;
