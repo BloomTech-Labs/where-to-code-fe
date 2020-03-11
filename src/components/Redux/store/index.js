@@ -1,10 +1,7 @@
-const initialState = {
-  userID: "",
-  username: "",
-  firstname: "",
-  lastname: "",
-  activity: ["code", "study", "stream"],
-  activityNumber: 0
-};
+import { createStore, applyMiddleware } from "redux";
+import { reducer } from "./components/Redux/reducer";
+import thunk from "redux-thunk";
+import logger from "redux-logger";
 
-export default initialState;
+const store = createStore(reducer, applyMiddleware(thunk, logger));
+export default store;
