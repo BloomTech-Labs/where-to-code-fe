@@ -1,6 +1,5 @@
 import {
   UPDATE_INFO,
-  UPDATE_ACTIVITY,
   LOGIN_SUBMIT,
   LOGIN_SUCCESS,
   LOGIN_FAIL,
@@ -27,14 +26,6 @@ export const userReducer = (state = initialState, action) => {
         username: action.payload.username,
         email: action.payload.email,
         password: action.payload.password
-      };
-    case UPDATE_ACTIVITY:
-      return {
-        ...state,
-        activityNumber:
-          state.activityNumber === state.activity.length - 1
-            ? 0
-            : state.activityNumber + 1
       };
     case LOGIN_SUBMIT:
       return state;
