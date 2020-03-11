@@ -179,7 +179,6 @@ const Navigation = ({ login, register }) => {
             style={{ color: "gold", margin: "0 10px 0" }}
           ></i>
           <Button
-            onClick={landingRedirect}
             label="HiveStack"
             color="white"
             plain="true"
