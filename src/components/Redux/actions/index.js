@@ -1,6 +1,4 @@
-import React from "react";
 import axiosWithAuth from "../../../Helpers/axiosWithAuth";
-export const UPDATE_ACTIVITY = "UPDATE_ACTIVITY";
 export const UPDATE_INFO = "UPDATE_INFO";
 
 export const LOGIN_SUBMIT = "LOGIN_SUBMIT";
@@ -18,10 +16,6 @@ export const userName = name => dispatch => {
     type: UPDATE_INFO,
     payload: name
   });
-};
-
-export const setActivity = () => dispatch => {
-  dispatch({ type: UPDATE_ACTIVITY });
 };
 
 export const login = (e, creds, history) => dispatch => {
