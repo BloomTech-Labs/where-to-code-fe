@@ -1,15 +1,17 @@
-import React from 'react'
-import ReactDOM from 'react-dom'
-import App from './App'
-import { createStore } from 'redux'
-import { userInfo } from './components/Redux/reducer'
-import { Provider } from 'react-redux'
+import React from "react";
+import ReactDOM from "react-dom";
+import App from "./App";
+import { createStore, applyMiddleware } from "redux";
+import { reducer } from "./components/Redux/reducer";
+import { Provider } from "react-redux";
+import thunk from "redux-thunk";
+import logger from "redux-logger";
 
-const store = createStore(userInfo)
+const store = createStore(reducer, applyMiddleware(thunk, logger));
 
 ReactDOM.render(
-	<Provider store={store}>
-		<App />
-	</Provider>,
-	document.getElementById('root')
-)
+  <Provider store={store}>
+    <App />
+  </Provider>,
+  document.getElementById("root")
+);
