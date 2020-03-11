@@ -1,5 +1,7 @@
 import React from "react";
 import styled from "styled-components";
+import { connect } from "react-redux";
+import { signout } from "../Redux/actions";
 
 const SignOutButton = styled.button`
   text-decoration: none;
@@ -29,4 +31,4 @@ const SignOut = ({ signout, ...props }) => {
   );
 };
 
-export default SignOut;
+export default connect(null, { signout})(SignOut);

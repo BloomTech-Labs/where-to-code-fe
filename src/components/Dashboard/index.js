@@ -1,8 +1,9 @@
 import React, { useState } from 'react'
 import SignOut from '../../components/Auth/SignOut'
 import './Dashboard.scss'
+import { connect } from 'react-redux';
 
-const Dashboard = ({ state, signout }) => {
+const Dashboard = ({ user }) => {
 	const [db, setDb] = useState({
 		user: {
 			userName: 'User',
@@ -28,16 +29,16 @@ const Dashboard = ({ state, signout }) => {
 					<a href='#'>Search</a>
 				</section>
 				<section className='nav-buttons'>
-					<SignOut signout={signout} />
+					<SignOut />
 				</section>
 			</nav>
 			<div className='column-container'>
 				<div className='first-column'>
 					<div className='user-information'>
-						<h2>Hello, {state.username}</h2>
+						<h2>Hello, {user.username}</h2>
 						<img style={profileImg} src={db.user.avatar} alt='default' />
 						<p>
-							{state.firstname} {state.lastname}
+							{user.firstname} {user.lastname}
 						</p>
 						<p>{db.user.location}</p>
 						<span>
@@ -147,7 +148,9 @@ const Dashboard = ({ state, signout }) => {
 	)
 }
 
-export default Dashboard
+export default connect(({ userReducer }) => ({
+		user: {...userReducer}
+}), null)(Dashboard)
 
 const profileImg = {
 	borderRadius: '50%',

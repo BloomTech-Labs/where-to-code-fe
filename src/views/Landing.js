@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import Navigation from "../components/Navigation/index";
 import styled from "styled-components";
 import { withRouter, Link } from "react-router-dom";
@@ -10,26 +10,29 @@ import { withRouter, Link } from "react-router-dom";
 
 import * as ROUTES from "../Routes/routes";
 
-const Landing = ({ state, setActivity, login, register, ...props }) => {
-  const activity = state.activity;
-  const number = state.activityNumber;
-
-  const { history } = props;
+const Landing = props => {
+  const activities = ["code", "study", "stream"];
+  const [number, setNumber] = useState(1);
 
   useEffect(() => {
-    let activityTimer = setTimeout(setActivity, 2000);
+    let activityTimer = setTimeout(() => {
+      number === activities.length - 1
+      ? setNumber(0)
+      : setNumber(number + 1) 
+    }, 2000);
+
     return function cleanup() {
       clearTimeout(activityTimer);
     };
-  }, [number, setActivity]);
+  }, [number]);
 
   return (
     <LandingPageContainer>
-      <Navigation login={login} register={register} />
+      <Navigation />
       <LandingScreen>
         <SearchComponent>
           <h2>
-            Find a place to <span>{activity[number]}</span> near you
+            Find a place to <span>{activities[number]}</span> near you
           </h2>
 
           <InputAndButtonContainer>
