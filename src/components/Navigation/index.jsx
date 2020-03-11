@@ -182,9 +182,9 @@ const NavigationAuth = () => (
 )
 
 const FadingBackground = styled(BaseModalBackground)`
-  opacity: ${props => props.opacity};
-  transition: opacity ease 1000ms;
-`;
+	opacity: ${props => props.opacity};
+	transition: opacity ease 1000ms;
+`
 
 const NavigationNonAuth = ({ login, register }) => {
   return (

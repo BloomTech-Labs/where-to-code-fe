@@ -1,10 +1,10 @@
-import React, { Component, useState } from "react";
-import axiosWithAuth, { axioswithAuth } from "../../Helpers/axiosWithAuth";
-import { withRouter } from "react-router-dom";
-import { SignUpLink } from "./SignUp.jsx";
-import { PasswordForgetLink } from "./PasswordForget.jsx";
-import * as ROUTES from "../../Routes/routes";
-import styled from "styled-components";
+import React, { Component, useState } from 'react'
+import axiosWithAuth, { axioswithAuth } from '../../Helpers/axiosWithAuth'
+import { withRouter } from 'react-router-dom'
+import { SignUpLink } from './SignUp.jsx'
+import { PasswordForgetLink } from './PasswordForget.jsx'
+// import * as ROUTES from '../../Routes/routes'
+import styled from 'styled-components'
 
 const StyledHeader = styled.div`
 	width: 100%;
@@ -102,21 +102,21 @@ const StyledError = styled.div`
 `
 
 const SignInForm = ({ login, ...props }) => {
-  const [creds, setCreds] = useState({
-    email: "",
-    password: "",
-    err: null
-  });
+	const [creds, setCreds] = useState({
+		email: '',
+		password: '',
+		err: null
+	})
 
-  const handleChange = e => {
-    setCreds({
-      ...creds,
-      [e.target.name]: e.target.value,
-      err: null
-    });
-  };
+	const handleChange = e => {
+		setCreds({
+			...creds,
+			[e.target.name]: e.target.value,
+			err: null
+		})
+	}
 
-  const { history } = props;
+	const { history } = props
 
   return (
     <FormContainer>
@@ -145,34 +145,33 @@ const SignInForm = ({ login, ...props }) => {
           placeholder='Password'
         />
 
-        {creds.err && <StyledError name='err'>{creds.err}</StyledError>}
-      </StyledForm>
-      <LoginButton
-        onClick={e => {
-          if (creds.email === "" || creds.password === "") {
-            setCreds({ ...creds, err: "Please complete all fields." });
-            return;
-          } else if (!login(e, creds, history)) {
-            setTimeout(
-              () =>
-                setCreds({
-                  ...creds,
-                  err: "Login failed. Please try again."
-                }),
-              2000
-            );
-            return;
-          } else setCreds({ ...creds, err: null });
-        }}
-        primary
-        label='Sign In'
-      >
-        Login
-      </LoginButton>
-      <br></br>
-      <PasswordForgetLink />
-    </FormContainer>
-  );
-};
+				{creds.err && <StyledError name='err'>{creds.err}</StyledError>}
+			</StyledForm>
+			<LoginButton
+				onClick={e => {
+					if (creds.email === '' || creds.password === '') {
+						setCreds({ ...creds, err: 'Please complete all fields.' })
+						return
+					} else if (!login(e, creds, history)) {
+						setTimeout(
+							() =>
+								setCreds({
+									...creds,
+									err: 'Login failed. Please try again.'
+								}),
+							2000
+						)
+						return
+					} else setCreds({ ...creds, err: null })
+				}}
+				primary
+				label='Sign In'>
+				Login
+			</LoginButton>
+			<br></br>
+			<PasswordForgetLink />
+		</FormContainer>
+	)
+}
 
 export default withRouter(SignInForm)

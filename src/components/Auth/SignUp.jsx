@@ -82,129 +82,63 @@ const SignUpButton = styled.button`
   margin-bottom: 85px;
 `;
 
-const StyledError = styled.div`
-  width: 85%;
-  padding: 12px;
-  background-color: #ffe7e7;
-  border: 2px solid #ff9090;
-  border-radius: 5px;
-  color: #ff9090;
-  font-weight: bold;
-  text-align: center;
-  font-family: "Zilla Slab", serif;
-  font-size: 1rem;
-  margin-top: 2%;
+const ExtendedSignUpButton = styled(SignUpButton)`
+  color: white;
 `;
 
-const SignUpForm = ({ register, ...props }) => {
-  const [creds, setCreds] = useState({
+function SignUpForm(props) {
+  const [credentials, setCredentials] = useState({
     username: "",
-    firstname: "",
-    lastname: "",
-    email: "",
-    password: "",
-    passwordConfirm: "",
-    err: null
+    password: ""
   });
 
   const handleChanges = e => {
-    setCreds({ ...creds, [e.target.name]: e.target.value, err: null });
+    setCredentials({ ...credentials, [e.target.name]: e.target.value });
   };
 
-  const { history } = props;
+  const signup = e => {
+    e.perventdefault();
+    axiosWithAuth()
+      .post("/login", credentials)
+      .then(res => {
+        localStorage.setItem("token", res.data.token);
+        props.history.push("/userdashboard");
+      })
+      .catch(err => console.log(err));
+  };
 
   return (
     <FormContainer>
       <StyledHeader>
         <i
-          className='fas fa-wifi fa-2x'
+          class="fas fa-wifi fa-2x"
           style={{ color: "gold", marginRight: "14px" }}
         ></i>
         <h1>HiveStack</h1>
         <circle fill="white" cx="0" cy="100" r="100" />
         <circle fill="white" cx="200" cy="100" r="100" />
       </StyledHeader>
-      <StyledForm>
+      <StyledForm onSubmit={signup}>
         <StyledInput
-          name='username'
-          value={creds.username}
+          name="email"
+          value={credentials.email}
           onChange={handleChanges}
-          type='text'
-          placeholder='Preferred Username...'
+          type="text"
+          placeholder="Email Address"
         />
         <StyledInput
-          name='firstname'
-          value={creds.firstname}
+          name="password"
+          value={credentials.password}
           onChange={handleChanges}
-          type='text'
-          placeholder='First Name...'
+          type="password"
+          placeholder="Password"
         />
-        <StyledInput
-          name='lastname'
-          value={creds.lastname}
-          onChange={handleChanges}
-          type='text'
-          placeholder='Last Name...'
-        />
-        <StyledInput
-          name='email'
-          value={creds.email}
-          onChange={handleChanges}
-          type='text'
-          placeholder='Email...'
-        />
-        <StyledInput
-          name='password'
-          value={creds.password}
-          onChange={handleChanges}
-          type='password'
-          placeholder='Password'
-        />
-        <StyledInput
-          name='passwordConfirm'
-          value={creds.passwordConfirm}
-          onChange={handleChanges}
-          type='password'
-          placeholder='Confirm Password...'
-        />
-        {creds.err && <StyledError name='err'>{creds.err}</StyledError>}
       </StyledForm>
-      <SignUpButton
-        onClick={e => {
-          if (
-            creds.username === "" ||
-            creds.firstname === "" ||
-            creds.lastname === "" ||
-            creds.email === "" ||
-            creds.password === ""
-          ) {
-            setCreds({ ...creds, err: "Please complete all fields." });
-            return;
-          } else if (creds.password !== creds.passwordConfirm) {
-            setCreds({
-              ...creds,
-              err: "Password and confirm fields must match."
-            });
-            return;
-          } else if (!register(e, creds, history)) {
-            setTimeout(
-              () =>
-                setCreds({
-                  ...creds,
-                  err: "Registration failed. Please try again."
-                }),
-              2000
-            );
-            return;
-          } else setCreds({ ...creds, err: null });
-        }}
-        primary
-        label='Sign Up'
-      >
-        Sign Up
+      <SignUpButton onClick={signup} primary label="Sign Up">
+        Login
       </SignUpButton>
     </FormContainer>
   );
-};
+}
 
 export default SignUpForm;
