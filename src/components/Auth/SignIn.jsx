@@ -1,10 +1,9 @@
-import React, { Component, useState } from "react";
-import axiosWithAuth, { axioswithAuth } from "../../Helpers/axiosWithAuth";
+import React, { useState } from "react";
 import { withRouter } from "react-router-dom";
-import { SignUpLink } from "./SignUp.jsx";
 import { PasswordForgetLink } from "./PasswordForget.jsx";
-import * as ROUTES from "../../Routes/routes";
 import styled from "styled-components";
+import { connect } from 'react-redux';
+import { login } from '../Redux/actions';
 
 const StyledHeader = styled.div`
   width: 100%;
@@ -167,4 +166,4 @@ const SignInForm = ({ login, ...props }) => {
   );
 };
 
-export default withRouter(SignInForm);
+export default withRouter(connect(null, { login })(SignInForm))
