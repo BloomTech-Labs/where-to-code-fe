@@ -22,7 +22,7 @@ const Dashboard = ({ user }) => {
 			<nav>
 				<section className='nav-links'>
 					<i
-						class='fas fa-wifi'
+						className='fas fa-wifi'
 						aria-hidden='true'
 						style={{ color: 'gold' }}></i>
 					<a href='#'>Home</a>
