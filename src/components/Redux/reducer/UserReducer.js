@@ -14,8 +14,7 @@ const initialState = {
   username: "",
   firstname: "",
   lastname: "",
-  activity: ["code", "study", "stream"],
-  activityNumber: 0
+  loggedIn: false
 };
 
 export const userReducer = (state = initialState, action) => {
@@ -35,7 +34,8 @@ export const userReducer = (state = initialState, action) => {
         userID: action.payload.id,
         username: action.payload.username,
         firstname: action.payload.firstName,
-        lastname: action.payload.lastName
+        lastname: action.payload.lastName,
+        loggedIn: true
       };
     case LOGIN_FAIL:
       return state;
@@ -47,7 +47,8 @@ export const userReducer = (state = initialState, action) => {
         userID: action.payload.id,
         username: action.payload.username,
         firstname: action.payload.firstName,
-        lastname: action.payload.lastName
+        lastname: action.payload.lastName,
+        loggedIn: true
       };
     case REGISTER_FAIL:
       return state;
@@ -57,7 +58,8 @@ export const userReducer = (state = initialState, action) => {
         userID: "",
         username: "",
         firstname: "",
-        lastname: ""
+        lastname: "",
+        loggedIn: false
       };
     default:
       return state;

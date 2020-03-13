@@ -1,5 +1,7 @@
 import React from "react";
 import { BrowserRouter as Router, Route, Redirect } from "react-router-dom";
+import { connect } from "react-redux";
+
 //@ components
 import Dashboard from "./components/Dashboard";
 
@@ -12,12 +14,12 @@ import Home from "./views/Home";
 //@ utils
 import * as ROUTES from "./Routes/routes";
 
-function App(props) {
+function App({ loggedIn, ...props}) {
   const PrivateRoute = ({ component: Component, ...rest }) => (
     <Route
       {...rest}
       render={props =>
-        localStorage.getItem("token") ? (
+        loggedIn ? (
           <Component {...props} {...rest} />
         ) : (
           <Redirect to='/' />
@@ -30,7 +32,7 @@ function App(props) {
     <Router>
       <Route exact path={ROUTES.LANDING}>
         <div className='App'>
-          {localStorage.getItem("token") ? (
+          {loggedIn ? (
             <Redirect to='/dashboard' />
           ) : (
             <Landing />
@@ -51,4 +53,4 @@ function App(props) {
 }
 
 
-export default App;
+export default connect(({ userReducer: { loggedIn }}) => ({ loggedIn }), null)(App);
