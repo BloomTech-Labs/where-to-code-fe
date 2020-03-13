@@ -34,19 +34,18 @@ const StyledHeader = styled.div`
   position: relative;
   border-radius: 25px 25px 0 0;
   padding: 34px 0 0 0;
-  margin-bottom: 55px;
   border-bottom: none;
 `;
 
 const StyledForm = styled.form`
 display:flex;
-flex-direction: column;
-justify-content: center;
+flex-direction: row;
+flex-wrap: wrap;
+justify-content: space-evenly;
 align-items: center
 text-align: center;
-margin-bottom: 0px;
-background: white;
-width: 70%;
+margin-top: 35px;
+width: 90%;
 `;
 
 const StyledInput = styled.input`
@@ -54,8 +53,6 @@ const StyledInput = styled.input`
   border: none;
   border-bottom: 0.7px solid grey;
   color: grey;
-  padding-left: 14px;
-  margin-left: 10px;
   margin-top: 15px;
   margin-bottom: 15px;
   font-size: 18px;
@@ -64,7 +61,7 @@ const StyledInput = styled.input`
   height: 30px;
   background: none;
   ::placeholder: gold;
-  width: 70%;
+  width: 44%;
 `;
 
 //@@GOLD SIGNUP BUTTON
@@ -79,7 +76,7 @@ const SignUpButton = styled.button`
   font-family: "Zilla Slab", serif;
   font-size: 2rem;
   margin-top: 40px;
-  margin-bottom: 85px;
+  margin-bottom: 50px;
 `;
 
 const StyledError = styled.div`
@@ -117,7 +114,7 @@ const SignUpForm = ({ register, ...props }) => {
     <FormContainer>
       <StyledHeader>
         <i
-          className='fas fa-wifi fa-2x'
+          className="fas fa-wifi fa-2x"
           style={{ color: "gold", marginRight: "14px" }}
         ></i>
         <h1>HiveStack</h1>
@@ -126,48 +123,48 @@ const SignUpForm = ({ register, ...props }) => {
       </StyledHeader>
       <StyledForm>
         <StyledInput
-          name='username'
+          name="username"
           value={creds.username}
           onChange={handleChanges}
-          type='text'
-          placeholder='Preferred Username...'
+          type="text"
+          placeholder="Preferred Username..."
         />
         <StyledInput
-          name='firstname'
-          value={creds.firstname}
-          onChange={handleChanges}
-          type='text'
-          placeholder='First Name...'
-        />
-        <StyledInput
-          name='lastname'
-          value={creds.lastname}
-          onChange={handleChanges}
-          type='text'
-          placeholder='Last Name...'
-        />
-        <StyledInput
-          name='email'
+          name="email"
           value={creds.email}
           onChange={handleChanges}
-          type='text'
-          placeholder='Email...'
+          type="text"
+          placeholder="Email..."
         />
         <StyledInput
-          name='password'
+          name="firstname"
+          value={creds.firstname}
+          onChange={handleChanges}
+          type="text"
+          placeholder="First Name..."
+        />
+        <StyledInput
+          name="lastname"
+          value={creds.lastname}
+          onChange={handleChanges}
+          type="text"
+          placeholder="Last Name..."
+        />
+        <StyledInput
+          name="password"
           value={creds.password}
           onChange={handleChanges}
-          type='password'
-          placeholder='Password'
+          type="password"
+          placeholder="Password"
         />
         <StyledInput
-          name='passwordConfirm'
+          name="passwordConfirm"
           value={creds.passwordConfirm}
           onChange={handleChanges}
-          type='password'
-          placeholder='Confirm Password...'
+          type="password"
+          placeholder="Confirm Password..."
         />
-        {creds.err && <StyledError name='err'>{creds.err}</StyledError>}
+        {creds.err && <StyledError name="err">{creds.err}</StyledError>}
       </StyledForm>
       <SignUpButton
         onClick={e => {
@@ -199,7 +196,7 @@ const SignUpForm = ({ register, ...props }) => {
           } else setCreds({ ...creds, err: null });
         }}
         primary
-        label='Sign Up'
+        label="Sign Up"
       >
         Sign Up
       </SignUpButton>
