@@ -65,6 +65,17 @@ export const register = (e, creds, history) => dispatch => {
     .catch(_ => dispatch({ type: REGISTER_FAIL }));
 };
 
+export const checkToken = () => dispatch => {
+  axiosWithAuth()
+    .get("/auth/info")
+    .then(res => {
+      dispatch({ type: LOGIN_SUCCESS, payload: res.data })
+    })
+    .catch(err => {
+      console.error(err.message);
+    })
+}
+
 export const signout = (e, history) => dispatch => {
   e.preventDefault();
   localStorage.removeItem("token");

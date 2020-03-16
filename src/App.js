@@ -1,6 +1,7 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { BrowserRouter as Router, Route, Redirect } from "react-router-dom";
 import { connect } from "react-redux";
+import { checkToken } from "./components/Redux/actions";
 
 //@ components
 import Dashboard from "./components/Dashboard";
@@ -14,7 +15,12 @@ import Home from "./views/Home";
 //@ utils
 import * as ROUTES from "./Routes/routes";
 
-function App({ loggedIn, ...props}) {
+function App({ loggedIn, checkToken, ...props}) {
+
+  useEffect(() => {
+    checkToken();
+  }, [])
+
   const PrivateRoute = ({ component: Component, ...rest }) => (
     <Route
       {...rest}
@@ -53,4 +59,4 @@ function App({ loggedIn, ...props}) {
 }
 
 
-export default connect(({ userReducer: { loggedIn }}) => ({ loggedIn }), null)(App);
+export default connect(({ userReducer: { loggedIn }}) => ({ loggedIn }), { checkToken })(App);
