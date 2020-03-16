@@ -11,6 +11,8 @@ export const REGISTER_FAIL = "REGISTER_FAIL";
 
 export const SIGN_OUT = "SIGN_OUT";
 
+export const UPDATE_PLACE = "UPDATE_PLACE";
+
 export const userName = name => dispatch => {
   dispatch({
     type: UPDATE_INFO,
@@ -68,3 +70,7 @@ export const signout = (e, history) => dispatch => {
   localStorage.removeItem("token");
   dispatch({ type: SIGN_OUT });
 };
+
+export const updatePlace = place => dispatch => {
+  dispatch({ type: UPDATE_PLACE, payload: place });
+}

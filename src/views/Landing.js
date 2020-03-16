@@ -1,14 +1,12 @@
+/*global google*/
 import React, { useEffect, useState } from "react";
 import Navigation from "../components/Navigation/index";
 import styled from "styled-components";
 import { withRouter, Link } from "react-router-dom";
 
-// import mockup from "../assets/mockup.png";
-// import hours from "../assets/hours.jpg";
-// import explore from "../assets/explore.jpg";
-// import reviews from "../assets/reviews.jpg";
-
 import * as ROUTES from "../Routes/routes";
+import { updatePlace } from "../components/Redux/actions";
+import { connect } from "react-redux";
 
 const Landing = props => {
   const activities = ["code", "study", "stream"];
@@ -25,6 +23,23 @@ const Landing = props => {
       clearTimeout(activityTimer);
     };
   }, [number]);
+
+  useEffect(() => {
+    const autocomplete = new google.maps.places.Autocomplete(
+      document.getElementById("exploreAutoComplete")
+    );
+    autocomplete.setFields([
+      "address_components",
+      "formatted_address",
+      "geometry",
+      "icon",
+      "name",
+      "place_id"
+    ]);
+    autocomplete.addListener("place_changed", () => {
+      props.updatePlace(autocomplete.getPlace());
+    });
+  }, []);
 
   return (
     <LandingPageContainer>
@@ -45,7 +60,7 @@ const Landing = props => {
   );
 };
 
-export default withRouter(Landing);
+export default withRouter(connect(null, { updatePlace})(Landing));
 
 const SearchComponent = styled.div`
   display: flex;
