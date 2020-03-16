@@ -1,6 +1,7 @@
-import React, { useState } from 'react'
-import SignOut from '../../components/Auth/SignOut'
-import './Dashboard.scss'
+import React, { useState } from 'react';
+import { Link } from 'react-router-dom';
+import SignOut from '../../components/Auth/SignOut';
+import './Dashboard.scss';
 import { connect } from 'react-redux';
 
 const Dashboard = ({ user }) => {
@@ -25,8 +26,8 @@ const Dashboard = ({ user }) => {
 						className='fas fa-wifi'
 						aria-hidden='true'
 						style={{ color: 'gold' }}></i>
-					<a href='#'>Home</a>
-					<a href='#'>Search</a>
+					<Link to='/'>Home</Link>
+					<Link to='/home'>Search</Link>
 				</section>
 				<section className='nav-buttons'>
 					<SignOut />
@@ -42,7 +43,7 @@ const Dashboard = ({ user }) => {
 						</p>
 						<p>{db.user.location}</p>
 						<span>
-							<i class='fas fa-envelope'></i> {db.user.email}
+							<i class='fas fa-envelope'></i> {user.email}
 						</span>
 					</div>
 				</div>

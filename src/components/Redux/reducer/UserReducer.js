@@ -14,6 +14,7 @@ const initialState = {
   username: "",
   firstname: "",
   lastname: "",
+  email: "",
   loggedIn: false
 };
 
@@ -35,6 +36,7 @@ export const userReducer = (state = initialState, action) => {
         username: action.payload.username,
         firstname: action.payload.firstName,
         lastname: action.payload.lastName,
+        email: action.payload.email,
         loggedIn: true
       };
     case LOGIN_FAIL:
@@ -48,6 +50,7 @@ export const userReducer = (state = initialState, action) => {
         username: action.payload.username,
         firstname: action.payload.firstName,
         lastname: action.payload.lastName,
+        email: action.payload.email,
         loggedIn: true
       };
     case REGISTER_FAIL:
