@@ -323,4 +323,3 @@ class ReviewPanel1 extends Component {
 
 const ReviewPanel = ReviewPanel1;
 export { ReviewPanel };
-
