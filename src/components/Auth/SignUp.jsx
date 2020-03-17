@@ -1,25 +1,23 @@
 import React, { useState } from "react";
-import { Link, withRouter } from "react-router-dom";
-
-import { withFirebase } from "../../Firebase";
-import * as ROUTES from "../../Routes/routes";
+import { connect } from 'react-redux';
+import { register } from '../Redux/actions';
 
 import styled from "styled-components";
 
-import axios from "axios";
-
 const FormContainer = styled.div`
-display: flex;
-flex-direction: column;
-justify-content: center;
-align-items: center;
-text-align: center;
-width: 100%
-height: 100%;
-border-radius: 25px;
-background:white;
-border: 3px solid gold;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  width: 100%;
+  height: 100%;
+  border-radius: 25px;
+  background: white;
 
+  p {
+    margin-bottom: 33px;
+  }
 `;
 
 const StyledHeader = styled.div`
@@ -32,38 +30,27 @@ const StyledHeader = styled.div`
   background: black;
   color: white;
   position: relative;
-  margin-top: -70px;
-  border-radius: 30px;
-  border: 3px solid gold;
+  border-radius: 25px 25px 0 0;
+  padding: 34px 0 0 0;
   border-bottom: none;
 `;
 
 const StyledForm = styled.form`
 display:flex;
-flex-direction: column;
-justify-content: center;
+flex-direction: row;
+flex-wrap: wrap;
+justify-content: space-evenly;
 align-items: center
 text-align: center;
-margin-top: 30px;
-background: white;
-width: 70%;
-`;
-
-const StyledSvg = styled.svg`
-  position: absolute;
-  bottom: 0;
-  width: 100%;
-  height: 50px;
+margin-top: 35px;
+width: 90%;
 `;
 
 const StyledInput = styled.input`
   opacity: 0.5;
-  // border-radius: 25px;
   border: none;
   border-bottom: 0.7px solid grey;
   color: grey;
-  padding-left: 10px;
-  margin-left: 10px;
   margin-top: 15px;
   margin-bottom: 15px;
   font-size: 18px;
@@ -71,143 +58,148 @@ const StyledInput = styled.input`
   text-align: left;
   height: 30px;
   background: none;
-  // box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
   ::placeholder: gold;
-  width: 70%;
+  width: 44%;
 `;
 
 //@@GOLD SIGNUP BUTTON
 const SignUpButton = styled.button`
   width: 55%;
   border-radius: 10px;
-  background: black;
-  border: 3px solid gold;
-  color: white;
+  background: gold;
+  color: black;
   height: 10%;
   text-align: center;
   margin-top: 8%;
   font-family: "Zilla Slab", serif;
-  font-size: 1.5rem;
-  display: flex;
-  justify-content: center;
-  align-items: center;
+  font-size: 2rem;
+  margin-top: 40px;
+  margin-bottom: 50px;
 `;
 
-const ExtendedSignUpButton = styled(SignUpButton)`
-  color: white;
+const StyledError = styled.div`
+  width: 85%;
+  padding: 12px;
+  background-color: #ffe7e7;
+  border: 2px solid #ff9090;
+  border-radius: 5px;
+  color: #ff9090;
+  font-weight: bold;
+  text-align: center;
+  font-family: "Zilla Slab", serif;
+  font-size: 1rem;
+  margin-top: 2%;
 `;
 
-const SignUpFormBase = props => {
-  //Hooks to update state
-  const [username, setUsername] = useState("");
-  const [email, setEmail] = useState("");
-  const [passwordOne, setPasswordOne] = useState("");
-  const [passwordTwo, setPasswordTwo] = useState("");
-  const [error, setError] = useState(null);
+const SignUpForm = ({ register, ...props }) => {
+  const [creds, setCreds] = useState({
+    username: "",
+    firstname: "",
+    lastname: "",
+    email: "",
+    password: "",
+    passwordConfirm: "",
+    err: null
+  });
 
-  const onSubmit = event => {
-    //send email & pw values form to firebase for authentication
-    props.firebase
-      .doCreateUserWithEmailAndPassword(email, passwordOne)
-      .then(user => {
-        const newUser = {
-          firebase_user_id: user.user.uid,
-          userName: username,
-          email: email
-        };
-        //send FB authenticated user UID, username and email to wheretocode Database
-        axios
-          .post(
-            "https://wheretocode-master.herokuapp.com/auth/register",
-
-            newUser
-          )
-          .then(res => {
-            setUsername("");
-            setEmail("");
-            setPasswordOne("");
-            props.history.push(ROUTES.HOME);
-          })
-          .catch(error => {
-            console.log(error);
-          });
-      })
-      .catch(error => {
-        setError(error);
-      });
-    event.preventDefault();
+  const handleChanges = e => {
+    setCreds({ ...creds, [e.target.name]: e.target.value, err: null });
   };
 
-  const isInvalid =
-    passwordOne !== passwordTwo ||
-    passwordOne === "" ||
-    email === "" ||
-    username === "";
+  const { history } = props;
 
   return (
     <FormContainer>
       <StyledHeader>
         <i
-          class="fas fa-wifi fa-2x"
+          className="fas fa-wifi fa-2x"
           style={{ color: "gold", marginRight: "14px" }}
         ></i>
         <h1>HiveStack</h1>
-        <StyledSvg
-          xmlns="http://www.w3.org/2000/svg"
-          viewBox="0 0 200 100"
-          preserveAspectRatio="none"
-        >
-          <circle fill="white" cx="0" cy="100" r="100" />
-          <circle fill="white" cx="200" cy="100" r="100" />
-        </StyledSvg>
+        <circle fill="white" cx="0" cy="100" r="100" />
+        <circle fill="white" cx="200" cy="100" r="100" />
       </StyledHeader>
-      <StyledForm onSubmit={onSubmit}>
+      <StyledForm>
         <StyledInput
           name="username"
-          value={username}
-          onChange={e => setUsername(e.target.value)}
+          value={creds.username}
+          onChange={handleChanges}
           type="text"
-          placeholder="Username"
+          placeholder="Preferred Username..."
         />
         <StyledInput
           name="email"
-          value={email}
-          onChange={e => setEmail(e.target.value)}
+          value={creds.email}
+          onChange={handleChanges}
           type="text"
-          placeholder="Email"
+          placeholder="Email..."
         />
         <StyledInput
-          name="passwordOne"
-          value={passwordOne}
-          onChange={e => setPasswordOne(e.target.value)}
+          name="firstname"
+          value={creds.firstname}
+          onChange={handleChanges}
+          type="text"
+          placeholder="First Name..."
+        />
+        <StyledInput
+          name="lastname"
+          value={creds.lastname}
+          onChange={handleChanges}
+          type="text"
+          placeholder="Last Name..."
+        />
+        <StyledInput
+          name="password"
+          value={creds.password}
+          onChange={handleChanges}
           type="password"
           placeholder="Password"
         />
         <StyledInput
-          name="passwordTwo"
-          value={passwordTwo}
-          onChange={e => setPasswordTwo(e.target.value)}
+          name="passwordConfirm"
+          value={creds.passwordConfirm}
+          onChange={handleChanges}
           type="password"
-          placeholder="Confirm Password"
+          placeholder="Confirm Password..."
         />
+        {creds.err && <StyledError name="err">{creds.err}</StyledError>}
       </StyledForm>
-      <ExtendedSignUpButton
-        disabled={isInvalid}
-        onClick={onSubmit}
-        // primary
+      <SignUpButton
+        onClick={e => {
+          if (
+            creds.username === "" ||
+            creds.firstname === "" ||
+            creds.lastname === "" ||
+            creds.email === "" ||
+            creds.password === ""
+          ) {
+            setCreds({ ...creds, err: "Please complete all fields." });
+            return;
+          } else if (creds.password !== creds.passwordConfirm) {
+            setCreds({
+              ...creds,
+              err: "Password and confirm fields must match."
+            });
+            return;
+          } else if (!register(e, creds, history)) {
+            setTimeout(
+              () =>
+                setCreds({
+                  ...creds,
+                  err: "Registration failed. Please try again."
+                }),
+              2000
+            );
+            return;
+          } else setCreds({ ...creds, err: null });
+        }}
+        primary
         label="Sign Up"
       >
         Sign Up
-      </ExtendedSignUpButton>
+      </SignUpButton>
     </FormContainer>
   );
 };
 
-const SignUpLink = () => (
-  <h6 alignSelf="center" margin="small">
-    Don't have an account? <Link to={ROUTES.SIGN_UP}>Sign Up</Link>
-  </h6>
-);
-const SignUpForm = withRouter(withFirebase(SignUpFormBase));
-// export default SignUpPage;
-export { SignUpForm, SignUpLink };
+export default connect(null, { register })(SignUpForm);

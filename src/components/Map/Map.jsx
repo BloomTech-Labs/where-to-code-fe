@@ -1,6 +1,7 @@
 // Imports
 /*global google*/
 import React, { Component } from "react";
+import { connect } from "react-redux";
 
 // Import React Script Library to load Google object
 import MapCards from "./MapCards";
@@ -143,8 +144,8 @@ class Map extends Component {
                 icon: !place.photos // Loads an img if it has one, if not it uses default google icon
                   ? place.icon
                   : place.photos[0].getUrl({
-                      maxWidth: 100
-                    }),
+                    maxWidth: 100
+                  }),
                 id: place.place_id,
                 address: place.formatted_address,
                 rating: place.rating,
@@ -223,8 +224,8 @@ class Map extends Component {
                 icon: !place.photos // Loads an img if it has one, if not it uses default google icon
                   ? place.icon
                   : place.photos[0].getUrl({
-                      maxWidth: 300
-                    }),
+                    maxWidth: 300
+                  }),
                 id: place.place_id,
                 address: place.formatted_address,
                 rating: place.rating,
@@ -287,15 +288,15 @@ class Map extends Component {
             {!this.state.filterBool ? (
               <p>Results: {this.state.locations.length}</p>
             ) : (
-              <p>Results: {this.state.locationsFilter.length}</p>
-            )}
+                <p>Results: {this.state.locationsFilter.length}</p>
+              )}
           </div>
 
           {!this.state.filterBool ? (
             <MapCards locations={this.state.locations} />
           ) : (
-            <FilteredMapCards locationsFilter={this.state.locationsFilter} />
-          )}
+              <FilteredMapCards locationsFilter={this.state.locationsFilter} />
+            )}
         </div>
         <div
           style={{
@@ -306,35 +307,19 @@ class Map extends Component {
             alignItems: "center"
           }}
         >
-          <input
-            id="locationType"
-            style={{ width: "25%" }}
-            placeholder="What are you looking for...ex: cafe"
-            style={{
-              border: "none",
-              borderBottom: "1px solid black",
-              width: "50%",
-              marginBottom: "20px",
-              background: "transparent",
-              fontSize: "20px"
-            }}
-            onChange={this.handleInputChange}
-            value={this.state.query}
-          />
-          <input
-            id="autocomplete"
-            style={{ width: "99.6%", height: "30px" }}
-            placeholder="Enter location..."
-            style={{
-              border: "none",
-              borderBottom: "1px solid black",
-              width: "50%",
-              marginBottom: "20px",
-              background: "transparent",
-              fontSize: "20px"
-            }}
-            onFocus={this.handleFocus}
-          />
+          <InputsContainer>
+            <InputLocation
+              id="locationType"
+              placeholder="What are you looking for...ex: cafe"
+              onChange={this.handleInputChange}
+              value={this.state.query}
+            />
+            <InputLocation
+              id="autocomplete"
+              placeholder="Enter location..."
+              onFocus={this.handleFocus}
+            />
+          </InputsContainer>
           <Button ref={this.searchButton}>Search</Button>
 
           <div
@@ -353,7 +338,27 @@ class Map extends Component {
   }
 }
 
-export default Map;
+export default connect(({ mapReducer: { place } }) => ({ place }), null)(Map);
+
+const InputsContainer = styled.div`
+
+  display:flex;
+  flex-flow:column;
+  width:100%;
+  align-items:center;
+  @media (max-width: 800px) {
+    margin:70px 0 0 0; 
+  }
+`
+
+const InputLocation = styled.input`
+  border: none;
+  border-bottom: 1px solid black;
+  width: 350px;
+  margin-bottom: 20px;
+  background: transparent;
+  font-size: 20px;
+`
 
 const HomeContainer = styled.div`
   display: flex;

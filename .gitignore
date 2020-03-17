@@ -105,3 +105,7 @@ dist
 
 # Stores VSCode versions used for testing VSCode extensions
 .vscode-test
+
+# Meta data for Mac
+.DS_Store
+

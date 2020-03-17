@@ -1,32 +1,9 @@
-import React, { Component } from "react";
-import { withRouter } from "react-router-dom";
-import { withFirebase } from "../../Firebase";
+import React from "react";
 import styled from "styled-components";
-import * as ROUTES from "../../Routes/routes";
+import { connect } from "react-redux";
+import { signout } from "../Redux/actions";
 
-class SignOutButton1 extends Component {
-  submit = e => {
-    this.props.firebase.doSignOut().then(() => {
-      this.props.history.push(ROUTES.LANDING);
-    });
-  };
-
-  render() {
-    return (
-      <>
-        <Signout type="button" onClick={this.submit}>
-          Sign Out
-        </Signout>
-      </>
-    );
-  }
-}
-
-const SignOutButton = withRouter(withFirebase(SignOutButton1));
-
-export default SignOutButton;
-
-const Signout = styled.button`
+const SignOutButton = styled.button`
   text-decoration: none;
   color: black;
   border: 1px solid gold;
@@ -40,3 +17,18 @@ const Signout = styled.button`
     background-color: yellow;
   }
 `;
+
+const SignOut = ({ signout, ...props }) => {
+  const { history } = props;
+  return (
+    <SignOutButton
+      onClick={e => {
+        signout(e, history);
+      }}
+    >
+      Sign Out
+    </SignOutButton>
+  );
+};
+
+export default connect(null, { signout})(SignOut);

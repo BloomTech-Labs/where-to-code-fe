@@ -1,21 +1,18 @@
-import React, { useState } from "react";
-import Modal, { ModalProvider, BaseModalBackground } from "styled-react-modal";
+import React, { useState } from 'react';
+import Modal, { ModalProvider, BaseModalBackground } from 'styled-react-modal';
 
-import SignOutButton from "../Auth/SignOut.jsx";
-import { withRouter } from "react-router-dom";
+import { withRouter } from 'react-router-dom';
+import { Box, Heading, Button } from 'grommet';
+import { connect } from 'react-redux';
 
-import { AuthUserContext } from "../Session";
+import { Link } from 'react-router-dom';
 
-import { Box, Button, Heading } from "grommet";
+import SignUpForm from '../Auth/SignUp.jsx';
+import SignInForm from '../Auth/SignIn.jsx';
+import SignOutButton from '../Auth/SignOut.jsx';
 
-import { Link } from "react-router-dom";
+import styled from 'styled-components'
 
-import { SignUpForm } from "../Auth/SignUp.jsx";
-import { SignInForm } from "../Auth/SignIn.jsx";
-
-import styled from "styled-components";
-
-//styled modal is css for pop up
 const StyledModal = Modal.styled`
   width: 30rem;
   height: 30rem;
@@ -26,42 +23,49 @@ const StyledModal = Modal.styled`
   opacity: ${props => props.opacity};
   transition: opacity ease 1000ms;
   border-radius: 30px;
-`;
+`
 
 const RegisterLink = styled(Link)`
-  text-decoration: none;
-  color: black;
-  border: 1px solid gold;
-  background-color: gold;
-  border-radius: 5px;
-  font-size: 1.5rem;
-  padding: 5px 20px;
-  font-family: "Zilla Slab", serif;
-  margin-right: 20px;
-  &:hover {
-    background-color: yellow;
+	text-decoration: none;
+	color: black;
+	border: 1px solid gold;
+	background-color: gold;
+	border-radius: 5px;
+	font-size: 1.5rem;
+	padding: 5px 20px;
+	font-family: 'Zilla Slab', serif;
+	margin-right: 20px;
+	&:hover {
+		background-color: yellow;
+	}
+`
+
+const Navbar = styled.div`
+	position: absolute;
+	display: flex;
+	justify-content: space-between;
+	width: 100%;
+	padding-top: 20px;
+`
+
+const NavButtons = styled.div`
+  display: flex;
+  @media (max-width: 600px) {
+    margin-top: 30px;
   }
 `;
 
-const Navbar = styled.div`
-  position: absolute;
-  display: flex;
-  justify-content: space-between;
-  width: 100%;
-  padding-top: 20px;
-`;
-
 const LoginLink = styled(Link)`
-  text-decoration: none;
-  color: white;
-  margin-right: 10px;
-  font-size: 1.5rem;
-  padding: 5px 20px;
-  font-family: "Zilla Slab", serif;
-  border-radius: 5px;
-`;
+	text-decoration: none;
+	color: white;
+	margin-right: 10px;
+	font-size: 1.5rem;
+	padding: 5px 20px;
+	font-family: 'Zilla Slab', serif;
+	border-radius: 5px;
+`
 
-function SignUpButton() {
+const SignUpButton = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [opacity, setOpacity] = useState(0);
 
@@ -84,7 +88,9 @@ function SignUpButton() {
 
   return (
     <div>
-      <RegisterLink onClick={toggleModal}>Sign Up</RegisterLink>
+      <RegisterLink to='' onClick={toggleModal}>
+        Sign Up
+      </RegisterLink>
       <StyledModal
         isOpen={isOpen}
         afterOpen={afterOpen}
@@ -95,14 +101,12 @@ function SignUpButton() {
         backgroundProps={{ opacity }}
       >
         <SignUpForm toggleModal={toggleModal} />
-
-        {/* <button onClick={toggleModal}>Close me</button> */}
       </StyledModal>
     </div>
   );
-}
+};
 
-function LoginButton() {
+const LoginButton = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [opacity, setOpacity] = useState(0);
 
@@ -122,9 +126,12 @@ function LoginButton() {
       setTimeout(resolve, 200);
     });
   }
+
   return (
     <div>
-      <LoginLink onClick={toggleModal}>Login</LoginLink>
+      <LoginLink to='' onClick={toggleModal}>
+        Login
+      </LoginLink>
       <StyledModal
         isOpen={isOpen}
         afterOpen={afterOpen}
@@ -135,60 +142,60 @@ function LoginButton() {
         backgroundProps={{ opacity }}
       >
         <SignInForm toggleModal={toggleModal} />
-
-        {/* <button onClick={toggleModal}>Close me</button> */}
       </StyledModal>
     </div>
   );
-}
+};
 
-const Navigation = props => {
-  const landingRedirect = () => {
-    props.history.push("/");
-  };
+const Navigation = ({ loggedIn }) => {
   return (
     <Navbar>
       <Box direction="row" gap="small">
-        <Heading level="3" margin="none">
+        <Heading responsive="false" level="2" margin="none">
           <i
-            class="fas fa-wifi"
-            style={{ color: "gold", margin: "0 20px" }}
+            className="fas fa-wifi"
+            style={{ color: "gold", margin: "0 10px 0" }}
           ></i>
           <Button
-            onClick={landingRedirect}
             label="HiveStack"
             color="white"
             plain="true"
           />
         </Heading>
       </Box>
-      <AuthUserContext.Consumer>
-        {authUser => (authUser ? <NavigationAuth /> : <NavigationNonAuth />)}
-      </AuthUserContext.Consumer>
+      {
+       loggedIn ? (
+          <NavigationAuth />
+        ) : (
+          <NavigationNonAuth />
+        )
+      }
     </Navbar>
   );
 };
 
 const NavigationAuth = () => (
-  <Box direction="row" justify="right" gap="small">
-    <SignOutButton />
-  </Box>
-);
+	<div direction='row' justify='right' gap='small'>
+		<SignOutButton />
+	</div>
+)
 
 const FadingBackground = styled(BaseModalBackground)`
   opacity: ${props => props.opacity};
   transition: opacity ease 1000ms;
 `;
 
-const NavigationNonAuth = () => (
-  <Box direction="row" justify="right" gap="small">
-    <ModalProvider backgroundComponent={FadingBackground}>
-      <LoginButton />
-    </ModalProvider>
-    <ModalProvider backgroundComponent={FadingBackground}>
-      <SignUpButton />
-    </ModalProvider>
-  </Box>
-);
+const NavigationNonAuth = () => {
+  return (
+    <NavButtons>
+      <ModalProvider backgroundComponent={FadingBackground}>
+        <LoginButton />
+      </ModalProvider>
+      <ModalProvider backgroundComponent={FadingBackground}>
+        <SignUpButton />
+      </ModalProvider>{" "}
+    </NavButtons>
+  );
+};
 
-export default withRouter(Navigation);
+export default withRouter(connect(({ userReducer: { loggedIn } }) => ({ loggedIn }), null)(Navigation));
