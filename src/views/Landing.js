@@ -1,35 +1,53 @@
-import React, { useEffect } from "react";
+/*global google*/
+import React, { useEffect, useState } from "react";
 import Navigation from "../components/Navigation/index";
 import styled from "styled-components";
 import { withRouter, Link } from "react-router-dom";
 
-// import mockup from "../assets/mockup.png";
-// import hours from "../assets/hours.jpg";
-// import explore from "../assets/explore.jpg";
-// import reviews from "../assets/reviews.jpg";
-
 import * as ROUTES from "../Routes/routes";
+import { updatePlace } from "../components/Redux/actions";
+import { connect } from "react-redux";
 
-const Landing = ({ state, setActivity, login, register, ...props }) => {
-  const activity = state.activity;
-  const number = state.activityNumber;
-
-  const { history } = props;
+const Landing = props => {
+  const activities = ["code", "study", "stream"];
+  const [number, setNumber] = useState(1);
 
   useEffect(() => {
-    let activityTimer = setTimeout(setActivity, 2000);
+    let activityTimer = setTimeout(() => {
+      number === activities.length - 1
+      ? setNumber(0)
+      : setNumber(number + 1) 
+    }, 2000);
+
     return function cleanup() {
       clearTimeout(activityTimer);
     };
-  }, [number, setActivity]);
+  }, [number]);
+
+  useEffect(() => {
+    const autocomplete = new google.maps.places.Autocomplete(
+      document.getElementById("exploreAutoComplete")
+    );
+    autocomplete.setFields([
+      "address_components",
+      "formatted_address",
+      "geometry",
+      "icon",
+      "name",
+      "place_id"
+    ]);
+    autocomplete.addListener("place_changed", () => {
+      props.updatePlace(autocomplete.getPlace());
+    });
+  }, []);
 
   return (
     <LandingPageContainer>
-      <Navigation login={login} register={register} />
+      <Navigation />
       <LandingScreen>
         <SearchComponent>
           <h2>
-            Find a place to <span>{activity[number]}</span> near you
+            Find a place to <span>{activities[number]}</span> near you
           </h2>
 
           <InputAndButtonContainer>
@@ -42,7 +60,7 @@ const Landing = ({ state, setActivity, login, register, ...props }) => {
   );
 };
 
-export default withRouter(Landing);
+export default withRouter(connect(null, { updatePlace})(Landing));
 
 const SearchComponent = styled.div`
   display: flex;

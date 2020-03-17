@@ -1,6 +1,7 @@
 // Imports
 /*global google*/
 import React, { Component } from "react";
+import { connect } from "react-redux";
 
 // Import React Script Library to load Google object
 import MapCards from "./MapCards";
@@ -337,7 +338,7 @@ class Map extends Component {
   }
 }
 
-export default Map;
+export default connect(({ mapReducer: { place } }) => ({ place }), null)(Map);
 
 const InputsContainer = styled.div`
 

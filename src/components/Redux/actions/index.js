@@ -1,6 +1,4 @@
-import React from "react";
 import axiosWithAuth from "../../../Helpers/axiosWithAuth";
-export const UPDATE_ACTIVITY = "UPDATE_ACTIVITY";
 export const UPDATE_INFO = "UPDATE_INFO";
 
 export const LOGIN_SUBMIT = "LOGIN_SUBMIT";
@@ -13,15 +11,13 @@ export const REGISTER_FAIL = "REGISTER_FAIL";
 
 export const SIGN_OUT = "SIGN_OUT";
 
+export const UPDATE_PLACE = "UPDATE_PLACE";
+
 export const userName = name => dispatch => {
   dispatch({
     type: UPDATE_INFO,
     payload: name
   });
-};
-
-export const setActivity = () => dispatch => {
-  dispatch({ type: UPDATE_ACTIVITY });
 };
 
 export const login = (e, creds, history) => dispatch => {
@@ -69,8 +65,23 @@ export const register = (e, creds, history) => dispatch => {
     .catch(_ => dispatch({ type: REGISTER_FAIL }));
 };
 
+export const checkToken = () => dispatch => {
+  axiosWithAuth()
+    .get("/auth/info")
+    .then(res => {
+      dispatch({ type: LOGIN_SUCCESS, payload: res.data })
+    })
+    .catch(err => {
+      console.error(err.message);
+    })
+}
+
 export const signout = (e, history) => dispatch => {
   e.preventDefault();
   localStorage.removeItem("token");
   dispatch({ type: SIGN_OUT });
 };
+
+export const updatePlace = place => dispatch => {
+  dispatch({ type: UPDATE_PLACE, payload: place });
+}

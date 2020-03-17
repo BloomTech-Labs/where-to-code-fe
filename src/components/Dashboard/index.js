@@ -1,8 +1,10 @@
-import React, { useState } from 'react'
-import SignOut from '../../components/Auth/SignOut'
-import './Dashboard.scss'
+import React, { useState } from 'react';
+import { Link } from 'react-router-dom';
+import SignOut from '../../components/Auth/SignOut';
+import './Dashboard.scss';
+import { connect } from 'react-redux';
 
-const Dashboard = ({ state, signout }) => {
+const Dashboard = ({ user }) => {
 	const [db, setDb] = useState({
 		user: {
 			userName: 'User',
@@ -21,27 +23,27 @@ const Dashboard = ({ state, signout }) => {
 			<nav>
 				<section className='nav-links'>
 					<i
-						class='fas fa-wifi'
+						className='fas fa-wifi'
 						aria-hidden='true'
 						style={{ color: 'gold' }}></i>
-					<a href='#'>Home</a>
-					<a href='#'>Search</a>
+					<Link to='/'>Home</Link>
+					<Link to='/home'>Search</Link>
 				</section>
 				<section className='nav-buttons'>
-					<SignOut signout={signout} />
+					<SignOut />
 				</section>
 			</nav>
 			<div className='column-container'>
 				<div className='first-column'>
 					<div className='user-information'>
-						<h2>Hello, {state.username}</h2>
+						<h2>Hello, {user.username}</h2>
 						<img style={profileImg} src={db.user.avatar} alt='default' />
 						<p>
-							{state.firstname} {state.lastname}
+							{user.firstname} {user.lastname}
 						</p>
 						<p>{db.user.location}</p>
 						<span>
-							<i class='fas fa-envelope'></i> {db.user.email}
+							<i class='fas fa-envelope'></i> {user.email}
 						</span>
 					</div>
 				</div>
@@ -147,7 +149,9 @@ const Dashboard = ({ state, signout }) => {
 	)
 }
 
-export default Dashboard
+export default connect(({ userReducer }) => ({
+		user: {...userReducer}
+}), null)(Dashboard)
 
 const profileImg = {
 	borderRadius: '50%',

@@ -1,37 +1,31 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { BrowserRouter as Router, Route, Redirect } from "react-router-dom";
 import { connect } from "react-redux";
-import {
-  userName,
-  setActivity,
-  login,
-  register,
-  signout
-} from "./components/Redux/actions";
-import Dashboard from "./components/Dashboard";
-//@ components
+import { checkToken } from "./components/Redux/actions";
 
-// import PasswordForgetPage from './components/Auth/PasswordForget.jsx'
-// import { withAuthentication } from './components/Session'
-// import Footer from "./components/Footer/Footer.jsx";
+//@ components
+import Dashboard from "./components/Dashboard";
 
 import "./App.css";
 
 //@ views
 import Landing from "./views/Landing";
-// import Home from "./views/Home";
-// import AccountPage from "./views/Account";
-// import NetworkPage from "./views/Network";
+import Home from "./views/Home";
 
 //@ utils
 import * as ROUTES from "./Routes/routes";
 
-function App({ state, setActivity, login, register, signout }) {
+function App({ loggedIn, checkToken, ...props}) {
+
+  useEffect(() => {
+    checkToken();
+  }, [])
+
   const PrivateRoute = ({ component: Component, ...rest }) => (
     <Route
       {...rest}
       render={props =>
-        localStorage.getItem("token") ? (
+        loggedIn ? (
           <Component {...props} {...rest} />
         ) : (
           <Redirect to='/' />
@@ -44,40 +38,25 @@ function App({ state, setActivity, login, register, signout }) {
     <Router>
       <Route exact path={ROUTES.LANDING}>
         <div className='App'>
-          {localStorage.getItem("token") ? (
+          {loggedIn ? (
             <Redirect to='/dashboard' />
           ) : (
-            <Landing
-              state={state}
-              setActivity={setActivity}
-              login={login}
-              register={register}
-            />
+            <Landing />
           )}
         </div>
       </Route>
       <PrivateRoute
         path='/dashboard'
         component={Dashboard}
-        signout={signout}
-        state={state}
       />
-      {/* <Route path={ROUTES.PASSWORD_FORGET} component={PasswordForgetPage} /> */}
-      {/* <Route */}
-      {/* // exact // path={ROUTES.HOME}
-      // render={props => <Home {...props} place={place} />}
-      // /> // <Route path={ROUTES.ACCOUNT} component={AccountPage} />
-      //  <Route path={ROUTES.NETWORK} component={NetworkPage} /> */}
+      <Route
+        exact
+        path={ROUTES.HOME}
+        render={props => <Home {...props} />}
+      />
     </Router>
   );
 }
 
-const mapStateToProps = state => ({ state: state });
 
-export default connect(mapStateToProps, {
-  userName,
-  setActivity,
-  login,
-  register,
-  signout
-})(App);
+export default connect(({ userReducer: { loggedIn }}) => ({ loggedIn }), { checkToken })(App);

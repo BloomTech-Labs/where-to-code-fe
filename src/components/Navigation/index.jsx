@@ -1,14 +1,15 @@
-import React, { useState } from 'react'
-import Modal, { ModalProvider, BaseModalBackground } from 'styled-react-modal'
+import React, { useState } from 'react';
+import Modal, { ModalProvider, BaseModalBackground } from 'styled-react-modal';
 
-import { withRouter } from 'react-router-dom'
+import { withRouter } from 'react-router-dom';
 import { Box, Heading, Button } from 'grommet';
-import { AuthUserContext } from '../Session'
+import { connect } from 'react-redux';
 
-import { Link } from 'react-router-dom'
+import { Link } from 'react-router-dom';
 
-import SignUpForm from '../Auth/SignUp.jsx'
-import SignInForm from '../Auth/SignIn.jsx'
+import SignUpForm from '../Auth/SignUp.jsx';
+import SignInForm from '../Auth/SignIn.jsx';
+import SignOutButton from '../Auth/SignOut.jsx';
 
 import styled from 'styled-components'
 
@@ -64,7 +65,7 @@ const LoginLink = styled(Link)`
 	border-radius: 5px;
 `
 
-const SignUpButton = ({ register }) => {
+const SignUpButton = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [opacity, setOpacity] = useState(0);
 
@@ -99,13 +100,13 @@ const SignUpButton = ({ register }) => {
         opacity={opacity}
         backgroundProps={{ opacity }}
       >
-        <SignUpForm toggleModal={toggleModal} register={register} />
+        <SignUpForm toggleModal={toggleModal} />
       </StyledModal>
     </div>
   );
 };
 
-const LoginButton = ({ login }) => {
+const LoginButton = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [opacity, setOpacity] = useState(0);
 
@@ -140,19 +141,19 @@ const LoginButton = ({ login }) => {
         opacity={opacity}
         backgroundProps={{ opacity }}
       >
-        <SignInForm toggleModal={toggleModal} login={login} />
+        <SignInForm toggleModal={toggleModal} />
       </StyledModal>
     </div>
   );
 };
 
-const Navigation = ({ login, register }) => {
+const Navigation = ({ loggedIn }) => {
   return (
     <Navbar>
       <Box direction="row" gap="small">
         <Heading responsive="false" level="2" margin="none">
           <i
-            class="fas fa-wifi"
+            className="fas fa-wifi"
             style={{ color: "gold", margin: "0 10px 0" }}
           ></i>
           <Button
@@ -162,22 +163,20 @@ const Navigation = ({ login, register }) => {
           />
         </Heading>
       </Box>
-      <AuthUserContext.Consumer>
-        {authUser =>
-          authUser ? (
-            <NavigationAuth />
-          ) : (
-            <NavigationNonAuth login={login} register={register} />
-          )
-        }
-      </AuthUserContext.Consumer>
+      {
+       loggedIn ? (
+          <NavigationAuth />
+        ) : (
+          <NavigationNonAuth />
+        )
+      }
     </Navbar>
   );
 };
 
 const NavigationAuth = () => (
 	<div direction='row' justify='right' gap='small'>
-		{/* <SignOutButton /> */}
+		<SignOutButton />
 	</div>
 )
 
@@ -186,17 +185,17 @@ const FadingBackground = styled(BaseModalBackground)`
   transition: opacity ease 1000ms;
 `;
 
-const NavigationNonAuth = ({ login, register }) => {
+const NavigationNonAuth = () => {
   return (
     <NavButtons>
       <ModalProvider backgroundComponent={FadingBackground}>
-        <LoginButton login={login} />
+        <LoginButton />
       </ModalProvider>
       <ModalProvider backgroundComponent={FadingBackground}>
-        <SignUpButton register={register} />
+        <SignUpButton />
       </ModalProvider>{" "}
     </NavButtons>
   );
 };
 
-export default withRouter(Navigation);
+export default withRouter(connect(({ userReducer: { loggedIn } }) => ({ loggedIn }), null)(Navigation));

@@ -1,8 +1,6 @@
 import React, { useState } from "react";
-import { Link, withRouter } from "react-router-dom";
-import axiosWithAuth from "../../Helpers/axiosWithAuth";
-
-import * as ROUTES from "../../Routes/routes";
+import { connect } from 'react-redux';
+import { register } from '../Redux/actions';
 
 import styled from "styled-components";
 
@@ -204,4 +202,4 @@ const SignUpForm = ({ register, ...props }) => {
   );
 };
 
-export default SignUpForm;
+export default connect(null, { register })(SignUpForm);
