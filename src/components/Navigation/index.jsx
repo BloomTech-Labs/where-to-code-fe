@@ -1,14 +1,15 @@
-import React, { useState } from 'react'
-import Modal, { ModalProvider, BaseModalBackground } from 'styled-react-modal'
+import React, { useState } from 'react';
+import Modal, { ModalProvider, BaseModalBackground } from 'styled-react-modal';
 
-import { withRouter } from 'react-router-dom'
+import { withRouter } from 'react-router-dom';
 import { Box, Heading, Button } from 'grommet';
-import { AuthUserContext } from '../Session'
+import { connect } from 'react-redux';
 
-import { Link } from 'react-router-dom'
+import { Link } from 'react-router-dom';
 
-import SignUpForm from '../Auth/SignUp.jsx'
-import SignInForm from '../Auth/SignIn.jsx'
+import SignUpForm from '../Auth/SignUp.jsx';
+import SignInForm from '../Auth/SignIn.jsx';
+import SignOutButton from '../Auth/SignOut.jsx';
 
 import styled from 'styled-components'
 
@@ -146,7 +147,7 @@ const LoginButton = () => {
   );
 };
 
-const Navigation = () => {
+const Navigation = ({ loggedIn }) => {
   return (
     <Navbar>
       <Box direction="row" gap="small">
@@ -162,22 +163,20 @@ const Navigation = () => {
           />
         </Heading>
       </Box>
-      <AuthUserContext.Consumer>
-        {authUser =>
-          authUser ? (
-            <NavigationAuth />
-          ) : (
-            <NavigationNonAuth />
-          )
-        }
-      </AuthUserContext.Consumer>
+      {
+       loggedIn ? (
+          <NavigationAuth />
+        ) : (
+          <NavigationNonAuth />
+        )
+      }
     </Navbar>
   );
 };
 
 const NavigationAuth = () => (
 	<div direction='row' justify='right' gap='small'>
-		{/* <SignOutButton /> */}
+		<SignOutButton />
 	</div>
 )
 
@@ -199,4 +198,4 @@ const NavigationNonAuth = () => {
   );
 };
 
-export default withRouter(Navigation);
+export default withRouter(connect(({ userReducer: { loggedIn } }) => ({ loggedIn }), null)(Navigation));
