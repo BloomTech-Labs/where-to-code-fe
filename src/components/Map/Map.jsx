@@ -370,13 +370,13 @@ const HomeContainer = styled.div`
 const Button = styled.button`
   align-self: center;
   border-radius: 10px;
-  border: 2px solid gold;
   font-size: 18px;
   cursor: pointer;
   width: 200px;
   padding: 10px 56px;
-  margin: 35px 0 10px;
+  margin: 35px 0 35px;
   background: white;
+  border-color: white;
   &:hover {
     box-shadow: 0px 5px 5px 0px rgba(176, 170, 176, 1);
     transform: translateY(-2px);
