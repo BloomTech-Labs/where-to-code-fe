@@ -1,17 +1,17 @@
-import React, { useState } from 'react';
-import Modal, { ModalProvider, BaseModalBackground } from 'styled-react-modal';
+import React, { useState } from "react";
+import Modal, { ModalProvider, BaseModalBackground } from "styled-react-modal";
 
-import { withRouter } from 'react-router-dom';
-import { Box, Heading, Button } from 'grommet';
-import { connect } from 'react-redux';
+import { withRouter } from "react-router-dom";
+import { Box, Heading, Button } from "grommet";
+import { connect } from "react-redux";
 
-import { Link } from 'react-router-dom';
+import { Link } from "react-router-dom";
 
-import SignUpForm from '../Auth/SignUp.jsx';
-import SignInForm from '../Auth/SignIn.jsx';
-import SignOutButton from '../Auth/SignOut.jsx';
+import SignUpForm from "../Auth/SignUp.jsx";
+import SignInForm from "../Auth/SignIn.jsx";
+import SignOutButton from "../Auth/SignOut.jsx";
 
-import styled from 'styled-components'
+import styled from "styled-components";
 
 const StyledModal = Modal.styled`
   width: 30rem;
@@ -23,30 +23,53 @@ const StyledModal = Modal.styled`
   opacity: ${props => props.opacity};
   transition: opacity ease 1000ms;
   border-radius: 30px;
-`
+
+  @media (max-width: 600px) {
+    width: 28rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  @media (max-width: 500px) {
+    width: 25rem;
+  }
+  @media (max-width: 400px) {
+    width: 22rem;
+  }
+`;
 
 const RegisterLink = styled(Link)`
-	text-decoration: none;
-	color: black;
-	border: 1px solid gold;
-	background-color: gold;
-	border-radius: 5px;
-	font-size: 1.5rem;
-	padding: 5px 20px;
-	font-family: 'Zilla Slab', serif;
-	margin-right: 20px;
-	&:hover {
-		background-color: yellow;
-	}
-`
+  text-decoration: none;
+  color: black;
+  background-color: gold;
+  border-radius: 5px;
+  font-size: 1.5rem;
+  padding: 5px 20px;
+  font-family: "Zilla Slab", serif;
+  margin-right: 20px;
+  &:hover {
+    background-color: yellow;
+  }
+  @media (max-width: 600px) {
+    margin: 0px;
+  }
+  @media (max-width: 500px) {
+  }
+  @media (max-width: 400px) {
+  }
+`;
 
 const Navbar = styled.div`
-	position: absolute;
-	display: flex;
-	justify-content: space-between;
-	width: 100%;
-	padding-top: 20px;
-`
+  display: flex;
+  justify-content: space-between;
+  flex-direction: row;
+  align-items: center;
+  width: 100%;
+  padding-top: 20px;
+  @media (max-width: 600px) {
+    flex-direction: column;
+  }
+`;
 
 const NavButtons = styled.div`
   display: flex;
@@ -56,14 +79,15 @@ const NavButtons = styled.div`
 `;
 
 const LoginLink = styled(Link)`
-	text-decoration: none;
-	color: white;
-	margin-right: 10px;
-	font-size: 1.5rem;
-	padding: 5px 20px;
-	font-family: 'Zilla Slab', serif;
-	border-radius: 5px;
-`
+  text-decoration: none;
+  color: white;
+  background-color: white;
+  margin-right: 10px;
+  font-size: 1.5rem;
+  padding: 5px 30px;
+  font-family: "Zilla Slab", serif;
+  border-radius: 5px;
+`;
 
 const SignUpButton = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -88,7 +112,7 @@ const SignUpButton = () => {
 
   return (
     <div>
-      <RegisterLink to='' onClick={toggleModal}>
+      <RegisterLink to="" onClick={toggleModal}>
         Sign Up
       </RegisterLink>
       <StyledModal
@@ -129,7 +153,7 @@ const LoginButton = () => {
 
   return (
     <div>
-      <LoginLink to='' onClick={toggleModal}>
+      <LoginLink to="" onClick={toggleModal}>
         Login
       </LoginLink>
       <StyledModal
@@ -154,31 +178,21 @@ const Navigation = ({ loggedIn }) => {
         <Heading responsive="false" level="2" margin="none">
           <i
             className="fas fa-wifi"
-            style={{ color: "gold", margin: "0 10px 0" }}
+            style={{ color: "gold", margin: "0px 10px 0px 0px" }}
           ></i>
-          <Button
-            label="HiveStack"
-            color="white"
-            plain="true"
-          />
+          <Button label="HiveStack" color="white" plain="true" />
         </Heading>
       </Box>
-      {
-       loggedIn ? (
-          <NavigationAuth />
-        ) : (
-          <NavigationNonAuth />
-        )
-      }
+      {loggedIn ? <NavigationAuth /> : <NavigationNonAuth />}
     </Navbar>
   );
 };
 
 const NavigationAuth = () => (
-	<div direction='row' justify='right' gap='small'>
-		<SignOutButton />
-	</div>
-)
+  <div direction="row" justify="right" gap="small">
+    <SignOutButton />
+  </div>
+);
 
 const FadingBackground = styled(BaseModalBackground)`
   opacity: ${props => props.opacity};
@@ -198,4 +212,6 @@ const NavigationNonAuth = () => {
   );
 };
 
-export default withRouter(connect(({ userReducer: { loggedIn } }) => ({ loggedIn }), null)(Navigation));
+export default withRouter(
+  connect(({ userReducer: { loggedIn } }) => ({ loggedIn }), null)(Navigation)
+);
