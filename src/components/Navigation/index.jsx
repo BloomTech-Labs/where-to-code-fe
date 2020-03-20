@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import Modal, { ModalProvider, BaseModalBackground } from 'styled-react-modal';
 
-import { withRouter } from 'react-router-dom';
+import { withRouter, useHistory } from 'react-router-dom';
 import { Box, Heading, Button } from 'grommet';
 import { connect } from 'react-redux';
 
@@ -10,8 +10,9 @@ import { Link } from 'react-router-dom';
 import SignUpForm from '../Auth/SignUp.jsx';
 import SignInForm from '../Auth/SignIn.jsx';
 import SignOutButton from '../Auth/SignOut.jsx';
-
+import Landing from '../../views/Landing';
 import styled from 'styled-components'
+
 
 const StyledModal = Modal.styled`
   width: 30rem;
@@ -88,7 +89,7 @@ const SignUpButton = () => {
 
   return (
     <div>
-      <RegisterLink to='' onClick={toggleModal}>
+      <RegisterLink onClick={toggleModal}>
         Sign Up
       </RegisterLink>
       <StyledModal
@@ -129,7 +130,7 @@ const LoginButton = () => {
 
   return (
     <div>
-      <LoginLink to='' onClick={toggleModal}>
+      <LoginLink onClick={toggleModal}>
         Login
       </LoginLink>
       <StyledModal
@@ -148,6 +149,10 @@ const LoginButton = () => {
 };
 
 const Navigation = ({ loggedIn }) => {
+  const history = useHistory();
+  const handleClick = () => {
+    history.push("/")
+  }
   return (
     <Navbar>
       <Box direction="row" gap="small">
@@ -157,27 +162,30 @@ const Navigation = ({ loggedIn }) => {
             style={{ color: "gold", margin: "0 10px 0" }}
           ></i>
           <Button
+            onClick={handleClick}
             label="HiveStack"
             color="white"
             plain="true"
           />
+
         </Heading>
       </Box>
       {
-       loggedIn ? (
+        loggedIn ? (
           <NavigationAuth />
         ) : (
-          <NavigationNonAuth />
-        )
+            <NavigationNonAuth />
+          )
       }
+
     </Navbar>
-  );
+  )
 };
 
 const NavigationAuth = () => (
-	<div direction='row' justify='right' gap='small'>
-		<SignOutButton />
-	</div>
+  <div direction='row' justify='right' gap='small'>
+    <SignOutButton />
+  </div>
 )
 
 const FadingBackground = styled(BaseModalBackground)`
