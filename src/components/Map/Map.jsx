@@ -265,74 +265,71 @@ class Map extends Component {
   render() {
     return (
       <HomeContainer>
-        <div
-          style={{
-            width: this.state.locations.length !== 0 ? "49vw" : "0",
-            padding: "8% 0 0 0",
-            overflow: "hidden",
-            marginTop: "29px"
-          }}
-        >
+        <InputsContainer>
+          <InputLocation
+            id="locationType"
+            placeholder="What are you looking for...ex: cafe"
+            onChange={this.handleInputChange}
+            value={this.state.query}
+          />
+          <InputLocation
+            id="autocomplete"
+            placeholder="Enter location..."
+            onFocus={this.handleFocus}
+          />
+          <InputButtonContainer>
+            <Button ref={this.searchButton}>Search</Button>
+            <ResultsFilterContainer
+              locationLength={this.state.locations.length}
+            >
+              {this.state.locations.length > 0 ? (
+                <Button onClick={this.filterResults}>Highest Rated</Button>
+              ) : null}
+              {!this.state.filterBool ? (
+                <p>Results: {this.state.locations.length}</p>
+              ) : (
+                <p>Results: {this.state.locationsFilter.length}</p>
+              )}
+            </ResultsFilterContainer>
+            <div></div>
+          </InputButtonContainer>
+        </InputsContainer>
+        <MapCardContainer>
+          <div
+            style={{
+              width: this.state.locations.length !== 0 ? "49vw" : "0",
+              padding: "8% 0 0 0",
+              overflow: "hidden",
+              marginTop: "29px"
+            }}
+          >
+            {!this.state.filterBool ? (
+              <MapCards locations={this.state.locations} />
+            ) : (
+              <FilteredMapCards locationsFilter={this.state.locationsFilter} />
+            )}
+          </div>
           <div
             style={{
               display: "flex",
-              alignItems: "flex-end",
-              justifyContent: "space-evenly",
-              fontSize: "20px"
+              flexDirection: "column",
+              padding: "5% 0 0 0",
+              width: this.state.locations.length !== 0 ? "49vw" : "100%",
+              alignItems: "center"
             }}
           >
-            {this.state.locations.length > 0 ? (
-              <Button onClick={this.filterResults}>Highest Rated</Button>
-            ) : null}
+            <div
+              id="map"
+              style={{
+                height: "82.85vh",
+                width: "100%"
+              }}
+            ></div>
 
-            {!this.state.filterBool ? (
-              <p>Results: {this.state.locations.length}</p>
-            ) : (
-              <p>Results: {this.state.locationsFilter.length}</p>
-            )}
+            {/* I used an empty div for the map object in the requestDetails function, this is a strange work around. If I use the actual map it reloads and we lose the position and markers. */}
+            <div id="fakeMap"></div>
           </div>
-
-          {!this.state.filterBool ? (
-            <MapCards locations={this.state.locations} />
-          ) : (
-            <FilteredMapCards locationsFilter={this.state.locationsFilter} />
-          )}
-        </div>
-        <div
-          style={{
-            display: "flex",
-            flexDirection: "column",
-            padding: "5% 0 0 0",
-            width: this.state.locations.length !== 0 ? "49vw" : "100%",
-            alignItems: "center"
-          }}
-        >
-          <InputsContainer>
-            <InputLocation
-              id="locationType"
-              placeholder="What are you looking for...ex: cafe"
-              onChange={this.handleInputChange}
-              value={this.state.query}
-            />
-            <InputLocation
-              id="autocomplete"
-              placeholder="Enter location..."
-              onFocus={this.handleFocus}
-            />
-          </InputsContainer>
-          <Button ref={this.searchButton}>Search</Button>
-
-          <div
-            id="map"
-            style={{
-              height: "82.85vh",
-              width: "100%"
-            }}
-          ></div>
-
-          {/* I used an empty div for the map object in the requestDetails function, this is a strange work around. If I use the actual map it reloads and we lose the position and markers. */}
-          <div id="fakeMap"></div>
-        </div>
+        </MapCardContainer>
       </HomeContainer>
     );
   }
@@ -340,6 +337,27 @@ class Map extends Component {
 
 export default connect(({ mapReducer: { place } }) => ({ place }), null)(Map);
 
+const MapCardContainer = styled.div`
+  display: flex;
+`;
+const InputButtonContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+`;
+const ResultsFilterContainer = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+  font-size: 20px;
+  width: ${props => {
+    if (props.locationLength < 0) {
+      return "100%";
+    } else if (props.locationLength > 0) {
+      return "50%";
+    }
+  }};
+`;
 const InputsContainer = styled.div`
   display: flex;
   flex-flow: column;
@@ -363,6 +381,7 @@ const HomeContainer = styled.div`
   display: flex;
   box-sizing: border-box;
   margin: 0 auto;
+  flex-direction: column;
   max-width: 1400px;
   height: 93.2vh;
 `;

@@ -80,7 +80,7 @@ const NavButtons = styled.div`
 
 const LoginLink = styled(Link)`
   text-decoration: none;
-  color: white;
+  color: black;
   background-color: white;
   margin-right: 10px;
   font-size: 1.5rem;
