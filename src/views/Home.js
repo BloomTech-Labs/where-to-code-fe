@@ -4,10 +4,6 @@ import Navigation from "../components/Navigation/index";
 import Map from "../components/Map/Map.jsx";
 import styled from "styled-components";
 
-const HomeBackground = styled.div`
-  background-image: url("/light_honeycomb.png");
-`;
-
 const HomeNavBar = styled.div`
   position: static;
   display: flex;
@@ -23,12 +19,12 @@ const HomeNavBar = styled.div`
 
 const Home = ({ place }) => {
   return (
-    <HomeBackground>
+    <div>
       <HomeNavBar>
         <Navigation />
       </HomeNavBar>
       <Map place={place} />
-    </HomeBackground>
+    </div>
   );
 };
 
