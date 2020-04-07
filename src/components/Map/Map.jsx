@@ -267,7 +267,7 @@ class Map extends Component {
       <HomeContainer>
         <div
           style={{
-            width: this.state.locations.length !== 0 ? "49vw" : "0",
+            // width: this.state.locations.length !== 0 ? "49vw" : "0",
             padding: "8% 0 0 0",
             overflow: "hidden",
             marginTop: "29px"
@@ -303,7 +303,7 @@ class Map extends Component {
             display: "flex",
             flexDirection: "column",
             padding: "5% 0 0 0",
-            width: this.state.locations.length !== 0 ? "49vw" : "100%",
+            // width: this.state.locations.length !== 0 ? "49vw" : "100%",
             alignItems: "center"
           }}
         >
@@ -322,13 +322,13 @@ class Map extends Component {
           </InputsContainer>
           <Button ref={this.searchButton}>Search</Button>
 
-          <div
+          <MapContainer
             id="map"
             style={{
               height: "82.85vh",
               width: "100%"
             }}
-          ></div>
+          ></MapContainer>
 
           {/* I used an empty div for the map object in the requestDetails function, this is a strange work around. If I use the actual map it reloads and we lose the position and markers. */}
           <div id="fakeMap"></div>
@@ -362,11 +362,24 @@ const InputLocation = styled.input`
 
 const HomeContainer = styled.div`
   display: flex;
-  box-sizing: border-box;
-  margin: 0 auto;
-  max-width: 1400px;
-  height: 93.2vh;
+  flex-direction:column;
+  justify-content:center;
+  width:100%;
+  @media (max-width: 768px) {
+			flex-direction: column-reverse;
+      width: 100%;
+      height:100%;
+		}
 `;
+
+const MapContainer = styled.div`
+    width:100%;
+    margin:0px 10px;
+      @media (max-width: 768px) {
+			flex-direction: column-reverse;
+      height:600px;
+		}
+`
 
 const Button = styled.button`
   align-self: center;
