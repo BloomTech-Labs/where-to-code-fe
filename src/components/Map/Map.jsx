@@ -21,11 +21,11 @@ class Map extends Component {
       filterBool: false,
       pos: {
         lat: 0,
-        lng: 0
+        lng: 0,
       },
       details: [],
       query: "",
-      locationCoords: []
+      locationCoords: [],
     };
   }
 
@@ -36,19 +36,19 @@ class Map extends Component {
     } else {
       if (navigator.geolocation) {
         navigator.geolocation.getCurrentPosition(
-          position => {
+          (position) => {
             localStorage.setItem("lat", position.coords.latitude);
             localStorage.setItem("lng", position.coords.longitude);
             this.setState({
               pos: {
                 lat: position.coords.latitude,
-                lng: position.coords.longitude
-              }
+                lng: position.coords.longitude,
+              },
             });
             // Loads map
             let map = new google.maps.Map(document.getElementById("map"), {
               center: this.state.pos,
-              zoom: 15
+              zoom: 15,
             });
           },
           () => {
@@ -70,7 +70,7 @@ class Map extends Component {
       "geometry",
       "icon",
       "name",
-      "place_id"
+      "place_id",
     ]);
 
     // When a new place is selected the map will be forced to update
@@ -85,14 +85,14 @@ class Map extends Component {
 
     let map = new google.maps.Map(document.getElementById("map"), {
       center: pos,
-      zoom: 15
+      zoom: 15,
     });
   };
 
   initialMapRender = () => {
     // Get map object
     let map = new google.maps.Map(document.getElementById("map"), {
-      zoom: 15
+      zoom: 15,
     });
 
     // Gets new place when auto complete search is clicked
@@ -107,7 +107,7 @@ class Map extends Component {
       icon: place.icon,
       photos: place.photos,
       radius: "500",
-      query: "Cafe"
+      query: "Cafe",
     };
 
     // requests use of PlaceService
@@ -125,12 +125,12 @@ class Map extends Component {
     // cb function that returns place results
     let callback = (results, status) => {
       if (status === google.maps.places.PlacesServiceStatus.OK) {
-        results.map(place => {
+        results.map((place) => {
           // Adds map markers to nearby locations
           let marker = new google.maps.Marker({
             map: map,
             position: place.geometry.location,
-            title: place.name
+            title: place.name,
           });
 
           marker.setPosition(place.geometry.location);
@@ -144,14 +144,14 @@ class Map extends Component {
                 icon: !place.photos // Loads an img if it has one, if not it uses default google icon
                   ? place.icon
                   : place.photos[0].getUrl({
-                      maxWidth: 100
+                      maxWidth: 100,
                     }),
                 id: place.place_id,
                 address: place.formatted_address,
                 rating: place.rating,
-                geocoder: google.maps.Geocoder
-              }
-            ]
+                geocoder: google.maps.Geocoder,
+              },
+            ],
           });
         });
       }
@@ -160,14 +160,14 @@ class Map extends Component {
     service.textSearch(request, callback);
   };
 
-  handleInputChange = e => {
+  handleInputChange = (e) => {
     this.setState({ query: e.target.value });
   };
 
   handleMapChange = () => {
     // Get map object
     let map = new google.maps.Map(document.getElementById("map"), {
-      zoom: 15
+      zoom: 15,
     });
 
     // Gets new place when auto complete search is clicked
@@ -181,7 +181,7 @@ class Map extends Component {
       icon: place.icon,
       photos: place.photos,
       radius: "500",
-      query: this.state.query || "cafe"
+      query: this.state.query || "cafe",
     };
 
     // requests use of PlaceService
@@ -201,12 +201,12 @@ class Map extends Component {
       if (status === google.maps.places.PlacesServiceStatus.OK) {
         let bounds = new google.maps.LatLngBounds();
 
-        results.map(place => {
+        results.map((place) => {
           // Adds map markers to nearby locations
           let marker = new google.maps.Marker({
             map: map,
             position: place.geometry.location,
-            title: place.name
+            title: place.name,
           });
 
           bounds.extend(marker.getPosition());
@@ -224,14 +224,14 @@ class Map extends Component {
                 icon: !place.photos // Loads an img if it has one, if not it uses default google icon
                   ? place.icon
                   : place.photos[0].getUrl({
-                      maxWidth: 300
+                      maxWidth: 300,
                     }),
                 id: place.place_id,
                 address: place.formatted_address,
                 rating: place.rating,
-                geocoder: google.maps.Geocoder
-              }
-            ]
+                geocoder: google.maps.Geocoder,
+              },
+            ],
           });
         });
       }
@@ -240,7 +240,7 @@ class Map extends Component {
     service.textSearch(request, callback);
   };
 
-  handleFocus = event => event.target.select();
+  handleFocus = (event) => event.target.select();
 
   filterResults = () => {
     if (this.state.filterBool === true) {
@@ -252,10 +252,10 @@ class Map extends Component {
     if (this.state.locationsFilter.length > 0) {
       return;
     } else {
-      this.state.locations.map(place => {
+      this.state.locations.map((place) => {
         if (place.rating >= 4) {
-          this.setState(prevState => ({
-            locationsFilter: [...prevState.locationsFilter, place]
+          this.setState((prevState) => ({
+            locationsFilter: [...prevState.locationsFilter, place],
           }));
         }
       });
@@ -300,7 +300,7 @@ class Map extends Component {
               width: this.state.locations.length !== 0 ? "49vw" : "0",
               padding: "8% 0 0 0",
               overflow: "hidden",
-              marginTop: "29px"
+              marginTop: "29px",
             }}
           >
             {!this.state.filterBool ? (
@@ -315,14 +315,14 @@ class Map extends Component {
               flexDirection: "column",
               padding: "5% 0 0 0",
               width: this.state.locations.length !== 0 ? "49vw" : "100%",
-              alignItems: "center"
+              alignItems: "center",
             }}
           >
             <div
               id="map"
               style={{
                 height: "82.85vh",
-                width: "100%"
+                width: "100%",
               }}
             ></div>
 
@@ -350,21 +350,27 @@ const ResultsFilterContainer = styled.div`
   align-items: center;
   justify-content: space-evenly;
   font-size: 20px;
-  width: ${props => {
-    if (props.locationLength < 0) {
+  width: ${(props) => {
+    if (props.locationLength <= 0) {
       return "100%";
     } else if (props.locationLength > 0) {
       return "50%";
     }
   }};
+
+  @media (max-width: 800px) {
+    flex-direction: column;
+    width: 100%;
+  }
 `;
 const InputsContainer = styled.div`
   display: flex;
   flex-flow: column;
   width: 100%;
   align-items: center;
+  margin-top: 50px;
   @media (max-width: 800px) {
-    margin: 30px 0 0 0;
+    margin: 50px 0 0 0;
   }
 `;
 

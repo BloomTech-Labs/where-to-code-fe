@@ -20,7 +20,7 @@ const StyledModal = Modal.styled`
   align-items: center;
   justify-content: center;
   background-color: white;
-  opacity: ${props => props.opacity};
+  opacity: ${(props) => props.opacity};
   transition: opacity ease 1000ms;
   border-radius: 30px;
 
@@ -64,8 +64,9 @@ const Navbar = styled.div`
   justify-content: space-between;
   flex-direction: row;
   align-items: center;
-  width: 100%;
+  width: 80%;
   padding-top: 20px;
+  margin: auto;
   @media (max-width: 600px) {
     flex-direction: column;
   }
@@ -104,7 +105,7 @@ const SignUpButton = () => {
   }
 
   function beforeClose() {
-    return new Promise(resolve => {
+    return new Promise((resolve) => {
       setOpacity(0);
       setTimeout(resolve, 200);
     });
@@ -145,7 +146,7 @@ const LoginButton = () => {
   }
 
   function beforeClose() {
-    return new Promise(resolve => {
+    return new Promise((resolve) => {
       setOpacity(0);
       setTimeout(resolve, 200);
     });
@@ -195,7 +196,7 @@ const NavigationAuth = () => (
 );
 
 const FadingBackground = styled(BaseModalBackground)`
-  opacity: ${props => props.opacity};
+  opacity: ${(props) => props.opacity};
   transition: opacity ease 1000ms;
 `;
 
