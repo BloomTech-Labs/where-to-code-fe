@@ -1,17 +1,19 @@
 import React, { useState } from "react";
 import Modal, { ModalProvider, BaseModalBackground } from "styled-react-modal";
 
-import { withRouter } from "react-router-dom";
-import { Box, Heading, Button } from "grommet";
-import { connect } from "react-redux";
+import { withRouter, useHistory } from 'react-router-dom';
+import { Box, Heading, Button } from 'grommet';
+import { connect } from 'react-redux';
 
 import { Link } from "react-router-dom";
 
-import SignUpForm from "../Auth/SignUp.jsx";
-import SignInForm from "../Auth/SignIn.jsx";
-import SignOutButton from "../Auth/SignOut.jsx";
+import SignUpForm from '../Auth/SignUp.jsx';
+import SignInForm from '../Auth/SignIn.jsx';
+import SignOutButton from '../Auth/SignOut.jsx';
+import Landing from '../../views/Landing';
+import styled from 'styled-components'
 
-import styled from "styled-components";
+
 
 const StyledModal = Modal.styled`
   width: 30rem;
@@ -113,7 +115,8 @@ const SignUpButton = () => {
 
   return (
     <div>
-      <RegisterLink to="" onClick={toggleModal}>
+      <RegisterLink onClick={toggleModal}>
+
         Sign Up
       </RegisterLink>
       <StyledModal
@@ -154,7 +157,8 @@ const LoginButton = () => {
 
   return (
     <div>
-      <LoginLink to="" onClick={toggleModal}>
+      <LoginLink onClick={toggleModal}>
+
         Login
       </LoginLink>
       <StyledModal
@@ -173,6 +177,10 @@ const LoginButton = () => {
 };
 
 const Navigation = ({ loggedIn }) => {
+  const history = useHistory();
+  const handleClick = () => {
+    history.push("/")
+  }
   return (
     <Navbar>
       <Box direction="row" gap="small">
@@ -181,19 +189,32 @@ const Navigation = ({ loggedIn }) => {
             className="fas fa-wifi"
             style={{ color: "gold", margin: "0px 10px 0px 0px" }}
           ></i>
-          <Button label="HiveStack" color="white" plain="true" />
+          <Button
+            onClick={handleClick}
+            label="HiveStack"
+            color="white"
+            plain="true"
+          />
+
         </Heading>
       </Box>
-      {loggedIn ? <NavigationAuth /> : <NavigationNonAuth />}
+      {
+        loggedIn ? (
+          <NavigationAuth />
+        ) : (
+            <NavigationNonAuth />
+          )
+      }
     </Navbar>
-  );
+  )
 };
 
 const NavigationAuth = () => (
-  <div direction="row" justify="right" gap="small">
+  <div direction='row' justify='right' gap='small'>
     <SignOutButton />
   </div>
-);
+)
+
 
 const FadingBackground = styled(BaseModalBackground)`
   opacity: ${(props) => props.opacity};
