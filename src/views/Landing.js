@@ -14,9 +14,7 @@ const Landing = props => {
 
   useEffect(() => {
     let activityTimer = setTimeout(() => {
-      number === activities.length - 1
-      ? setNumber(0)
-      : setNumber(number + 1) 
+      number === activities.length - 1 ? setNumber(0) : setNumber(number + 1);
     }, 2000);
 
     return function cleanup() {
@@ -51,7 +49,7 @@ const Landing = props => {
           </h2>
 
           <InputAndButtonContainer>
-            <Input id='exploreAutoComplete' placeholder='Explore' size='40' />
+            <Input id="exploreAutoComplete" placeholder="Explore" size="40" />
             <GoButton to={ROUTES.HOME}>Go</GoButton>
           </InputAndButtonContainer>
         </SearchComponent>
@@ -60,7 +58,7 @@ const Landing = props => {
   );
 };
 
-export default withRouter(connect(null, { updatePlace})(Landing));
+export default withRouter(connect(null, { updatePlace })(Landing));
 
 const SearchComponent = styled.div`
   display: flex;
@@ -104,16 +102,20 @@ const SearchComponent = styled.div`
   }
 `;
 
-const LandingPageContainer = styled.div``;
-
-const LandingScreen = styled.div`
+const LandingPageContainer = styled.div`
   background: url("/heroimage.svg");
   background-size: cover;
+`;
+
+const LandingScreen = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
   width: 100%;
   height: 100vh;
+  @media (max-width: 600px) {
+    height: 87vh;
+  }
 `;
 
 const GoButton = styled(Link)`
