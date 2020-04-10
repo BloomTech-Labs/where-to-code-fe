@@ -295,12 +295,9 @@ class Map extends Component {
           </InputButtonContainer>
         </InputsContainer>
         <MapCardContainer>
-          <div
+          <CardContainer
             style={{
-              width: this.state.locations.length !== 0 ? "49vw" : "0",
-              padding: "8% 0 0 0",
-              overflow: "hidden",
-              marginTop: "29px",
+              // width: this.state.locations.length !== 0 ? "49vw" : "0",
             }}
           >
             {!this.state.filterBool ? (
@@ -308,27 +305,26 @@ class Map extends Component {
             ) : (
               <FilteredMapCards locationsFilter={this.state.locationsFilter} />
             )}
-          </div>
-          <div
+          </CardContainer>
+          <MapContainer
             style={{
               display: "flex",
               flexDirection: "column",
-              padding: "5% 0 0 0",
-              width: this.state.locations.length !== 0 ? "49vw" : "100%",
+              // width: this.state.locations.length !== 0 ? "49vw" : "100%",
               alignItems: "center",
             }}
           >
-            <div
+            <GMap
               id="map"
               style={{
-                height: "82.85vh",
+                height: "800px",
                 width: "100%",
               }}
-            ></div>
+            ></GMap>
 
             {/* I used an empty div for the map object in the requestDetails function, this is a strange work around. If I use the actual map it reloads and we lose the position and markers. */}
             <div id="fakeMap"></div>
-          </div>
+          </MapContainer>
         </MapCardContainer>
       </HomeContainer>
     );
@@ -339,6 +335,16 @@ export default connect(({ mapReducer: { place } }) => ({ place }), null)(Map);
 
 const MapCardContainer = styled.div`
   display: flex;
+  flex-direction:row;
+  width:100%;
+  max-height:600;
+  overflow:auto;
+    @media (max-width: 768px) {
+			flex-direction: column-reverse;
+      width: 100%;
+      height:100%;
+      align-items:center;
+		}
 `;
 const InputButtonContainer = styled.div`
   display: flex;
@@ -388,24 +394,25 @@ const HomeContainer = styled.div`
   flex-direction:column;
   justify-content:center;
   width:100%;
-  @media (max-width: 768px) {
-			flex-direction: column-reverse;
-      width: 100%;
-      height:100%;
-		}
-  // box-sizing: border-box;
-  // margin: 0 auto;
-  // flex-direction: column;
-  // max-width: 1400px;
-  // height: 93.2vh;
 `;
 
 const MapContainer = styled.div`
     width:100%;
     margin:0px 10px;
-      @media (max-width: 768px) {
-			flex-direction: column-reverse;
-      height:600px;
+
+`
+
+const CardContainer = styled.div`
+  overflow: "hidden";
+  height:800px;
+  max-width:600px;
+
+  @media (max-width: 768px) {
+			margin:20px 0 0 0;
+    }
+    
+      @media (max-width: 411px) {
+      width:300px;
 		}
 `
 
@@ -425,3 +432,10 @@ const Button = styled.button`
     transition: 0.2s;
   }
 `;
+
+const GMap = styled.div`
+  width:100%;
+  @media (max-width: 768px) {
+			height:600px !important;
+    }
+`
