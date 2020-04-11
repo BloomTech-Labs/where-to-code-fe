@@ -85,36 +85,44 @@ export default SingleMapCard;
 
 const SingleMapCardContainer = styled.div`
   display: flex;
-  border-radius: 15px;
+  border-radius: 5px;
   box-shadow: -4px 2px 22px -13px rgba(0, 0, 0, 0.75);
-  width: 700px;
-  height: 365px;
-  margin: 0;
+  max-width: 700px;
+  margin: 20px auto;
   padding: 14px;
   align-items: center;
   background: white;
+
   img {
     margin-right: 10px;
-    margin-left: 30px;
-    height: 300px;
     width: 225px;
+    height:225px;
     overflow: hidden;
+
+    @media (max-width: 600px) {
+			display:none;
+    }
   }
 `;
 
 const DetailContainer = styled.div`
   display: flex;
   flex-direction: column;
-  width: 480px;
+  max-width: 480px;
   h2 {
     font-size: 24px;
     border-bottom: 1px dotted lightgray;
     line-height: 2;
+        margin:0;
+
   }
   h4 {
     font-size: 18px;
     font-weight: 700;
+    margin:0;
   }
+
+  
 `;
 
 const DetailButton = styled.button`
