@@ -1,12 +1,7 @@
 import {
-  UPDATE_INFO,
-  LOGIN_SUBMIT,
   LOGIN_SUCCESS,
-  LOGIN_FAIL,
-  REGISTER_SUBMIT,
-  REGISTER_SUCCESS,
-  REGISTER_FAIL,
-  SIGN_OUT
+  SIGN_OUT,
+  UPDATE_SAVED_LOCATIONS
 } from "../actions";
 
 const initialState = {
@@ -15,20 +10,12 @@ const initialState = {
   firstname: "",
   lastname: "",
   email: "",
-  loggedIn: false
+  loggedIn: false,
+  savedLocations: []
 };
 
 export const userReducer = (state = initialState, action) => {
   switch (action.type) {
-    case UPDATE_INFO:
-      return {
-        ...state,
-        username: action.payload.username,
-        email: action.payload.email,
-        password: action.payload.password
-      };
-    case LOGIN_SUBMIT:
-      return state;
     case LOGIN_SUCCESS:
       return {
         ...state,
@@ -39,22 +26,6 @@ export const userReducer = (state = initialState, action) => {
         email: action.payload.email,
         loggedIn: true
       };
-    case LOGIN_FAIL:
-      return state;
-    case REGISTER_SUBMIT:
-      return state;
-    case REGISTER_SUCCESS:
-      return {
-        ...state,
-        userID: action.payload.id,
-        username: action.payload.username,
-        firstname: action.payload.firstName,
-        lastname: action.payload.lastName,
-        email: action.payload.email,
-        loggedIn: true
-      };
-    case REGISTER_FAIL:
-      return state;
     case SIGN_OUT:
       return {
         ...state,
@@ -63,6 +34,11 @@ export const userReducer = (state = initialState, action) => {
         firstname: "",
         lastname: "",
         loggedIn: false
+      };
+    case UPDATE_SAVED_LOCATIONS:
+      return {
+        ...state,
+        savedLocations: action.payload
       };
     default:
       return state;
