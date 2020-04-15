@@ -1,10 +1,13 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import SignOut from '../../components/Auth/SignOut';
 import './Dashboard.scss';
 import { connect } from 'react-redux';
+import { getSavedLocations } from '../Redux/actions';
 
-const Dashboard = ({ user }) => {
+import SavedLocations from './SavedLocations';
+
+const Dashboard = ({ user, getSavedLocations }) => {
 	const [db, setDb] = useState({
 		user: {
 			userName: 'User',
@@ -17,6 +20,12 @@ const Dashboard = ({ user }) => {
 			address: '2216 Polk St San Francisco, CA 94109'
 		}
 	})
+
+	useEffect(() => {
+		getSavedLocations();
+	}, [getSavedLocations])
+
+	const savedLocations = user.savedLocations;
 
 	return (
 		<div className='dashboard-container'>
@@ -43,7 +52,7 @@ const Dashboard = ({ user }) => {
 						</p>
 						<p>{db.user.location}</p>
 						<span>
-							<i class='fas fa-envelope'></i> {user.email}
+							<i className='fas fa-envelope'></i> {user.email}
 						</span>
 					</div>
 				</div>
@@ -57,7 +66,7 @@ const Dashboard = ({ user }) => {
 							<span>{db.location.address}</span>
 						</section>
 						<p>
-							<i class='fas fa-long-arrow-alt-right'></i>
+							<i className='fas fa-long-arrow-alt-right'></i>
 						</p>
 					</section>
 					<section className='location-listing'>
@@ -67,7 +76,7 @@ const Dashboard = ({ user }) => {
 							<span>1 Front St #100 San Francisco, CA 94111</span>
 						</section>
 						<p>
-							<i class='fas fa-long-arrow-alt-right'></i>
+							<i className='fas fa-long-arrow-alt-right'></i>
 						</p>
 					</section>
 					<section className='location-listing'>
@@ -77,40 +86,10 @@ const Dashboard = ({ user }) => {
 							<span>180 Montgomery St San Francisco, CA 94104</span>
 						</section>
 						<p>
-							<i class='fas fa-long-arrow-alt-right'></i>
+							<i className='fas fa-long-arrow-alt-right'></i>
 						</p>
 					</section>
-					<p className='sub-header'>Saved Locations</p>
-					<section className='location-listing'>
-						<section>
-							<b>Jane on Fillmore</b>
-							<br />
-							<span>2123 Fillmore St San Francisco, CA 94115</span>
-						</section>
-						<p>
-							<i class='fas fa-heart'></i>
-						</p>
-					</section>
-					<section className='location-listing'>
-						<section>
-							<b>{db.location.name}</b>
-							<br />
-							<span>{db.location.address}</span>
-						</section>
-						<p>
-							<i class='fas fa-heart'></i>
-						</p>
-					</section>
-					<section className='location-listing'>
-						<section>
-							<b>The Social Study</b>
-							<br />
-							<span>1795 Geary Blvd San Francisco, CA 94115</span>
-						</section>
-						<p>
-							<i class='fas fa-heart'></i>
-						</p>
-					</section>
+					<SavedLocations savedLocations={savedLocations}/>
 				</div>
 
 				<div className='column'>
@@ -141,9 +120,6 @@ const Dashboard = ({ user }) => {
 						</article>
 					</section>
 				</div>
-				{/* <div className='column'>
-					<h3>Other stuff I guess</h3>
-				</div> */}
 			</div>
 		</div>
 	)
@@ -151,7 +127,7 @@ const Dashboard = ({ user }) => {
 
 export default connect(({ userReducer }) => ({
 		user: {...userReducer}
-}), null)(Dashboard)
+}), { getSavedLocations })(Dashboard)
 
 const profileImg = {
 	borderRadius: '50%',
@@ -159,10 +135,3 @@ const profileImg = {
 	width: '50%'
 }
 
-const firstColumn = {
-	border: '1px solid transparent',
-	width: '40%',
-	margin: '100px 20px 20px 20px',
-	background: 'transparent',
-	textAlign: 'center'
-}
