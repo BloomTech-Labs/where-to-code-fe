@@ -5,6 +5,7 @@ export const SIGN_OUT = "SIGN_OUT";
 
 export const UPDATE_PLACE = "UPDATE_PLACE";
 export const UPDATE_SAVED_LOCATIONS = "UPDATE_SAVED_LOCATIONS";
+export const UPDATE_USER_VISITS = "UPDATE_USER_VISITS";
 
 export const login = (e, creds, history) => dispatch => {
   e.preventDefault();
@@ -69,6 +70,15 @@ export const getSavedLocations = () => dispatch => {
     .get("/locations/saved/")
     .then(res => {
       dispatch({ type: UPDATE_SAVED_LOCATIONS, payload: res.data });
+    })
+    .catch(err => console.error(err.message));
+};
+
+export const getUserVisits = () => dispatch => {
+  axiosWithAuth()
+    .get("/locations/visited/")
+    .then(res => {
+      dispatch({ type: UPDATE_USER_VISITS, payload: res.data });
     })
     .catch(err => console.error(err.message));
 };

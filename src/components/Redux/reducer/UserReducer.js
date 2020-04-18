@@ -1,7 +1,8 @@
 import {
   LOGIN_SUCCESS,
   SIGN_OUT,
-  UPDATE_SAVED_LOCATIONS
+  UPDATE_SAVED_LOCATIONS,
+  UPDATE_USER_VISITS
 } from "../actions";
 
 const initialState = {
@@ -11,7 +12,8 @@ const initialState = {
   lastname: "",
   email: "",
   loggedIn: false,
-  savedLocations: []
+  savedLocations: [],
+  visits: []
 };
 
 export const userReducer = (state = initialState, action) => {
@@ -39,6 +41,11 @@ export const userReducer = (state = initialState, action) => {
       return {
         ...state,
         savedLocations: action.payload
+      };
+    case UPDATE_USER_VISITS:
+      return {
+        ...state,
+        visits: action.payload
       };
     default:
       return state;
