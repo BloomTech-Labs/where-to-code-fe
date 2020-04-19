@@ -3,11 +3,12 @@ import { Link } from 'react-router-dom';
 import SignOut from '../../components/Auth/SignOut';
 import './Dashboard.scss';
 import { connect } from 'react-redux';
-import { getSavedLocations } from '../Redux/actions';
+import { getSavedLocations, getUserVisits } from '../Redux/actions';
 
+import RecentlyVisited from './RecentlyVisited';
 import SavedLocations from './SavedLocations';
 
-const Dashboard = ({ user, getSavedLocations }) => {
+const Dashboard = ({ user, getSavedLocations, getUserVisits }) => {
 	const [db, setDb] = useState({
 		user: {
 			userName: 'User',
@@ -23,6 +24,7 @@ const Dashboard = ({ user, getSavedLocations }) => {
 
 	useEffect(() => {
 		getSavedLocations();
+		getUserVisits();
 	}, [getSavedLocations])
 
 	const savedLocations = user.savedLocations;
@@ -58,37 +60,7 @@ const Dashboard = ({ user, getSavedLocations }) => {
 				</div>
 				<div className='column'>
 					<h3>Activity</h3>
-					<p className='sub-header'>Recently Visited</p>
-					<section className='location-listing'>
-						<section>
-							<b>{db.location.name}</b>
-							<br />
-							<span>{db.location.address}</span>
-						</section>
-						<p>
-							<i className='fas fa-long-arrow-alt-right'></i>
-						</p>
-					</section>
-					<section className='location-listing'>
-						<section>
-							<b>Philz Coffee</b>
-							<br />
-							<span>1 Front St #100 San Francisco, CA 94111</span>
-						</section>
-						<p>
-							<i className='fas fa-long-arrow-alt-right'></i>
-						</p>
-					</section>
-					<section className='location-listing'>
-						<section>
-							<b>Workshop Cafe</b>
-							<br />
-							<span>180 Montgomery St San Francisco, CA 94104</span>
-						</section>
-						<p>
-							<i className='fas fa-long-arrow-alt-right'></i>
-						</p>
-					</section>
+					<RecentlyVisited visits={user.visits}/>
 					<SavedLocations savedLocations={savedLocations}/>
 				</div>
 
@@ -127,7 +99,7 @@ const Dashboard = ({ user, getSavedLocations }) => {
 
 export default connect(({ userReducer }) => ({
 		user: {...userReducer}
-}), { getSavedLocations })(Dashboard)
+}), { getSavedLocations, getUserVisits })(Dashboard)
 
 const profileImg = {
 	borderRadius: '50%',
