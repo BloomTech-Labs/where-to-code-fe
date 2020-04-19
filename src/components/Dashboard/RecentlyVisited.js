@@ -8,7 +8,7 @@ const RecentlyVisited = props => {
     <>
       <p className="sub-header">Recently Visited</p>
       {visits.map(visit => (
-        <LocationCard visit={visit} />
+        <LocationCard key={`user-visit-${visit.id}`} visit={visit} />
       ))}
     </>
   );
