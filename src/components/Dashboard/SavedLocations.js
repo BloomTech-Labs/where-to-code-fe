@@ -6,7 +6,7 @@ const SavedLocations = props => {
   return (
     <>
       <p className="sub-header">Saved Locations</p>
-      { savedLocations.map(location => <LocationCard location={location} />)}
+      { savedLocations.map(location => <LocationCard location={location} saved/>)}
     </>
   );
 };
