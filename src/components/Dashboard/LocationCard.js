@@ -1,10 +1,38 @@
-import React from "react";
-import moment from "moment";
+import React, { useState } from "react";
+import Modal from "styled-react-modal";
 
-const LocationCard = ({ location, saved, visit }) => {
+import LocationDetails from "./LocationDetails";
+
+const StyledModal = Modal.styled`
+width: 30rem;
+height: 30rem;
+display: flex;
+align-items: center;
+justify-content: center;
+background-color: white;
+opacity: ${props => props.opacity};
+transition: opacity ease 1000ms;
+border-radius: 30px;
+
+@media (max-width: 600px) {
+  width: 28rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+@media (max-width: 500px) {
+  width: 25rem;
+}
+@media (max-width: 400px) {
+  width: 22rem;
+}
+`;
+
+const Card = props => {
+  const { location, saved, visit, toggleModal } = props;
   const { name, address } = location || visit.location;
   return (
-    <section className="location-listing">
+    <div className="location-listing" onClick={toggleModal}>
       <section>
         <b>{name}</b>
         <br />
@@ -18,7 +46,46 @@ const LocationCard = ({ location, saved, visit }) => {
           <i className="fas fa-long-arrow-alt-right"></i>
         )}
       </p>
-    </section>
+    </div>
+  );
+};
+
+const LocationCard = props => {
+  const [isOpen, setIsOpen] = useState(false);
+  const [opacity, setOpacity] = useState(0);
+
+  function toggleModal(e) {
+    setIsOpen(!isOpen);
+  }
+
+  function afterOpen() {
+    setTimeout(() => {
+      setOpacity(1);
+    }, 20);
+  }
+
+  function beforeClose() {
+    return new Promise(resolve => {
+      setOpacity(0);
+      setTimeout(resolve, 200);
+    });
+  }
+
+  return (
+    <div>
+      <Card {...props} toggleModal={toggleModal} />
+      <StyledModal
+        isOpen={isOpen}
+        afterOpen={afterOpen}
+        beforeClose={beforeClose}
+        onBackgroundClick={toggleModal}
+        onEscapeKeydown={toggleModal}
+        opacity={opacity}
+        backgroundProps={{ opacity }}
+      >
+        <LocationDetails {...props} />
+      </StyledModal>
+    </div>
   );
 };
 
