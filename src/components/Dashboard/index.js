@@ -9,25 +9,12 @@ import RecentlyVisited from './RecentlyVisited';
 import SavedLocations from './SavedLocations';
 
 const Dashboard = ({ user, getSavedLocations, getUserVisits }) => {
-	const [db, setDb] = useState({
-		user: {
-			userName: 'User',
-			location: 'San Francisco, CA',
-			email: 'email@mail.com',
-			avatar: 'http://s3.amazonaws.com/37assets/svn/765-default-avatar.png'
-		},
-		location: {
-			name: 'Royal Ground Coffee',
-			address: '2216 Polk St San Francisco, CA 94109'
-		}
-	})
+	const avatar = user.avatar || 'http://s3.amazonaws.com/37assets/svn/765-default-avatar.png';
 
 	useEffect(() => {
 		getSavedLocations();
 		getUserVisits();
-	}, [getSavedLocations])
-
-	const savedLocations = user.savedLocations;
+	}, [getSavedLocations, getUserVisits])
 
 	return (
 		<div className='dashboard-container'>
@@ -48,11 +35,11 @@ const Dashboard = ({ user, getSavedLocations, getUserVisits }) => {
 				<div className='first-column'>
 					<div className='user-information'>
 						<h2>Hello, {user.username}</h2>
-						<img style={profileImg} src={db.user.avatar} alt='default' />
+						<img style={profileImg} src={avatar} alt='default' />
 						<p>
 							{user.firstname} {user.lastname}
 						</p>
-						<p>{db.user.location}</p>
+						<p>{user.location || 'San Francisco, CA'}</p>
 						<span>
 							<i className='fas fa-envelope'></i> {user.email}
 						</span>
@@ -61,7 +48,7 @@ const Dashboard = ({ user, getSavedLocations, getUserVisits }) => {
 				<div className='column'>
 					<h3>Activity</h3>
 					<RecentlyVisited visits={user.visits}/>
-					<SavedLocations savedLocations={savedLocations}/>
+					<SavedLocations savedLocations={user.savedLocations}/>
 				</div>
 
 				<div className='column'>
