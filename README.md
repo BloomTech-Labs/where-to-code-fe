@@ -1,22 +1,27 @@
-🚫 Note: All lines that start with 🚫 are instructions and should be deleted before this is posted to your portfolio. This is intended to be a guideline, feel free to add your own flare to it.
 
-🚫 The numbers 1️⃣ through 5️⃣ next to each item represent the week that part of the docs needs to be comepleted by. Make sure to delete the numbers by the end of Labs.
+# HiveStack
 
-🚫 Each student has a required minimum number of meaningful PRs each week per the rubric. Contributing to docs does NOT count as a PR to meet your weekly requirements.
+You can find the deployed project  [[HERE](https://hivestack-fe.herokuapp.com/)].
 
-# 1️⃣ Title of project goes here
+## Contributors
 
-1️⃣ You can find the deployed project at [🚫URL NAME GOES HERE](🚫copy and paste URL here).
+All Team Members are listed below, as active contributors to both the front end, and the back end of HiveStack. Feel free to contact members through the links below!
 
-## 4️⃣ Contributors
-
-🚫Add contributor info below, make sure add images and edit the social links for each member. Add to or delete these place-holders as needed
-
-|                                                      [Student 1](https://github.com/)                                                       |                                                       [Student 2](https://github.com/)                                                        |                                                      [Student 3](https://github.com/)                                                       |                                                       [Student 4](https://github.com/)                                                        |                                                      [Student 5](https://github.com/)                                                       |
+|                                                      [Oscar Ortiz-PM](https://github.com/CleverOscar)                                                       |                                                       [Aciel Ochoa](https://github.com/AceIsHuman)                                                        |                                                      [Aaron Johnson](https://github.com/ajohnson1031)                                                       |                                                       [Cody Caro](https://github.com/CodyCaro)                                                        |                                                      
 | :-----------------------------------------------------------------------------------------------------------------------------------------: | :-------------------------------------------------------------------------------------------------------------------------------------------: | :-----------------------------------------------------------------------------------------------------------------------------------------: | :-------------------------------------------------------------------------------------------------------------------------------------------: | :-----------------------------------------------------------------------------------------------------------------------------------------: |
-| [<img src="https://www.dalesjewelers.com/wp-content/uploads/2018/10/placeholder-silhouette-male.png" width = "200" />](https://github.com/) | [<img src="https://www.dalesjewelers.com/wp-content/uploads/2018/10/placeholder-silhouette-female.png" width = "200" />](https://github.com/) | [<img src="https://www.dalesjewelers.com/wp-content/uploads/2018/10/placeholder-silhouette-male.png" width = "200" />](https://github.com/) | [<img src="https://www.dalesjewelers.com/wp-content/uploads/2018/10/placeholder-silhouette-female.png" width = "200" />](https://github.com/) | [<img src="https://www.dalesjewelers.com/wp-content/uploads/2018/10/placeholder-silhouette-male.png" width = "200" />](https://github.com/) |
-|                                [<img src="https://github.com/favicon.ico" width="15"> ](https://github.com/)                                |                            [<img src="https://github.com/favicon.ico" width="15"> ](https://github.com/honda0306)                             |                          [<img src="https://github.com/favicon.ico" width="15"> ](https://github.com/Mister-Corn)                           |                          [<img src="https://github.com/favicon.ico" width="15"> ](https://github.com/NandoTheessen)                           |                           [<img src="https://github.com/favicon.ico" width="15"> ](https://github.com/wvandolah)                            |
-|                [ <img src="https://static.licdn.com/sc/h/al2o9zrvru7aqj8e1x2rzsrca" width="15"> ](https://www.linkedin.com/)                |                 [ <img src="https://static.licdn.com/sc/h/al2o9zrvru7aqj8e1x2rzsrca" width="15"> ](https://www.linkedin.com/)                 |                [ <img src="https://static.licdn.com/sc/h/al2o9zrvru7aqj8e1x2rzsrca" width="15"> ](https://www.linkedin.com/)                |                 [ <img src="https://static.licdn.com/sc/h/al2o9zrvru7aqj8e1x2rzsrca" width="15"> ](https://www.linkedin.com/)                 |                [ <img src="https://static.licdn.com/sc/h/al2o9zrvru7aqj8e1x2rzsrca" width="15"> ](https://www.linkedin.com/)                |
+| [<img src="https://avatars3.githubusercontent.com/u/22969581?s=400&u=9eac8d547cd64ff5817fa36af47cc9db240b2ac8&v=4" width = "200" />](https://github.com/CleverOscar) | [<img src="https://avatars2.githubusercontent.com/u/47653241?s=400&u=82518eeb63e86225c930922367227c8e5935b06c&v=4" width = "200" />](https://github.com/AceIsHuman) | [<img src="https://avatars3.githubusercontent.com/u/33072719?s=400&u=55d048a1de0a535cf0c79ad427d50c8bf105f831&v=4" width = "200" />](https://github.com/ajohnson1031) | [<img src="https://avatars3.githubusercontent.com/u/50003014?s=400&u=0e2f7cc5e5f9504930abae33fa9dd9228916ed9e&v=4" width = "200" />](https://github.com/CodyCaro) 
+|                                [<img src="https://github.com/favicon.ico" width="15"> ](https://github.com/CleverOscar)                                |                            [<img src="https://github.com/favicon.ico" width="15"> ](https://github.com/AceIsHuman)                             |                          [<img src="https://github.com/favicon.ico" width="15"> ](https://github.com/ajohnson1031)                           |                          [<img src="https://github.com/favicon.ico" width="15"> ](https://github.com/CodyCaro)                           | 
+|                [ <img src="https://static.licdn.com/sc/h/al2o9zrvru7aqj8e1x2rzsrca" width="15"> ](https://www.linkedin.com/in/clever-oscar)                |                 [ <img src="https://static.licdn.com/sc/h/al2o9zrvru7aqj8e1x2rzsrca" width="15"> ](https://www.linkedin.com/in/aciel-ochoa)                 |                [ <img src="https://static.licdn.com/sc/h/al2o9zrvru7aqj8e1x2rzsrca" width="15"> ](https://www.linkedin.com/)                |                 [ <img src="https://static.licdn.com/sc/h/al2o9zrvru7aqj8e1x2rzsrca" width="15"> ](https://www.linkedin.com/)                 |   
+
+<br>
+<br>
+
+
+|                                                      [Elijah Paminsan](https://github.com/elijahdaniel)                                                       |                                                       [Elizabeth Doyle](https://github.com/lizdoyle)                                                        |                                                      [Jacqueline Omollo](https://github.com/jacquelineomollo)                                                       |                                                       [Kim Kiamco](https://github.com/kiamco)                                                        | 
+| :-----------------------------------------------------------------------------------------------------------------------------------------: | :-------------------------------------------------------------------------------------------------------------------------------------------: | :-----------------------------------------------------------------------------------------------------------------------------------------: | :-------------------------------------------------------------------------------------------------------------------------------------------: | :-----------------------------------------------------------------------------------------------------------------------------------------: |
+| [<img src="https://avatars1.githubusercontent.com/u/42392420?s=400&u=0a2ef5381b1571bed8f808283bf469e4ff9e0ad3&v=4" width = "200" />](https://github.com/elijahdaniel) | [<img src="https://avatars3.githubusercontent.com/u/49792606?s=400&u=2155775f055e5b1aceb7d48ec31a74d06385fded&v=4" width = "200" />](https://github.com/lizdoyle) | [<img src="https://avatars0.githubusercontent.com/u/42282797?s=400&v=4" width = "200" />](https://github.com/jacquelineomollo) | [<img src="https://avatars1.githubusercontent.com/u/25730559?s=400&u=92f45bf92bfc23486a2a67e15bb523a0d8b2ba70&v=4" width = "200" />](https://github.com/kiamco) |
+|                                [<img src="https://github.com/favicon.ico" width="15"> ](https://github.com/elijahdaniel)                                |                            [<img src="https://github.com/favicon.ico" width="15"> ](https://github.com/lizdoyle)                             |                          [<img src="https://github.com/favicon.ico" width="15"> ](https://github.com/jacquelineomollo)                           |                          [<img src="https://github.com/favicon.ico" width="15"> ](https://github.com/kiamco)                           |                           
+|                [ <img src="https://static.licdn.com/sc/h/al2o9zrvru7aqj8e1x2rzsrca" width="15"> ](https://www.linkedin.com/)                |                 [ <img src="https://static.licdn.com/sc/h/al2o9zrvru7aqj8e1x2rzsrca" width="15"> ](https://www.linkedin.com/)                 |                [ <img src="https://static.licdn.com/sc/h/al2o9zrvru7aqj8e1x2rzsrca" width="15"> ](https://www.linkedin.com/)                |                 [ <img src="https://static.licdn.com/sc/h/al2o9zrvru7aqj8e1x2rzsrca" width="15"> ](https://www.linkedin.com/)                 |  
 
 <br>
 <br>
@@ -26,47 +31,73 @@
 ![MIT](https://img.shields.io/packagist/l/doctrine/orm.svg)
 ![React](https://img.shields.io/badge/react-v16.7.0--alpha.2-blue.svg)
 ![Typescript](https://img.shields.io/npm/types/typescript.svg?style=flat)
-[![Netlify Status](https://api.netlify.com/api/v1/badges/b5c4db1c-b10d-42c3-b157-3746edd9e81d/deploy-status)](netlify link goes in these parenthesis)
 [![code style: prettier](https://img.shields.io/badge/code_style-prettier-ff69b4.svg?style=flat-square)](https://github.com/prettier/prettier)
 
 🚫 more info on using badges [here](https://github.com/badges/shields)
 
 ## Project Overview
 
-1️⃣ [Trello Board](🚫add link to trello board here)
+[Trello Board](https://trello.com/b/uHo1KeRc/labspt7-where-to-code)
 
-1️⃣ [Product Canvas](🚫add link to product canvas here)
+[Product Canvas](https://www.notion.so/Labs-PT7-Student-Guide-1a061b7dce394b7a9dc158f35a76d6c3)
 
-1️⃣ [UX Design files](🚫add link to design files here) - 🚫 delete if not applicable
+HiveStack is a platform designed for avid WiFi users to be able to easily find hotspots that cater to their unique technical and environmental needs. A user will be able to search locations based on proximity to his/her geographical input, and the system will afford them a limited range of details about each location returned. They will be only able to see HiveStack locations without registering for a user account, and will also be limited to searching a limited range of environment variables.
 
-🚫 Replace lorem ipsum with a description of your project
+Once a general user registers for an account, a sea of filtration options becomes available to them (a further incentive for registration). This will include the ability to filter locations by preset environmental preferences. They will also gain access to promotions, deals and coupons from preferred HiveStack Hubs (providers), as well as being granted immediate access to the WiFi password and downloading instructions per location prior to their arrival, which increases ease of use at the location. In addition to this, a user will be able to purchase special business deals from within the application.
 
-Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
 
-Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+### Future Expansions:
+Providers will be able to post their location within the HiveStack network of businesses, which allows them to be featured to all general users whether or not they are logged in. This will be a motivating factor for paid registration, as Providers will not be able to register without paying for listing their business, as there will be a nominal cost associated with provider registration. Providers will also be able to offer unique coupons and discounts to the HiveStack users. They will be able to track the number of registered users. They will also be able to offer unique deals and coupons or discounts to registered users, and in turn collect payments from registered users for special deals that may be offered. Within the payment portal they will have access to a record of transactions, be able to track their received payments, and forward all proceeds to their listed bank account with implementation of the Stripe API.
 
 ### 4️⃣ Key Features
 
-- feature one
-- feature two
-- feature three
-- feature four
-- feature five
+- User Registration & Signup
+- Google Maps Search Integration (Google Maps API)
+- User Rating and Feedback System
+- Saved and Recent Locations
 
 ## 1️⃣ Tech Stack
 
 ### Front end built using:
 
-#### _Front end framework goes here_
+#### React , React Hooks & Redux
 
-🚫 Why did you choose this framework?
+-   React
+    
+    -   Virtual DOM improves both the experience of the user and work of the developer — Virtual DOM helps to update any user’s changes without the other parts’ interference by applying isolated components. It greatly helps to smooth the experience of all participants in real time mode.
+    -   Saving time while re-using React components — React deals with isolated components, that’s why you can reuse them anytime you need. System upgrades will not impact or change your system.
+    -   The stable code is provided by one-direction data flow — Direct work with each component requires one-direction data flow and makes the code really stable. Another thing is that only downward data binding is possible in this JavaScript framework.
+    -   An open-source library with a variety of tools — All updates are released to the community. React has had the open-source library and engineers can introduce the additional tools.
+-   Redux
+    
+    Redux favors predictability and control over your component states, making it a great choice for building consistent, cross-environment, testable applications with React. It has middleware.
+    
+-   React Hooks
+    
+    -   Saving time while re-using React components and creating expandable custom React Components to extend React's functionality.
 
-- point one
-- point two
-- point three
-- point four
+### Backend Modules
 
-🚫List the rest of the front end features and libraries in the same format as the framework above.
+**Dependencies**
+
+-   Axios — [](https://github.com/axios/axios)[https://github.com/axios/axios](https://github.com/axios/axios)
+-   Redux — [](https://redux.js.org/introduction/getting-started)[https://redux.js.org/introduction/getting-started](https://redux.js.org/introduction/getting-started)
+-   Jsonwebtoken — [](https://jwt.io/)[https://jwt.io/](https://jwt.io/)
+-   Bcryptjs — [](https://www.npmjs.com/package/bcryptjs)[https://www.npmjs.com/package/bcryptjs](https://www.npmjs.com/package/bcryptjs)
+-   Helmet — [](https://helmetjs.github.io/)[https://helmetjs.github.io/](https://helmetjs.github.io/)
+-   Express — [](https://expressjs.com/en/guide/routing.html)[https://expressjs.com/en/guide/routing.html](https://expressjs.com/en/guide/routing.html)
+-   Knex — [](http://knexjs.org/)[http://knexjs.org/](http://knexjs.org/)
+-   Knex Cleaner — [](https://www.npmjs.com/package/knex-cleaner)[https://www.npmjs.com/package/knex-cleaner](https://www.npmjs.com/package/knex-cleaner)
+-   Dotenv — [](https://www.npmjs.com/package/dotenv)[https://www.npmjs.com/package/dotenv](https://www.npmjs.com/package/dotenv)
+-   Cors — [](https://expressjs.com/en/resources/middleware/cors.html)[https://expressjs.com/en/resources/middleware/cors.html](https://expressjs.com/en/resources/middleware/cors.html)
+-   PG — [](https://www.postgresql.org/)[https://www.postgresql.org/](https://www.postgresql.org/)
+
+**Dev Dependencies**
+
+-   Supertest — [](https://www.npmjs.com/package/supertest)[https://www.npmjs.com/package/supertest](https://www.npmjs.com/package/supertest)
+-   Nodemon — [](https://nodemon.io/)[https://nodemon.io/](https://nodemon.io/)
+-   Cross-Env — [](https://www.npmjs.com/package/cross-env)[https://www.npmjs.com/package/cross-env](https://www.npmjs.com/package/cross-env)
+-   Jest — [](https://jestjs.io/docs/en/getting-started.html)[https://jestjs.io/docs/en/getting-started.html](https://jestjs.io/docs/en/getting-started.html)
 
 #### Front end deployed to `🚫insert service here`
 
@@ -78,7 +109,30 @@ Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu 
 - point two
 - point three
 
-🚫 List the rest of the back end end features and libraries in the same format as the framework above
+### Backend Modules
+
+**Dependencies**
+
+-   Axios —  [](https://github.com/axios/axios)[https://github.com/axios/axios](https://github.com/axios/axios)
+-   Redux —  [](https://redux.js.org/introduction/getting-started)[https://redux.js.org/introduction/getting-started](https://redux.js.org/introduction/getting-started)
+-   Jsonwebtoken —  [](https://jwt.io/)[https://jwt.io/](https://jwt.io/)
+-   Bcryptjs —  [](https://www.npmjs.com/package/bcryptjs)[https://www.npmjs.com/package/bcryptjs](https://www.npmjs.com/package/bcryptjs)
+-   Helmet —  [](https://helmetjs.github.io/)[https://helmetjs.github.io/](https://helmetjs.github.io/)
+-   Express —  [](https://expressjs.com/en/guide/routing.html)[https://expressjs.com/en/guide/routing.html](https://expressjs.com/en/guide/routing.html)
+-   Knex —  [](http://knexjs.org/)[http://knexjs.org/](http://knexjs.org/)
+-   Knex Cleaner —  [](https://www.npmjs.com/package/knex-cleaner)[https://www.npmjs.com/package/knex-cleaner](https://www.npmjs.com/package/knex-cleaner)
+-   Dotenv —  [](https://www.npmjs.com/package/dotenv)[https://www.npmjs.com/package/dotenv](https://www.npmjs.com/package/dotenv)
+-   Cors —  [](https://expressjs.com/en/resources/middleware/cors.html)[https://expressjs.com/en/resources/middleware/cors.html](https://expressjs.com/en/resources/middleware/cors.html)
+-   PG —  [](https://www.postgresql.org/)[https://www.postgresql.org/](https://www.postgresql.org/)
+
+**Dev Dependencies**
+
+-   Supertest —  [](https://www.npmjs.com/package/supertest)[https://www.npmjs.com/package/supertest](https://www.npmjs.com/package/supertest)
+-   Nodemon —  [](https://nodemon.io/)[https://nodemon.io/](https://nodemon.io/)
+-   Cross-Env —  [](https://www.npmjs.com/package/cross-env)[https://www.npmjs.com/package/cross-env](https://www.npmjs.com/package/cross-env)
+-   Jest —  [](https://jestjs.io/docs/en/getting-started.html)[https://jestjs.io/docs/en/getting-started.html](https://jestjs.io/docs/en/getting-started.html)
+
+####
 
 # APIs
 
@@ -88,29 +142,16 @@ Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu 
 
 Water's like me. It's laaazy ... Boy, it always looks for the easiest way to do things A little happy sunlight shining through there. Let all these little things happen. Don't fight them. Learn to use them. Even the worst thing we can do here is good.
 
-## 2️⃣ Payment API here
+## 2️⃣ Stripe API Integration
 
-🚫Replace text below with a description of the API
+This has not been implented, and will be a future integration into this project on a possible later release canvas.
 
-This is the way you take out your flustrations. Get away from those little Christmas tree things we used to make in school. Isn't it fantastic that you can change your mind and create all these happy things? Everything's not great in life, but we can still find beauty in it.
 
 ## 3️⃣ Misc API here
 
 🚫Replace text below with a description of the API
 
 You can do anything your heart can imagine. In life you need colors. This is where you take out all your hostilities and frustrations. It's better than kicking the puppy dog around and all that so. I'm sort of a softy, I couldn't shoot Bambi except with a camera. Trees get lonely too, so we'll give him a little friend. We'll lay all these little funky little things in there.
-
-## 3️⃣ Misc API here
-
-🚫Replace text below with a description of the API
-
-When you do it your way you can go anywhere you choose. Let your heart take you to wherever you want to be. If I paint something, I don't want to have to explain what it is. A tree needs to be your friend if you're going to paint him. That's a son of a gun of a cloud. Even the worst thing we can do here is good.
-
-## 3️⃣ Misc API here
-
-🚫Replace text below with a description of the API
-
-Volunteering your time; it pays you and your whole community fantastic dividends. Maybe there's a happy little waterfall happening over here. You can spend all day playing with mountains. We don't have to be committed. We are just playing here. You have freedom here. The only guide is your heart. It's cold, but it's beautiful.
 
 # 3️⃣ Environment Variables
 
@@ -144,16 +185,12 @@ In order for the app to function correctly, the user must set up their own envir
 
 # 4️⃣ Installation Instructions
 
-🚫explain how to install the required dependencies to get this project up and running with yarn and NPM
+Download and Clone the Front End & Back End repositories.
+
 
 ## Other Scripts
 
-🚫replace these examples with your own
-
-    * typecheck - runs the TypeScript compiler
-    * build - creates a build of the application
-    * start - starts the production server after a build is created
-    * test - runs tests in **tests** directory \* eject - copy the configuration files and dependencies into the project so you have full control over them
+No additional scripts are required to run this project.
 
 # Contributing
 
