@@ -7,6 +7,9 @@ export const UPDATE_PLACE = "UPDATE_PLACE";
 export const UPDATE_SAVED_LOCATIONS = "UPDATE_SAVED_LOCATIONS";
 export const UPDATE_USER_VISITS = "UPDATE_USER_VISITS";
 
+export const REMOVE_USER_VISIT = "REMOVE_USER_VISIT";
+export const REMOVE_SAVED_LOCATION = "REMOVE_SAVED_LOCATION";
+
 export const login = (e, creds, history) => dispatch => {
   e.preventDefault();
   axiosWithAuth()
@@ -82,3 +85,23 @@ export const getUserVisits = () => dispatch => {
     })
     .catch(err => console.error(err.message));
 };
+
+export const removeUserVisit = visitId => dispatch => {
+  axiosWithAuth()
+    .delete(`/locations/visited/${visitId}`)
+    .then(res => {
+      res.status === 204 &&
+        dispatch({ type: REMOVE_USER_VISIT, payload: visitId });
+    })
+    .catch(err => console.error(err.message));
+  };
+  
+  export const removeSavedLocation = locationId => dispatch => {
+    axiosWithAuth()
+      .delete(`/locations/saved/${locationId}`)
+      .then(res => {
+        res.status === 204 &&
+          dispatch({ type: REMOVE_SAVED_LOCATION, payload: locationId });
+      })
+      .catch(err => console.error(err.message));
+}
