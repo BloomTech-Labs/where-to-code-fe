@@ -1,14 +1,22 @@
 import React, { useState } from "react";
 import styled from "styled-components";
 import Modal from "styled-react-modal";
+import { connect } from "react-redux";
+import { removeUserVisit, removeSavedLocation } from "../Redux/actions";
 
 import { Link } from "react-router-dom";
 
-const RemoveOption = (type, id) => {
+const RemoveOption = props => {
+  const { location, visit, saved, removeUserVisit, removeSavedLocation } = props;
   const [isOpen, setIsOpen] = useState(false);
 
   function toggleModal(e) {
     setIsOpen(!isOpen);
+  }
+
+  async function initiateDelete() {
+    await !!saved ? removeSavedLocation(location.id) : removeUserVisit(visit.id);
+    toggleModal();
   }
 
   return (
@@ -23,7 +31,7 @@ const RemoveOption = (type, id) => {
       >
         <h2>Are you sure?</h2>
         <ConfirmContainer>
-          <Yes>Yes</Yes>
+          <Yes onClick={initiateDelete}>Yes</Yes>
           <No onClick={toggleModal}>No</No>
         </ConfirmContainer>
       </StyledModal>
@@ -83,4 +91,4 @@ font-weight: 500;
 
 `;
 
-export default RemoveOption;
+export default connect(null, { removeUserVisit, removeSavedLocation })(RemoveOption);
