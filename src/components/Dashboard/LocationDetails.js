@@ -35,7 +35,7 @@ const LocationDetails = props => {
         </DirectionsContainer>
       </DetailsContainer>
       <ImageContainer>
-        {!!icon ? <Image src={icon} /> : <i class="fas fa-store-alt fa-7x" />}
+        {!!icon ? <Image src={icon} /> : <i className="fas fa-store-alt fa-7x" />}
       </ImageContainer>
     </Container>
   );
