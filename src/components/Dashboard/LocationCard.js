@@ -5,7 +5,6 @@ import LocationDetails from "./LocationDetails";
 
 const StyledModal = Modal.styled`
 width: 30rem;
-height: 30rem;
 display: flex;
 align-items: center;
 justify-content: center;
@@ -13,6 +12,7 @@ background-color: white;
 opacity: ${props => props.opacity};
 transition: opacity ease 1000ms;
 border-radius: 30px;
+padding: 1rem;
 
 @media (max-width: 600px) {
   width: 28rem;
