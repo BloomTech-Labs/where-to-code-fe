@@ -2,7 +2,7 @@ import React from "react";
 import Popup from "reactjs-popup";
 import styled from "styled-components";
 
-import { Link } from "react-router-dom";
+import RemoveOption from "./RemoveOption";
 
 const LocationDetails = props => {
   const { location, visit } = props;
@@ -16,9 +16,7 @@ const LocationDetails = props => {
           position="bottom right"
         >
           <Menu>
-            <Remove>
-              Remove <i className="far fa-trash-alt"></i>
-            </Remove>
+            <RemoveOption {...props} />
           </Menu>
         </Popup>
       </ExtrasContainer>
@@ -67,9 +65,9 @@ const PhoneNumber = styled.a`
 const DirectionsContainer = styled.div`
   display: flex;
   flex-flow: row-reverse;
-  `
-  
-  const Directions = styled.a`
+`;
+
+const Directions = styled.a`
   color: black
   text-decoration: none;
   padding: 0.2rem 0.5rem;
@@ -97,11 +95,6 @@ const Menu = styled.div`
   display: flex;
   flex-direction: column;
   text-align: center;
-`;
-
-const Remove = styled(Link)`
-  text-decoration: none;
-  color: red;
 `;
 
 export default LocationDetails;
