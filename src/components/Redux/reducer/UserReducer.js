@@ -2,7 +2,9 @@ import {
   LOGIN_SUCCESS,
   SIGN_OUT,
   UPDATE_SAVED_LOCATIONS,
-  UPDATE_USER_VISITS
+  UPDATE_USER_VISITS,
+  REMOVE_USER_VISIT,
+  REMOVE_SAVED_LOCATION
 } from "../actions";
 
 const initialState = {
@@ -42,11 +44,21 @@ export const userReducer = (state = initialState, action) => {
         ...state,
         savedLocations: action.payload
       };
+    case REMOVE_SAVED_LOCATION:
+      return {
+        ...state,
+        savedLocations: state.savedLocations.filter(location => location.id !== action.payload)
+      }
     case UPDATE_USER_VISITS:
       return {
         ...state,
         visits: action.payload
       };
+    case REMOVE_USER_VISIT:
+      return {
+        ...state,
+        visits: state.visits.filter(visit => visit.id !== action.payload)
+      }
     default:
       return state;
   }
