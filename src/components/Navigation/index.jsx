@@ -1,19 +1,16 @@
 import React, { useState } from "react";
-import Modal, { ModalProvider, BaseModalBackground } from "styled-react-modal";
+import Modal from "styled-react-modal";
 
-import { withRouter, useHistory } from 'react-router-dom';
-import { Box, Heading, Button } from 'grommet';
-import { connect } from 'react-redux';
+import { withRouter, useHistory } from "react-router-dom";
+import { Box, Heading, Button } from "grommet";
+import { connect } from "react-redux";
 
 import { Link } from "react-router-dom";
 
-import SignUpForm from '../Auth/SignUp.jsx';
-import SignInForm from '../Auth/SignIn.jsx';
-import SignOutButton from '../Auth/SignOut.jsx';
-import Landing from '../../views/Landing';
-import styled from 'styled-components'
-
-
+import SignUpForm from "../Auth/SignUp.jsx";
+import SignInForm from "../Auth/SignIn.jsx";
+import SignOutButton from "../Auth/SignOut.jsx";
+import styled from "styled-components";
 
 const StyledModal = Modal.styled`
   width: 30rem;
@@ -22,7 +19,7 @@ const StyledModal = Modal.styled`
   align-items: center;
   justify-content: center;
   background-color: white;
-  opacity: ${(props) => props.opacity};
+  opacity: ${props => props.opacity};
   transition: opacity ease 1000ms;
   border-radius: 30px;
 
@@ -107,7 +104,7 @@ const SignUpButton = () => {
   }
 
   function beforeClose() {
-    return new Promise((resolve) => {
+    return new Promise(resolve => {
       setOpacity(0);
       setTimeout(resolve, 200);
     });
@@ -115,10 +112,7 @@ const SignUpButton = () => {
 
   return (
     <div>
-      <RegisterLink onClick={toggleModal}>
-
-        Sign Up
-      </RegisterLink>
+      <RegisterLink onClick={toggleModal}>Sign Up</RegisterLink>
       <StyledModal
         isOpen={isOpen}
         afterOpen={afterOpen}
@@ -149,7 +143,7 @@ const LoginButton = () => {
   }
 
   function beforeClose() {
-    return new Promise((resolve) => {
+    return new Promise(resolve => {
       setOpacity(0);
       setTimeout(resolve, 200);
     });
@@ -157,10 +151,7 @@ const LoginButton = () => {
 
   return (
     <div>
-      <LoginLink onClick={toggleModal}>
-
-        Login
-      </LoginLink>
+      <LoginLink onClick={toggleModal}>Login</LoginLink>
       <StyledModal
         isOpen={isOpen}
         afterOpen={afterOpen}
@@ -179,8 +170,8 @@ const LoginButton = () => {
 const Navigation = ({ loggedIn }) => {
   const history = useHistory();
   const handleClick = () => {
-    history.push("/")
-  }
+    history.push("/");
+  };
   return (
     <Navbar>
       <Box direction="row" gap="small">
@@ -195,41 +186,24 @@ const Navigation = ({ loggedIn }) => {
             color="white"
             plain="true"
           />
-
         </Heading>
       </Box>
-      {
-        loggedIn ? (
-          <NavigationAuth />
-        ) : (
-            <NavigationNonAuth />
-          )
-      }
+      {loggedIn ? <NavigationAuth /> : <NavigationNonAuth />}
     </Navbar>
-  )
+  );
 };
 
 const NavigationAuth = () => (
-  <div direction='row' justify='right' gap='small'>
+  <div direction="row" justify="right" gap="small">
     <SignOutButton />
   </div>
-)
-
-
-const FadingBackground = styled(BaseModalBackground)`
-  opacity: ${(props) => props.opacity};
-  transition: opacity ease 1000ms;
-`;
+);
 
 const NavigationNonAuth = () => {
   return (
     <NavButtons>
-      <ModalProvider backgroundComponent={FadingBackground}>
-        <LoginButton />
-      </ModalProvider>
-      <ModalProvider backgroundComponent={FadingBackground}>
-        <SignUpButton />
-      </ModalProvider>{" "}
+      <LoginButton />
+      <SignUpButton />
     </NavButtons>
   );
 };
