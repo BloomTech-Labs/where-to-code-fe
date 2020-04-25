@@ -36,6 +36,7 @@ const Landing = props => {
     ]);
     autocomplete.addListener("place_changed", () => {
       props.updatePlace(autocomplete.getPlace());
+      props.history.push(ROUTES.HOME);
     });
   }, []);
 
