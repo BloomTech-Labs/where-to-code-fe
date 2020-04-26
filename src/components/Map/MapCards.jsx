@@ -20,7 +20,6 @@ class MapCards extends Component {
                 rating={location.rating}
                 icon={location.icon}
                 id={location.id}
-                requestDetails={this.props.requestDetails}
               />
             </div>
           );

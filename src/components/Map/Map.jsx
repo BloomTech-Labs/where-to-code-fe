@@ -168,7 +168,7 @@ class Map extends Component {
   handleMapChange = () => {
     // Get map object
     let map = new google.maps.Map(document.getElementById("map"), {
-      zoom: 15
+      zoom: 16
     });
 
     // Gets new place when auto complete search is clicked
@@ -211,8 +211,24 @@ class Map extends Component {
           });
 
           bounds.extend(marker.getPosition());
+          
+          const infoWindow = new google.maps.InfoWindow({
+            content: `
+            <b>${place.name}</b>
+            <address>
+            ${place.formatted_address}
+            </address>
+            `
+          });
+          
+          marker.addListener("click", () => {
+            google.maps.event.addListener(map, "click", event => {
+              console.log("place: ", place)
+              infoWindow.close();
+            });
+            infoWindow.open(map, marker);
+          });
 
-          marker.setPosition(place.geometry.location);
           marker.setVisible(true);
           map.fitBounds(bounds);
           map.setCenter(bounds.getCenter());
@@ -266,7 +282,7 @@ class Map extends Component {
   render() {
     return (
       <HomeContainer>
-        <Search 
+        <Search
           state={this.state}
           handleInputChange={this.handleInputChange}
           handleFocus={this.handleFocus}
@@ -274,13 +290,7 @@ class Map extends Component {
           filterResults={this.filterResults}
         />
         <MapCardContainer>
-          <CardContainer
-            style={
-              {
-                // width: this.state.locations.length !== 0 ? "49vw" : "0",
-              }
-            }
-          >
+          <CardContainer>
             {!this.state.filterBool ? (
               <MapCards locations={this.state.locations} />
             ) : (
@@ -291,7 +301,6 @@ class Map extends Component {
             style={{
               display: "flex",
               flexDirection: "column",
-              // width: this.state.locations.length !== 0 ? "49vw" : "100%",
               alignItems: "center"
             }}
           >
