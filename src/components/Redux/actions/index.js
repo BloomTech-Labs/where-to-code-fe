@@ -51,9 +51,13 @@ export const checkToken = () => dispatch => {
   axiosWithAuth()
     .get("/auth/info")
     .then(res => {
-      dispatch({ type: LOGIN_SUCCESS, payload: res.data });
+      if (res.status < 200)
+        dispatch({ type: LOGIN_SUCCESS, payload: res.data });
+      else {
+      }
     })
     .catch(err => {
+      localStorage.removeItem("token");
       console.error(err.message);
     });
 };
@@ -94,14 +98,14 @@ export const removeUserVisit = visitId => dispatch => {
         dispatch({ type: REMOVE_USER_VISIT, payload: visitId });
     })
     .catch(err => console.error(err.message));
-  };
-  
-  export const removeSavedLocation = locationId => dispatch => {
-    axiosWithAuth()
-      .delete(`/locations/saved/${locationId}`)
-      .then(res => {
-        res.status === 204 &&
-          dispatch({ type: REMOVE_SAVED_LOCATION, payload: locationId });
-      })
-      .catch(err => console.error(err.message));
-}
+};
+
+export const removeSavedLocation = locationId => dispatch => {
+  axiosWithAuth()
+    .delete(`/locations/saved/${locationId}`)
+    .then(res => {
+      res.status === 204 &&
+        dispatch({ type: REMOVE_SAVED_LOCATION, payload: locationId });
+    })
+    .catch(err => console.error(err.message));
+};
