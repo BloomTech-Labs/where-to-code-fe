@@ -1,19 +1,20 @@
-import React, { useState, useEffect } from 'react';
-import { Link } from 'react-router-dom';
-import SignOut from '../../components/Auth/SignOut';
-import './Dashboard.scss';
-import { connect } from 'react-redux';
-import { getSavedLocations, getUserVisits } from '../Redux/actions';
+import React, { useState, useEffect } from 'react'
+import { Link, NavLink } from 'react-router-dom'
+import SignOut from '../../components/Auth/SignOut'
+import './Dashboard.scss'
+import { connect } from 'react-redux'
+import { getSavedLocations, getUserVisits } from '../Redux/actions'
 
-import RecentlyVisited from './RecentlyVisited';
-import SavedLocations from './SavedLocations';
+import RecentlyVisited from './RecentlyVisited'
+import SavedLocations from './SavedLocations'
 
 const Dashboard = ({ user, getSavedLocations, getUserVisits }) => {
-	const avatar = user.avatar || 'http://s3.amazonaws.com/37assets/svn/765-default-avatar.png';
+	const avatar =
+		user.avatar || 'http://s3.amazonaws.com/37assets/svn/765-default-avatar.png'
 
 	useEffect(() => {
-		getSavedLocations();
-		getUserVisits();
+		getSavedLocations()
+		getUserVisits()
 	}, [getSavedLocations, getUserVisits])
 
 	return (
@@ -43,12 +44,16 @@ const Dashboard = ({ user, getSavedLocations, getUserVisits }) => {
 						<span>
 							<i className='fas fa-envelope'></i> {user.email}
 						</span>
+						<br /> <br />
+						<NavLink className='editButton' to='/EditAccount'>
+							Edit Information
+						</NavLink>
 					</div>
 				</div>
 				<div className='column'>
 					<h3>Activity</h3>
-					<RecentlyVisited visits={user.visits}/>
-					<SavedLocations savedLocations={user.savedLocations}/>
+					<RecentlyVisited visits={user.visits} />
+					<SavedLocations savedLocations={user.savedLocations} />
 				</div>
 
 				<div className='column'>
@@ -84,13 +89,15 @@ const Dashboard = ({ user, getSavedLocations, getUserVisits }) => {
 	)
 }
 
-export default connect(({ userReducer }) => ({
-		user: {...userReducer}
-}), { getSavedLocations, getUserVisits })(Dashboard)
+export default connect(
+	({ userReducer }) => ({
+		user: { ...userReducer }
+	}),
+	{ getSavedLocations, getUserVisits }
+)(Dashboard)
 
 const profileImg = {
 	borderRadius: '50%',
 	border: '1px solid #ccc',
 	width: '50%'
 }
-
