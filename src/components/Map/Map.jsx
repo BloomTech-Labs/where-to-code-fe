@@ -331,7 +331,6 @@ const MapCardContainer = styled.div`
   flex-direction: row;
   width: 100%;
   max-height: 600;
-  overflow: auto;
   @media (max-width: 768px) {
     flex-direction: column-reverse;
     width: 100%;
