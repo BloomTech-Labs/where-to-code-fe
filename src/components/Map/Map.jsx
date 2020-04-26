@@ -226,8 +226,13 @@ class Map extends Component {
               infoWindow.close();
             });
 
-            const card = document.getElementById(`card-${place.place_id}`)
+            // Scroll to location card
+            const card = document.getElementById(`card-${place.place_id}`);
             card.scrollIntoView();
+
+            // Move map to location
+            map.setCenter(place.geometry.location);
+            map.setZoom(18);
 
             infoWindow.open(map, marker);
           });
@@ -352,7 +357,8 @@ const MapContainer = styled.div`
 `;
 
 const CardContainer = styled.div`
-  overflow: "hidden";
+  box-sizing: border-box;
+  padding: 0 1rem;
   height: 800px;
   max-width: 600px;
 
