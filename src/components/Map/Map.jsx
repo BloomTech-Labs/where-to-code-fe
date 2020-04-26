@@ -211,7 +211,7 @@ class Map extends Component {
           });
 
           bounds.extend(marker.getPosition());
-          
+
           const infoWindow = new google.maps.InfoWindow({
             content: `
             <b>${place.name}</b>
@@ -220,12 +220,15 @@ class Map extends Component {
             </address>
             `
           });
-          
+
           marker.addListener("click", () => {
             google.maps.event.addListener(map, "click", event => {
-              console.log("place: ", place)
               infoWindow.close();
             });
+
+            const card = document.getElementById(`card-${place.place_id}`)
+            card.scrollIntoView();
+
             infoWindow.open(map, marker);
           });
 
