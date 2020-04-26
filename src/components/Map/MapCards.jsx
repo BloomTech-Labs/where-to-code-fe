@@ -42,7 +42,6 @@ const MapCardsContainer = styled.div`
   margin-right: -50px;
   padding-right: 50px;
   overflow-x: hidden;
-  margin:20px auto;
   &::-webkit-scrollbar {
     display: none;
   }
