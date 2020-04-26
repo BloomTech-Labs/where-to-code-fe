@@ -43,7 +43,7 @@ class SingleMapCard extends Component {
     return (
       <>
         {this.props.location !== "" ? (
-          <SingleMapCardContainer>
+          <SingleMapCardContainer id={`card-${this.props.id}`}>
             <img src={this.props.icon} alt="Icon of the location" />
             <DetailContainer>
               <h2>{`${this.props.location}`}</h2>
