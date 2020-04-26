@@ -18,7 +18,7 @@ import * as ROUTES from "./Routes/routes";
 function App({ loggedIn, checkToken, ...props}) {
 
   useEffect(() => {
-    checkToken();
+    !!localStorage.getItem("token") &&checkToken();
   }, [])
 
   const PrivateRoute = ({ component: Component, ...rest }) => (
