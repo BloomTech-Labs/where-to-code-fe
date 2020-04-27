@@ -14,6 +14,7 @@ class MapCards extends Component {
           return (
             <div>
               <SingleMapCard
+                key={location.id}
                 location={location}
               />
             </div>
