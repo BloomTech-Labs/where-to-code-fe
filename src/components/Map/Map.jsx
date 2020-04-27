@@ -8,7 +8,6 @@ import { updatePlace, updateMap } from "../Redux/actions";
 import MapCards from "./MapCards";
 
 import styled from "styled-components";
-import FilteredMapCards from "./FilteredMapCards";
 import Search from "./Search";
 
 class Map extends Component {
@@ -241,7 +240,7 @@ class Map extends Component {
             {!this.state.filterBool ? (
               <MapCards locations={this.state.locations} />
             ) : (
-              <FilteredMapCards locationsFilter={this.state.locationsFilter} />
+              <MapCards locations={this.state.locationsFilter} />
             )}
           </CardContainer>
           <MapContainer
