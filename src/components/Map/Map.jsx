@@ -91,88 +91,21 @@ class Map extends Component {
   };
 
   initialMapRender = () => {
-    // Get map object
-    let map = new google.maps.Map(document.getElementById("map"), {
-      zoom: 15
-    });
-
-    // Gets new place when auto complete search is clicked
-    let place = this.state.initialPlace;
-
-    // request object sets search query, search radius, and coordinates
-
-    let request = {
-      location: place.geometry.location,
-      id: place.place_id,
-      rating: place.rating,
-      icon: place.icon,
-      photos: place.photos,
-      radius: "500",
-      query: "Cafe"
-    };
-
-    // requests use of PlaceService
-    let service = new google.maps.places.PlacesService(map);
-
-    // Sets map screen to new location based on lat and lng
-    map.setCenter(place.geometry.location);
-    // Sets marker to lat/lng position
-
-    // Resets state when a new location is clicked
-    if (this.state.locations.name !== "") {
-      this.setState({ locations: [], locationsFilter: [] });
-    }
-
-    // cb function that returns place results
-    let callback = (results, status) => {
-      if (status === google.maps.places.PlacesServiceStatus.OK) {
-        results.map(place => {
-          // Adds map markers to nearby locations
-          let marker = new google.maps.Marker({
-            map: map,
-            position: place.geometry.location,
-            title: place.name
-          });
-
-          marker.setPosition(place.geometry.location);
-          marker.setVisible(true);
-
-          this.setState({
-            locations: [
-              ...this.state.locations,
-              {
-                name: place.name,
-                icon: !place.photos // Loads an img if it has one, if not it uses default google icon
-                  ? place.icon
-                  : place.photos[0].getUrl({
-                      maxWidth: 100
-                    }),
-                id: place.place_id,
-                address: place.formatted_address,
-                rating: place.rating,
-                geocoder: google.maps.Geocoder
-              }
-            ]
-          });
-        });
-      }
-    };
-    // PlaceService has the `textSearch` method
-    service.textSearch(request, callback);
+    this.handleMapChange(this.state.initialPlace);
   };
 
   handleInputChange = e => {
     this.setState({ query: e.target.value });
   };
 
-  handleMapChange = () => {
+  handleMapChange = initialPlace => {
     // Get map object
     let map = new google.maps.Map(document.getElementById("map"), {
       zoom: 16
     });
 
     // Gets new place when auto complete search is clicked
-    let place = this.autocomplete.getPlace();
+    let place = initialPlace || this.autocomplete.getPlace();
 
     // request object sets search query, search radius, and coordinates
     let request = {
@@ -254,7 +187,8 @@ class Map extends Component {
                 id: place.place_id,
                 address: place.formatted_address,
                 rating: place.rating,
-                geocoder: google.maps.Geocoder
+                geocoder: google.maps.Geocoder,
+                marker: marker
               }
             ]
           });
