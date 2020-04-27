@@ -2,7 +2,7 @@
 /*global google*/
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { updatePlace } from "../Redux/actions";
+import { updatePlace, updateMap } from "../Redux/actions";
 
 // Import React Script Library to load Google object
 import MapCards from "./MapCards";
@@ -52,6 +52,7 @@ class Map extends Component {
               center: this.state.pos,
               zoom: 15
             });
+            this.props.updateMap(map);
           },
           () => {
             // If user denies geolocation info, default location is used
@@ -92,6 +93,7 @@ class Map extends Component {
       center: pos,
       zoom: 15
     });
+    this.props.updateMap(map);
   };
 
   handleInputChange = e => {
@@ -118,6 +120,7 @@ class Map extends Component {
     const map = new google.maps.Map(document.getElementById("map"), {
       zoom: 16
     });
+    this.props.updateMap(map);
 
     // requests use of PlaceService
     const service = new google.maps.places.PlacesService(map);
@@ -166,7 +169,7 @@ class Map extends Component {
 
             // Move map to location
             map.setCenter(place.geometry.location);
-            map.setZoom(18);
+            map.setZoom(16);
 
             infoWindow.open(map, marker);
           });
@@ -188,7 +191,8 @@ class Map extends Component {
                 id: place.place_id,
                 address: place.formatted_address,
                 rating: place.rating,
-                geocoder: google.maps.Geocoder,
+                infoWindow: infoWindow,
+                position: place.geometry.location,
                 marker: marker
               }
             ]
@@ -265,7 +269,8 @@ class Map extends Component {
 }
 
 export default connect(({ mapReducer: { place } }) => ({ place }), {
-  updatePlace
+  updatePlace,
+  updateMap
 })(Map);
 
 const MapCardContainer = styled.div`
