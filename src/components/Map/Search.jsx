@@ -1,14 +1,32 @@
 import React from "react";
 import styled from "styled-components";
 
+/* global google */
+
 const Search = props => {
-  const {
-    state,
-    handleInputChange,
-    handleFocus,
-    searchButton,
-    filterResults
-  } = props;
+  const { state, handleInputChange, filterResults } = props;
+
+  const autocomplete = new google.maps.places.Autocomplete(
+    document.getElementById("autocomplete")
+  );
+
+  // Sets autocomplete fields to be returned
+  autocomplete.setFields([
+    "address_components",
+    "formatted_address",
+    "geometry",
+    "icon",
+    "name",
+    "place_id"
+  ]);
+
+  // When a new place is selected the map will be forced to update
+  autocomplete.addListener("place_changed", () => {
+    props.updatePlace(autocomplete.getPlace());
+    props.handleMapChange();
+  });
+
+  const handleFocus = event => event.target.select();
 
   return (
     <SearchContainer>
@@ -24,7 +42,7 @@ const Search = props => {
           placeholder="Enter location..."
           onFocus={handleFocus}
         />
-        <SearchButton ref={searchButton}>Search</SearchButton>
+        <SearchButton onClick={props.handleMapChange}>Search</SearchButton>
       </LocationInputContainer>
       <ButtonsContainer>
         <ResultsFilterContainer locationLength={state.locations.length}>

@@ -13,7 +13,6 @@ import Search from "./Search";
 class Map extends Component {
   constructor(props) {
     super(props);
-    this.searchButton = React.createRef();
 
     this.state = {
       initialPlace: this.props.place,
@@ -60,28 +59,6 @@ class Map extends Component {
         );
       } // To disable any eslint 'google not defined' errors
     }
-
-    this.autocomplete = new google.maps.places.Autocomplete(
-      document.getElementById("autocomplete")
-    );
-
-    // Sets autocomplete fields to be returned
-    this.autocomplete.setFields([
-      "address_components",
-      "formatted_address",
-      "geometry",
-      "icon",
-      "name",
-      "place_id"
-    ]);
-
-    // When a new place is selected the map will be forced to update
-    this.autocomplete.addListener("place_changed", () => {
-      this.props.updatePlace(this.autocomplete.getPlace());
-      this.handleMapChange();
-    });
-
-    this.searchButton.current.addEventListener("click", this.handleMapChange);
   }
 
   handleLocationError = (browserHasGeolocation = false) => {
@@ -102,7 +79,7 @@ class Map extends Component {
   handleMapChange = () => {
     // Gets new place when auto complete search is clicked
     const place = this.props.place;
-    if (!place) return;
+    if (!place.place_id) return;
 
     // request object sets search query, search radius, and coordinates
     const request = {
@@ -203,8 +180,6 @@ class Map extends Component {
     service.textSearch(request, callback);
   };
 
-  handleFocus = event => event.target.select();
-
   filterResults = () => {
     if (this.state.filterBool === true) {
       this.setState({ filterBool: false });
@@ -231,9 +206,9 @@ class Map extends Component {
         <Search
           state={this.state}
           handleInputChange={this.handleInputChange}
-          handleFocus={this.handleFocus}
-          searchButton={this.searchButton}
           filterResults={this.filterResults}
+          updatePlace={this.props.updatePlace}
+          handleMapChange={this.handleMapChange}
         />
         <MapCardContainer>
           <CardContainer>
