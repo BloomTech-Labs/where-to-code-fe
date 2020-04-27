@@ -3,6 +3,7 @@ import Popup from "reactjs-popup";
 import Review from "../Review/Review";
 import styled from "styled-components";
 import StarRatings from "react-star-ratings";
+import { connect } from "react-redux";
 
 /*global google*/
 
@@ -39,19 +40,39 @@ class SingleMapCard extends Component {
     });
   };
 
+  showOnMap = () => {
+    // Clicking on map closes the infoWindow
+    google.maps.event.addListener(this.props.map, "click", event => {
+      this.props.location.infoWindow.close();
+    });
+
+    // Open marker info window and center on map
+    this.props.location.infoWindow.open(
+      this.props.map,
+      this.props.location.marker
+    );
+    this.props.map.setCenter(this.props.location.position);
+    this.props.map.setZoom(16);
+  };
+
   render() {
+    const location = this.props.location;
+
     return (
       <>
         {this.props.location !== "" ? (
-          <SingleMapCardContainer id={`card-${this.props.id}`}>
-            <img src={this.props.icon} alt="Icon of the location" />
+          <SingleMapCardContainer
+            id={`card-${location.id}`}
+            onClick={this.showOnMap}
+          >
+            <img src={location.icon} alt="Icon of the location" />
             <DetailContainer>
-              <h2>{`${this.props.location}`}</h2>
+              <h2>{`${location.name}`}</h2>
               {/* Placeholder rating */}
               <h4>
-                {`rating: ${this.props.rating} `}
+                {`rating: ${location.rating} `}
                 <StarRatings
-                  rating={this.props.rating}
+                  rating={location.rating}
                   starRatedColor="gold"
                   numberOfStars={5}
                   name="rating"
@@ -59,17 +80,17 @@ class SingleMapCard extends Component {
                   starSpacing="0px"
                 />
               </h4>
-              <p>{`${this.props.address}`}</p>
+              <p>{`${location.address}`}</p>
               <Popup modal trigger={<DetailButton>Details</DetailButton>}>
                 {close => (
                   <Review
                     close={close}
-                    onClick={this.requestDetails(this.props.id)}
+                    onClick={this.requestDetails(location.id)}
                     details={this.state.details}
                     hours={this.state.hours}
                     address={this.props.address}
                     locationId={this.state.id}
-                    icon={this.props.icon}
+                    icon={location.icon}
                   />
                 )}
               </Popup>
@@ -81,7 +102,10 @@ class SingleMapCard extends Component {
   }
 }
 
-export default SingleMapCard;
+export default connect(
+  state => ({ map: state.mapReducer.map }),
+  null
+)(SingleMapCard);
 
 const SingleMapCardContainer = styled.div`
   display: flex;
@@ -92,15 +116,16 @@ const SingleMapCardContainer = styled.div`
   padding: 14px;
   align-items: center;
   background: white;
+  cursor: pointer;
 
   img {
     margin-right: 10px;
     width: 225px;
-    height:225px;
+    height: 225px;
     overflow: hidden;
 
     @media (max-width: 600px) {
-			display:none;
+      display: none;
     }
   }
 `;
@@ -113,16 +138,13 @@ const DetailContainer = styled.div`
     font-size: 24px;
     border-bottom: 1px dotted lightgray;
     line-height: 2;
-        margin:0;
-
+    margin: 0;
   }
   h4 {
     font-size: 18px;
     font-weight: 700;
-    margin:0;
+    margin: 0;
   }
-
-  
 `;
 
 const DetailButton = styled.button`
