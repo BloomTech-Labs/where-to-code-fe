@@ -68,6 +68,10 @@ const SearchContainer = styled.div`
   width: 70%;
   padding: 2rem 0;
   margin 0 auto;
+
+  @media (max-width: 500px) {
+    width: 90%;
+  };
 `;
 
 const InputLocation = styled.input`
@@ -84,6 +88,7 @@ const LocationInputContainer = styled.div`
   display: flex;
   max-width: 100%;
 `;
+
 const SearchButton = styled.span`
   display: flex;
   justify-content: center;
