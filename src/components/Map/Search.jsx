@@ -11,20 +11,22 @@ const Search = props => {
   } = props;
 
   return (
-    <InputsContainer>
+    <SearchContainer>
       <InputLocation
         id="locationType"
         placeholder="What are you looking for...ex: cafe"
         onChange={handleInputChange}
         value={state.query}
       />
-      <InputLocation
-        id="autocomplete"
-        placeholder="Enter location..."
-        onFocus={handleFocus}
-      />
-      <InputButtonContainer>
-        <Button ref={searchButton}>Search</Button>
+      <LocationInputContainer>
+        <InputLocation
+          id="autocomplete"
+          placeholder="Enter location..."
+          onFocus={handleFocus}
+        />
+        <SearchButton ref={searchButton}>Search</SearchButton>
+      </LocationInputContainer>
+      <ButtonsContainer>
         <ResultsFilterContainer locationLength={state.locations.length}>
           {state.locations.length > 0 ? (
             <Button onClick={filterResults}>Highest Rated</Button>
@@ -35,18 +37,50 @@ const Search = props => {
             <p>Results: {state.locationsFilter.length}</p>
           )}
         </ResultsFilterContainer>
-        <div></div>
-      </InputButtonContainer>
-    </InputsContainer>
+      </ButtonsContainer>
+    </SearchContainer>
   );
 };
 
 export default Search;
 
-const InputButtonContainer = styled.div`
+const SearchContainer = styled.div`
   display: flex;
   flex-direction: column;
-  width: 100%;
+  width: 70%;
+  padding: 2rem 0;
+  margin 0 auto;
+`;
+
+const InputLocation = styled.input`
+  border: none;
+  border-bottom: 1px solid black;
+  margin: 20px 0 0;
+  background: transparent;
+  font-size: 20px;
+  outline: none;
+  min-width: 75%;
+`;
+
+const LocationInputContainer = styled.div`
+  display: flex;
+  max-width: 100%;
+`;
+const SearchButton = styled.span`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 20px;
+  font-weight: 500;
+  background: gold;
+  color: black;
+  border-bottom: 1px solid black;
+  width: 25%;
+
+  &&:hover {
+    background: yellow;
+    cursor: pointer;
+  }
 `;
 
 const ResultsFilterContainer = styled.div`
@@ -68,24 +102,14 @@ const ResultsFilterContainer = styled.div`
   }
 `;
 
-const InputsContainer = styled.div`
+const ButtonsContainer = styled.div`
   display: flex;
-  flex-flow: column;
+  flex-flow: row;
   width: 100%;
-  align-items: center;
   margin-top: 50px;
   @media (max-width: 800px) {
     margin: 50px 0 0 0;
   }
-`;
-
-const InputLocation = styled.input`
-  border: none;
-  border-bottom: 1px solid black;
-  width: 95%;
-  margin-bottom: 20px;
-  background: transparent;
-  font-size: 20px;
 `;
 
 const Button = styled.button`
@@ -95,7 +119,6 @@ const Button = styled.button`
   cursor: pointer;
   width: 200px;
   padding: 10px 56px;
-  margin: 35px 0 35px;
   background: white;
   border-color: white;
   &:hover {
