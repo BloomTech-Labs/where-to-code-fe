@@ -2,6 +2,7 @@
 /*global google*/
 import React, { Component } from "react";
 import { connect } from "react-redux";
+import { updatePlace } from "../Redux/actions";
 
 // Import React Script Library to load Google object
 import MapCards from "./MapCards";
@@ -33,7 +34,7 @@ class Map extends Component {
   componentDidMount() {
     // Try HTML5 Geolocation
     if (this.state.initialPlace) {
-      this.initialMapRender();
+      this.handleMapChange();
     } else {
       if (navigator.geolocation) {
         navigator.geolocation.getCurrentPosition(
@@ -47,7 +48,7 @@ class Map extends Component {
               }
             });
             // Loads map
-            let map = new google.maps.Map(document.getElementById("map"), {
+            const map = new google.maps.Map(document.getElementById("map"), {
               center: this.state.pos,
               zoom: 15
             });
@@ -75,40 +76,35 @@ class Map extends Component {
     ]);
 
     // When a new place is selected the map will be forced to update
-    this.autocomplete.addListener("place_changed", this.handleMapChange);
+    this.autocomplete.addListener("place_changed", () => {
+      this.props.updatePlace(this.autocomplete.getPlace());
+      this.handleMapChange();
+    });
 
     this.searchButton.current.addEventListener("click", this.handleMapChange);
   }
 
   handleLocationError = (browserHasGeolocation = false) => {
     // Set default location to Sydney, Australia
-    let pos = { lat: -33.856, lng: 151.215 };
+    const pos = { lat: -33.856, lng: 151.215 };
 
-    let map = new google.maps.Map(document.getElementById("map"), {
+    const map = new google.maps.Map(document.getElementById("map"), {
       center: pos,
       zoom: 15
     });
-  };
-
-  initialMapRender = () => {
-    this.handleMapChange(this.state.initialPlace);
   };
 
   handleInputChange = e => {
     this.setState({ query: e.target.value });
   };
 
-  handleMapChange = initialPlace => {
-    // Get map object
-    let map = new google.maps.Map(document.getElementById("map"), {
-      zoom: 16
-    });
-
+  handleMapChange = () => {
     // Gets new place when auto complete search is clicked
-    let place = initialPlace || this.autocomplete.getPlace();
+    const place = this.props.place;
+    if (!place) return;
 
     // request object sets search query, search radius, and coordinates
-    let request = {
+    const request = {
       location: place.geometry.location,
       id: place.place_id,
       rating: place.rating,
@@ -118,8 +114,13 @@ class Map extends Component {
       query: this.state.query || "cafe"
     };
 
+    // Get map object
+    const map = new google.maps.Map(document.getElementById("map"), {
+      zoom: 16
+    });
+
     // requests use of PlaceService
-    let service = new google.maps.places.PlacesService(map);
+    const service = new google.maps.places.PlacesService(map);
 
     // Sets map screen to new location based on lat and lng
     map.setCenter(place.geometry.location);
@@ -131,13 +132,13 @@ class Map extends Component {
     }
 
     // cb function that returns place results
-    let callback = (results, status) => {
+    const callback = (results, status) => {
       if (status === google.maps.places.PlacesServiceStatus.OK) {
-        let bounds = new google.maps.LatLngBounds();
+        const bounds = new google.maps.LatLngBounds();
 
         results.map(place => {
           // Adds map markers to nearby locations
-          let marker = new google.maps.Marker({
+          const marker = new google.maps.Marker({
             map: map,
             position: place.geometry.location,
             title: place.name
@@ -263,7 +264,9 @@ class Map extends Component {
   }
 }
 
-export default connect(({ mapReducer: { place } }) => ({ place }), null)(Map);
+export default connect(({ mapReducer: { place } }) => ({ place }), {
+  updatePlace
+})(Map);
 
 const MapCardContainer = styled.div`
   display: flex;
