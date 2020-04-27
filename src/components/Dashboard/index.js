@@ -46,7 +46,7 @@ const Dashboard = ({ user, getSavedLocations, getUserVisits }) => {
 						</span>
 						<br /> <br />
 						<NavLink className='editButton' to='/EditAccount'>
-							Edit Information
+							Edit Credentials
 						</NavLink>
 					</div>
 				</div>

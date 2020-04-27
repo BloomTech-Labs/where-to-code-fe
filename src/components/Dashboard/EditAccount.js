@@ -1,24 +1,25 @@
-import React, { useState, useEffect } from 'react'
-import { Link, NavLink, Route } from 'react-router-dom'
+import React from 'react'
+import { Link, NavLink } from 'react-router-dom'
 import SignOut from '../../components/Auth/SignOut'
 import { connect } from 'react-redux'
-import axios from 'axios'
 
 import axiosWithAuth from '../../Helpers/axiosWithAuth'
 
 import './Dashboard.scss'
 
-function EditAccount({ user, props }) {
+function EditAccount({ user }) {
 	const avatar =
 		user.avatar || 'http://s3.amazonaws.com/37assets/svn/765-default-avatar.png'
 
 	const handleSubmit = e => {
 		// e.preventDefault()
-		console.log(user.username)
 
 		const data = {
-			username: e.target.username.value
+			username: e.target.username.value,
+			email: e.target.email.value
 		}
+
+		console.log(data)
 
 		axiosWithAuth()
 			.put(`/auth/update`, data)
@@ -47,8 +48,9 @@ function EditAccount({ user, props }) {
 			</nav>
 			<div className='edit-container'>
 				<h1 className='edit-header'>
-					Hi {user.username.toUpperCase()}! <br /> Edit Account Information
+					Hi {user.username.toUpperCase()}! <br /> Edit Account Credentials
 				</h1>
+				<img style={profileImg} src={avatar} alt='default' />
 				<form onSubmit={handleSubmit}>
 					<span className='titles'>username</span>
 					<br />
@@ -59,33 +61,25 @@ function EditAccount({ user, props }) {
 						className='inputBorder'
 					/>
 					<br />
-					{/* <span className='titles'>first name</span>
+					<span className='titles'>Email</span>
 					<br />
 					<input
 						type='text'
-						name='firstName'
-						placeholder='Update first name'
+						name='email'
+						placeholder={user.email}
 						className='inputBorder'
 					/>
 					<br />
-					<span className='titles'>last name</span>
-					<br />
-					<input
-						type='text'
-						name='lastName'
-						placeholder='Update last name'
-						className='inputBorder'
-					/>
-					<br /> */}
-					<button className='signUpButton' type='submit'>
+					<button className='submitButton' type='submit'>
 						Save Changes
 					</button>
-					<button
-						onClick={() => window.history.go(-1)}
-						className='cancelButton'>
-						Cancel
-					</button>
 				</form>
+				<br />
+				<br />
+				<br />
+				<NavLink className='backToDash' to='/dashboard'>
+					&larr; Back to Dashboard
+				</NavLink>
 			</div>
 		</div>
 	)
@@ -98,5 +92,5 @@ export default connect(({ userReducer }) => ({
 const profileImg = {
 	borderRadius: '50%',
 	border: '1px solid #ccc',
-	width: '50%'
+	width: '200px'
 }
