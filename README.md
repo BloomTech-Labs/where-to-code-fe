@@ -3,6 +3,7 @@
 
 You can find the deployed project  [HERE (https://hivestack-fe.herokuapp.com/)].
 
+
 ## Contributors
 
 All Team Members are listed below, as active contributors to both the front end, and the back end of HiveStack. Feel free to contact members through the links below!
@@ -18,6 +19,7 @@ All Team Members are listed below, as active contributors to both the front end,
 
 
 |                                                      [Elijah Paminsan](https://github.com/elijahdaniel)                                                       |                                                       [Elizabeth Doyle](https://github.com/lizdoyle)                                                        |                                                      [Jacqueline Omollo](https://github.com/jacquelineomollo)                                                       |                                                       [Kim Kiamco](https://github.com/kiamco)                                                        | 
+
 
 | [<img src="https://avatars1.githubusercontent.com/u/42392420?s=400&u=0a2ef5381b1571bed8f808283bf469e4ff9e0ad3&v=4" width = "200" />](https://github.com/elijahdaniel) | [<img src="https://avatars3.githubusercontent.com/u/49792606?s=400&u=2155775f055e5b1aceb7d48ec31a74d06385fded&v=4" width = "200" />](https://github.com/lizdoyle) | [<img src="https://avatars0.githubusercontent.com/u/42282797?s=400&v=4" width = "200" />](https://github.com/jacquelineomollo) | [<img src="https://avatars1.githubusercontent.com/u/25730559?s=400&u=92f45bf92bfc23486a2a67e15bb523a0d8b2ba70&v=4" width = "200" />](https://github.com/kiamco) |
 |                                [<img src="https://github.com/favicon.ico" width="15"> ](https://github.com/elijahdaniel)                                |                            [<img src="https://github.com/favicon.ico" width="15"> ](https://github.com/lizdoyle)                             |                          [<img src="https://github.com/favicon.ico" width="15"> ](https://github.com/jacquelineomollo)                           |                          [<img src="https://github.com/favicon.ico" width="15"> ](https://github.com/kiamco)                           |                           
@@ -77,6 +79,7 @@ Providers will be able to post their location within the HiveStack network of bu
 
 **Dependencies**
 
+
 -   Axios — [](https://github.com/axios/axios)[https://github.com/axios/axios](https://github.com/axios/axios)
 -   Redux — [](https://redux.js.org/introduction/getting-started)[https://redux.js.org/introduction/getting-started](https://redux.js.org/introduction/getting-started)
 -   Jsonwebtoken — [](https://jwt.io/)[https://jwt.io/](https://jwt.io/)
@@ -95,6 +98,26 @@ Providers will be able to post their location within the HiveStack network of bu
 -   Nodemon — [](https://nodemon.io/)[https://nodemon.io/](https://nodemon.io/)
 -   Cross-Env — [](https://www.npmjs.com/package/cross-env)[https://www.npmjs.com/package/cross-env](https://www.npmjs.com/package/cross-env)
 -   Jest — [](https://jestjs.io/docs/en/getting-started.html)[https://jestjs.io/docs/en/getting-started.html](https://jestjs.io/docs/en/getting-started.html)
+
+-   Axios — [](https://github.com/axios/axios)[https://github.com/axios/axios](https://github.com/axios/axios)
+-   Redux — [](https://redux.js.org/introduction/getting-started)[https://redux.js.org/introduction/getting-started](https://redux.js.org/introduction/getting-started)
+-   Jsonwebtoken — [](https://jwt.io/)[https://jwt.io/](https://jwt.io/)
+-   Bcryptjs — [](https://www.npmjs.com/package/bcryptjs)[https://www.npmjs.com/package/bcryptjs](https://www.npmjs.com/package/bcryptjs)
+-   Helmet — [](https://helmetjs.github.io/)[https://helmetjs.github.io/](https://helmetjs.github.io/)
+-   Express — [](https://expressjs.com/en/guide/routing.html)[https://expressjs.com/en/guide/routing.html](https://expressjs.com/en/guide/routing.html)
+-   Knex — [](http://knexjs.org/)[http://knexjs.org/](http://knexjs.org/)
+-   Knex Cleaner — [](https://www.npmjs.com/package/knex-cleaner)[https://www.npmjs.com/package/knex-cleaner](https://www.npmjs.com/package/knex-cleaner)
+-   Dotenv — [](https://www.npmjs.com/package/dotenv)[https://www.npmjs.com/package/dotenv](https://www.npmjs.com/package/dotenv)
+-   Cors — [](https://expressjs.com/en/resources/middleware/cors.html)[https://expressjs.com/en/resources/middleware/cors.html](https://expressjs.com/en/resources/middleware/cors.html)
+-   PG — [](https://www.postgresql.org/)[https://www.postgresql.org/](https://www.postgresql.org/)
+
+**Dev Dependencies**
+
+-   Supertest — [](https://www.npmjs.com/package/supertest)[https://www.npmjs.com/package/supertest](https://www.npmjs.com/package/supertest)
+-   Nodemon — [](https://nodemon.io/)[https://nodemon.io/](https://nodemon.io/)
+-   Cross-Env — [](https://www.npmjs.com/package/cross-env)[https://www.npmjs.com/package/cross-env](https://www.npmjs.com/package/cross-env)
+-   Jest — [](https://jestjs.io/docs/en/getting-started.html)[https://jestjs.io/docs/en/getting-started.html](https://jestjs.io/docs/en/getting-started.html)
+
 
 
 #### [Back end](https://github.com/Lambda-School-Labs/where-to-code-be) built using:
@@ -120,22 +143,20 @@ Providers will be able to post their location within the HiveStack network of bu
 -   Cors —  [](https://expressjs.com/en/resources/middleware/cors.html)[https://expressjs.com/en/resources/middleware/cors.html](https://expressjs.com/en/resources/middleware/cors.html)
 -   PG —  [](https://www.postgresql.org/)[https://www.postgresql.org/](https://www.postgresql.org/)
 
-**Dev Dependencies**
+
 
 -   Supertest —  [](https://www.npmjs.com/package/supertest)[https://www.npmjs.com/package/supertest](https://www.npmjs.com/package/supertest)
 -   Nodemon —  [](https://nodemon.io/)[https://nodemon.io/](https://nodemon.io/)
 -   Cross-Env —  [](https://www.npmjs.com/package/cross-env)[https://www.npmjs.com/package/cross-env](https://www.npmjs.com/package/cross-env)
 -   Jest —  [](https://jestjs.io/docs/en/getting-started.html)[https://jestjs.io/docs/en/getting-started.html](https://jestjs.io/docs/en/getting-started.html)
 
-####
-
-# APIs
 
 ##  Authentication API here
 
 🚫Replace text below with a description of the API
 
 Water's like me. It's laaazy ... Boy, it always looks for the easiest way to do things A little happy sunlight shining through there. Let all these little things happen. Don't fight them. Learn to use them. Even the worst thing we can do here is good.
+
 
 ## Stripe API Integration
 
@@ -145,6 +166,8 @@ This has not been implented, and will be a future integration into this project 
 # Installation Instructions
 
 Download and Clone the Front End & Back End repositories.
+
+
 
 ## Other Scripts
 
