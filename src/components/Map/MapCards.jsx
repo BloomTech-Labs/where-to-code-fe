@@ -15,12 +15,7 @@ class MapCards extends Component {
             <div>
               <SingleMapCard
                 key={location.id}
-                location={location.name}
-                address={location.address}
-                rating={location.rating}
-                icon={location.icon}
-                id={location.id}
-                requestDetails={this.props.requestDetails}
+                location={location}
               />
             </div>
           );
@@ -39,10 +34,10 @@ const MapCardsContainer = styled.div`
   height: 100%;
   justify-content: center;
   overflow: scroll;
+  scroll-behavior: smooth;
   margin-right: -50px;
   padding-right: 50px;
   overflow-x: hidden;
-  margin:20px auto;
   &::-webkit-scrollbar {
     display: none;
   }

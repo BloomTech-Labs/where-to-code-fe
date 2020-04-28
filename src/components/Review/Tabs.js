@@ -56,11 +56,9 @@ export default props => {
     <StyledTabs>
       <StyledTabList>
         <StyledTab>
-          {" "}
           <p>Details</p>
         </StyledTab>
         <StyledTab>
-          {" "}
           <p>All Reviews</p>
         </StyledTab>
         <StyledTab>
