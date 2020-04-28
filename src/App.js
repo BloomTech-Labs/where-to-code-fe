@@ -14,34 +14,35 @@ import Landing from './views/Landing'
 import Home from './views/Home'
 
 //@ utils
-import * as ROUTES from './Routes/routes'
+import * as ROUTES from "./Routes/routes";
 
-function App({ loggedIn, checkToken, ...props }) {
-	useEffect(() => {
-		checkToken()
-	}, [])
+function App({ loggedIn, checkToken, ...props}) {
 
-	const PrivateRoute = ({ component: Component, ...rest }) => (
-		<Route
-			{...rest}
-			render={props =>
-				loggedIn ? <Component {...props} {...rest} /> : <Redirect to='/' />
-			}
-		/>
-	)
+  useEffect(() => {
+    !!localStorage.getItem("token") && checkToken();
+  }, [])
 
-	return (
-		<Router>
-			<Route exact path={ROUTES.LANDING}>
-				<div className='App'>
-					{loggedIn ? <Redirect to='/dashboard' /> : <Landing />}
-				</div>
-			</Route>
-			<PrivateRoute path='/dashboard' component={Dashboard} />
-			<Route exact path={ROUTES.HOME} render={props => <Home {...props} />} />
-			<Route path='/EditAccount' component={EditAccount} />
-		</Router>
-	)
+  const PrivateRoute = ({ component: Component, ...rest }) => (
+    <Route
+      {...rest}
+      render={props =>
+        loggedIn ? <Component {...props} {...rest} /> : <Redirect to='/' />
+      }
+    />
+  );
+
+  return (
+    <Router>
+      <Route exact path={ROUTES.LANDING}>
+        <div className='App'>
+          {loggedIn ? <Redirect to='/dashboard' /> : <Landing />}
+        </div>
+      </Route>
+      <PrivateRoute path='/dashboard' component={Dashboard} />
+      <Route exact path={ROUTES.HOME} render={props => <Home {...props} />} />
+      <Route path='/EditAccount' component={EditAccount} />
+    </Router>
+  );
 }
 
 export default connect(
