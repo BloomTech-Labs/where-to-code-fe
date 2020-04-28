@@ -12,19 +12,18 @@ function EditAccount({ user }) {
 		user.avatar || 'http://s3.amazonaws.com/37assets/svn/765-default-avatar.png'
 
 	const handleSubmit = e => {
-		// e.preventDefault()
+		e.preventDefault()
 
 		const data = {
-			username: e.target.username.value,
-			email: e.target.email.value
+			username: e.target.username.value || user.username,
+			email: e.target.email.value || user.email
 		}
-
-		console.log(data)
 
 		axiosWithAuth()
 			.put(`/auth/update`, data)
 			.then(res => {
 				console.log(res.data)
+				alert(`Information has been updated!`)
 			})
 			.catch(err => {
 				console.error(err)
