@@ -1,22 +1,20 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import SignOut from '../../components/Auth/SignOut';
 import './Dashboard.scss';
 import { connect } from 'react-redux';
+import { getSavedLocations, getUserVisits } from '../Redux/actions';
 
-const Dashboard = ({ user }) => {
-	const [db, setDb] = useState({
-		user: {
-			userName: 'User',
-			location: 'San Francisco, CA',
-			email: 'email@mail.com',
-			avatar: 'http://s3.amazonaws.com/37assets/svn/765-default-avatar.png'
-		},
-		location: {
-			name: 'Royal Ground Coffee',
-			address: '2216 Polk St San Francisco, CA 94109'
-		}
-	})
+import RecentlyVisited from './RecentlyVisited';
+import SavedLocations from './SavedLocations';
+
+const Dashboard = ({ user, getSavedLocations, getUserVisits }) => {
+	const avatar = user.avatar || 'http://s3.amazonaws.com/37assets/svn/765-default-avatar.png';
+
+	useEffect(() => {
+		getSavedLocations();
+		getUserVisits();
+	}, [getSavedLocations, getUserVisits])
 
 	return (
 		<div className='dashboard-container'>
@@ -37,80 +35,20 @@ const Dashboard = ({ user }) => {
 				<div className='first-column'>
 					<div className='user-information'>
 						<h2>Hello, {user.username}</h2>
-						<img style={profileImg} src={db.user.avatar} alt='default' />
+						<img style={profileImg} src={avatar} alt='default' />
 						<p>
 							{user.firstname} {user.lastname}
 						</p>
-						<p>{db.user.location}</p>
+						<p>{user.location || 'San Francisco, CA'}</p>
 						<span>
-							<i class='fas fa-envelope'></i> {user.email}
+							<i className='fas fa-envelope'></i> {user.email}
 						</span>
 					</div>
 				</div>
 				<div className='column'>
 					<h3>Activity</h3>
-					<p className='sub-header'>Recently Visited</p>
-					<section className='location-listing'>
-						<section>
-							<b>{db.location.name}</b>
-							<br />
-							<span>{db.location.address}</span>
-						</section>
-						<p>
-							<i class='fas fa-long-arrow-alt-right'></i>
-						</p>
-					</section>
-					<section className='location-listing'>
-						<section>
-							<b>Philz Coffee</b>
-							<br />
-							<span>1 Front St #100 San Francisco, CA 94111</span>
-						</section>
-						<p>
-							<i class='fas fa-long-arrow-alt-right'></i>
-						</p>
-					</section>
-					<section className='location-listing'>
-						<section>
-							<b>Workshop Cafe</b>
-							<br />
-							<span>180 Montgomery St San Francisco, CA 94104</span>
-						</section>
-						<p>
-							<i class='fas fa-long-arrow-alt-right'></i>
-						</p>
-					</section>
-					<p className='sub-header'>Saved Locations</p>
-					<section className='location-listing'>
-						<section>
-							<b>Jane on Fillmore</b>
-							<br />
-							<span>2123 Fillmore St San Francisco, CA 94115</span>
-						</section>
-						<p>
-							<i class='fas fa-heart'></i>
-						</p>
-					</section>
-					<section className='location-listing'>
-						<section>
-							<b>{db.location.name}</b>
-							<br />
-							<span>{db.location.address}</span>
-						</section>
-						<p>
-							<i class='fas fa-heart'></i>
-						</p>
-					</section>
-					<section className='location-listing'>
-						<section>
-							<b>The Social Study</b>
-							<br />
-							<span>1795 Geary Blvd San Francisco, CA 94115</span>
-						</section>
-						<p>
-							<i class='fas fa-heart'></i>
-						</p>
-					</section>
+					<RecentlyVisited visits={user.visits}/>
+					<SavedLocations savedLocations={user.savedLocations}/>
 				</div>
 
 				<div className='column'>
@@ -141,9 +79,6 @@ const Dashboard = ({ user }) => {
 						</article>
 					</section>
 				</div>
-				{/* <div className='column'>
-					<h3>Other stuff I guess</h3>
-				</div> */}
 			</div>
 		</div>
 	)
@@ -151,7 +86,7 @@ const Dashboard = ({ user }) => {
 
 export default connect(({ userReducer }) => ({
 		user: {...userReducer}
-}), null)(Dashboard)
+}), { getSavedLocations, getUserVisits })(Dashboard)
 
 const profileImg = {
 	borderRadius: '50%',
@@ -159,10 +94,3 @@ const profileImg = {
 	width: '50%'
 }
 
-const firstColumn = {
-	border: '1px solid transparent',
-	width: '40%',
-	margin: '100px 20px 20px 20px',
-	background: 'transparent',
-	textAlign: 'center'
-}

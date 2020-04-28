@@ -4,7 +4,7 @@ const axiosWithAuth = () => {
     const token = localStorage.getItem("token");
 
     return axios.create({
-        baseURL:  "https://hive-stack-stage-backend.herokuapp.com/",
+        baseURL:  "https://hive-stack.herokuapp.com/",
         headers: {
         "Content-Type": "application/json",
         authorization: token

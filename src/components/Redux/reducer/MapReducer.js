@@ -1,7 +1,9 @@
-import { UPDATE_PLACE } from '../actions';
+import { UPDATE_PLACE } from "../actions";
+import { UPDATE_MAP } from "../actions";
 
 const initialState = {
-  place: ''
+  place: "", 
+  map: null
 };
 
 export const mapReducer = (state = initialState, action) => {
@@ -10,6 +12,11 @@ export const mapReducer = (state = initialState, action) => {
       return {
         ...state,
         place: action.payload
+      };
+    case UPDATE_MAP:
+      return {
+        ...state,
+        map: action.payload
       };
     default:
       return state;

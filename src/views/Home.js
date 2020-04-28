@@ -17,13 +17,13 @@ const HomeNavBar = styled.div`
   }
 `;
 
-const Home = ({ place }) => {
+const Home = props => {
   return (
     <div>
       <HomeNavBar>
         <Navigation />
       </HomeNavBar>
-      <Map place={place} />
+      <Map />
     </div>
   );
 };
