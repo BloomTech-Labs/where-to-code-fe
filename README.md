@@ -1,8 +1,11 @@
 
 # HiveStack
 
-You can find the deployed project  [HERE (https://hivestack-fe.herokuapp.com/)].
+You can find the deployed project [HERE](https://hivestack-fe.herokuapp.com/).
 
+[![Maintainability](https://api.codeclimate.com/v1/badges/57a897f38350a2ae1831/maintainability)](https://codeclimate.com/github/Lambda-School-Labs/where-to-code-fe/maintainability)
+
+[![Test Coverage](https://api.codeclimate.com/v1/badges/57a897f38350a2ae1831/test_coverage)](https://codeclimate.com/github/Lambda-School-Labs/where-to-code-fe/test_coverage)
 
 ## Contributors
 
@@ -212,8 +215,4 @@ These contribution guidelines have been adapted from [this good-Contributing.md-
 
 ## Documentation
 
-See [Backend Documentation](https://github.com/Lambda-School-Labs/where-to-code-be)S for details on the backend of our project.
-
-[![Maintainability](https://api.codeclimate.com/v1/badges/57a897f38350a2ae1831/maintainability)](https://codeclimate.com/github/Lambda-School-Labs/where-to-code-fe/maintainability)
-
-[![Test Coverage](https://api.codeclimate.com/v1/badges/57a897f38350a2ae1831/test_coverage)](https://codeclimate.com/github/Lambda-School-Labs/where-to-code-fe/test_coverage)
+See [Backend Documentation](https://github.com/Lambda-School-Labs/where-to-code-be) for details on the backend of our project.
