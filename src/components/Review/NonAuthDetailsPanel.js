@@ -1,10 +1,13 @@
 // IMPORTS
 import React from "react";
-import axios from "axios";
 import styled from "styled-components";
-// import { withFirebase } from "../../Firebase";
 import axiosWithAuth from "../../Helpers/axiosWithAuth";
 import StarRatings from "react-star-ratings";
+import Popup from "reactjs-popup";
+
+import CheckIn from "./CheckIn.js";
+import FavoriteLocation from "./FavoriteLocation.js";
+import Directions from "../Dashboard/Directions";
 
 // STYLED COMPONENTS
 const StyleModal = styled.div`
@@ -13,14 +16,6 @@ const StyleModal = styled.div`
   max-height: 550px;
   padding: 10px 10px 10px 10px;
   font-size: 12px;
-`;
-const Header = styled.div`
-  text-align: center;
-  font-size: 20px;
-  font-weight: bold;
-  color: #fbd702;
-  width: 100%;
-  margin-bottom: 15px;
 `;
 const StyledFeaturedReview = styled.div`
   text-align: center;
@@ -63,8 +58,7 @@ const ContentRight = styled.div`
   .name {
     padding-top: px;
   }
-  background-color: #111;
-  opacity: 0.45;
+  background-color: #959595;
 `;
 const ContentLeft = styled.div`
   display: flex;
@@ -94,75 +88,40 @@ const StyledFeatureReview = styled.div`
   display: flex;
   flex-direction: column;
 `;
+const Menu = styled.div`
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+  color: black;
+`;
+const ExtrasContainer = styled.div`
+  display: flex;
+  justify-content: flex-end;
+  width: 100%;
+  color: white;
+`;
 
 // COMPONENT
-class DetailsPanel1 extends React.Component {
+class DetailsPanel extends React.Component {
   // STATE
   state = {
-    review: [],
-    location_id: [],
-    location: this.props.locationId
+    review: []
   };
 
   componentDidUpdate(prevProps, nextState) {
     if (this.props.locationId !== prevProps.locationId) {
-      let locationReq = this.props.locationId;
-      return axiosWithAuth()
-        .get(
-          `https://wheretocode-master.herokuapp.com/locations/${locationReq}`
-        )
-        .then(res => {
-          if (res.data.length === 0) {
-            let newLocation = [
-              {
-                locationName: this.props.details[0],
-                locationGoogleId: this.props.locationId
-              }
-            ];
-            return axios.post(
-              "https://wheretocode-master.herokuapp.com/locations",
-              newLocation
-            );
-          } else {
-            console.log("location does not need to be posted");
-          }
-        })
-        .then(res => {
-          let locationReq = this.props.locationId;
-          return axios.get(
-            `https://wheretocode-master.herokuapp.com/locations/${locationReq}`
-          );
-        })
-        .then(res => {
-          let locationId = res.data[0].id;
-          return axios.get(
-            `https://wheretocode-master.herokuapp.com/reviews/${locationId}/location`
-          );
-        })
-        .then(res => {
-          let newReview1 = res.data.slice(-1);
-          let newReview = newReview1[0];
-          this.setState({
-            review: newReview
-          });
-        })
-        .catch(error => {
-          console.log(error);
-        });
+      return this.grabReviews();
     }
   }
 
   // METHODS
   componentDidMount() {
-    let locationReq = this.props.locationId;
-    return axios
-      .get(`https://wheretocode-master.herokuapp.com/locations/${locationReq}`)
-      .then(res => {
-        let locationId = res.data[0].id;
-        return axios.get(
-          `https://wheretocode-master.herokuapp.com/reviews/${locationId}/location`
-        );
-      })
+    return this.grabReviews();
+  }
+
+  grabReviews() {
+    return axiosWithAuth()
+      .get(`/reviews/${this.props.locationId}/location`)
       .then(res => {
         let newReview1 = res.data.slice(-1);
         let newReview = newReview1[0];
@@ -178,7 +137,6 @@ class DetailsPanel1 extends React.Component {
   render() {
     return (
       <StyleModal>
-        <Header> Details </Header>
         <Content>
           <ContentLeft>
             <p>
@@ -197,11 +155,11 @@ class DetailsPanel1 extends React.Component {
                         Overall Rating:
                         <StarRatings
                           rating={this.state.review.rating}
-                          starRatedColor='gold'
+                          starRatedColor="gold"
                           numberOfStars={3}
-                          name='rating'
-                          starDimension='15px'
-                          starSpacing='0px'
+                          name="rating"
+                          starDimension="15px"
+                          starSpacing="0px"
                         />
                       </p>
                     </li>
@@ -210,11 +168,11 @@ class DetailsPanel1 extends React.Component {
                         Internet Rating:
                         <StarRatings
                           rating={this.state.review.internet_rating}
-                          starRatedColor='gold'
+                          starRatedColor="gold"
                           numberOfStars={3}
-                          name='rating'
-                          starDimension='15px'
-                          starSpacing='0px'
+                          name="rating"
+                          starDimension="15px"
+                          starSpacing="0px"
                         />
                       </p>
                     </li>
@@ -231,11 +189,22 @@ class DetailsPanel1 extends React.Component {
             </StyledFeatureReview>
           </ContentLeft>
           <ContentRight>
-            <h2 className='name'>Name:</h2>
+            <ExtrasContainer>
+              <Popup
+                trigger={<i className="fas fa-ellipsis-h fa-2x"></i>}
+                position="bottom right"
+              >
+                <Menu>
+                  <CheckIn locationId={this.props.locationId} />
+                  <FavoriteLocation locationId={this.props.locationId} />
+                </Menu>
+              </Popup>
+            </ExtrasContainer>
+            <h2 className="name">Name:</h2>
             <p style={{ fontSize: "20px" }}>{this.props.details[0]}</p>
             <h2>Phone:</h2>
             <p style={{ fontSize: "20px" }}>{this.props.details[1]}</p>
-            <h2 className='hours'>Hours:</h2>
+            <h2 className="hours">Hours:</h2>
             <ul>
               <p>
                 {this.props.hours.map((data, index) => {
@@ -247,13 +216,12 @@ class DetailsPanel1 extends React.Component {
                 })}
               </p>
             </ul>
+            <Directions address={this.props.location.address} />
           </ContentRight>
         </Content>
-        {/* // -- // */}
       </StyleModal>
     );
   }
 }
 // EXPORT
-const NonAuthDetailsPanel = DetailsPanel1;
-export default NonAuthDetailsPanel;
+export default DetailsPanel;
